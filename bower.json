@@ -5,7 +5,7 @@
   "authors": [
     "David González Zornoza"
   ],
-  "license": "The MIT License (MIT)",
+  "license": "MIT",
   "keywords": [
     "angular",
     "seed",
@@ -21,6 +21,7 @@
   ],
   "dependencies": {
     "jquery": "2.2.3",
-    "angular": "1.5.5"
+    "angular": "1.5.5",
+    "bootstrap": "3.3.6"
   }
 }

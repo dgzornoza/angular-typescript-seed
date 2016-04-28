@@ -4,9 +4,9 @@
   "description": "Seed project for angular1 with typescript apps. http://angularjs.org/",
   "main": "index.js",
   "scripts": {
-    
+
     "postinstall": "bower install",
-    
+
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,12 +19,13 @@
     "typescript"
   ],
   "author": "David González Zornoza",
-  "license": "The MIT License (MIT)",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/dgzornoza/angular-typescript-seed/issues"
   },
   "homepage": "https://github.com/dgzornoza/angular-typescript-seed#readme",
   "devDependencies": {
-    "bower": "^1.7.9"
+    "bower": "^1.7.9",
+    "gulp": "^3.9.1"
   }
 }
