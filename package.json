@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
 
-    "postinstall": "bower install",
+    "postinstall": "bower install && npm run build.modernizr",
 
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    
+    "build.modernizr": "cd ./bower_components/modernizr && npm install && node ./bin/modernizr -c ../../tools/modernizr-config.json -d ./dist"
   },
   "repository": {
     "type": "git",
