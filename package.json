@@ -1,0 +1,30 @@
+{
+  "name": "angular-typescript-seed",
+  "version": "1.0.0",
+  "description": "Seed project for angular1 with typescript apps. http://angularjs.org/",
+  "main": "index.js",
+  "scripts": {
+    
+    "postinstall": "bower install",
+    
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dgzornoza/angular-typescript-seed.git"
+  },
+  "keywords": [
+    "angular",
+    "seed",
+    "typescript"
+  ],
+  "author": "David González Zornoza",
+  "license": "The MIT License (MIT)",
+  "bugs": {
+    "url": "https://github.com/dgzornoza/angular-typescript-seed/issues"
+  },
+  "homepage": "https://github.com/dgzornoza/angular-typescript-seed#readme",
+  "devDependencies": {
+    "bower": "^1.7.9"
+  }
+}

@@ -232,3 +232,8 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+
+
+# Bower/Node directories
+bower_components
+node_modules
