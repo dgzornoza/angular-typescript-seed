@@ -26,6 +26,7 @@
   "homepage": "https://github.com/dgzornoza/angular-typescript-seed#readme",
   "devDependencies": {
     "bower": "^1.7.9",
-    "gulp": "^3.9.1"
+    "gulp": "^3.9.1",
+    "gulp-postcss": "^6.1.0"
   }
 }
