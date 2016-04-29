@@ -237,3 +237,6 @@ _Pvt_Extensions
 # Bower/Node directories
 bower_components
 node_modules
+
+# published app
+wwwroot/app
