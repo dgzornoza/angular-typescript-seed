@@ -2,49 +2,50 @@ var gulp = require("gulp");
 var del = require("del"); // delete files/directories
 var postcss = require("gulp-postcss"); // css processor
 
-// output web libraries directory
-var www_lib = "wwwroot/lib/";
-    
-var thirdPartyLibraries = [
+// output web libraries folder
+var wwwlib = "wwwroot/lib/";
+var wwwcss = "wwwroot/css/";
+var wwwfonts = "wwwroot/fonts/";
 
-        // modernizr      
-        "node_modules/systemjs/dist/system-polyfills.js",
-        "node_modules/angular2/bundles/angular2-polyfills.js",
-
-        // systemjs
-        "node_modules/systemjs/dist/system.js",
-
-        // angular2        
-        "node_modules/rxjs/bundles/Rx.js",
-        "node_modules/angular2/bundles/angular2.js",
-        "node_modules/angular2/bundles/http.min.js",
-        "node_modules/angular2/bundles/router.js",
-
-        // angular2-translate
-        "node_modules/ng2-translate/bundles/ng2-translate.js",
-
-        // requisitos polyfills 
-        // NOTA: este polifill se agrega el primero en index.html y asi esta en la documentacion de angular2, pero por algun motivo no funciona en el boundle para IExplorer/Chrome
-        // y solo funciona si se establece el ultimo, parece ser algun tipo de compatibilidad con systemjs
-        "node_modules/es6-shim/es6-shim.min.js"
-
+// thirdparty files
+var thirdPartyLibs = [
+        "bower_components/modernizr/dist/modernizr.js",
+        "bower_components/jquery/dist/jquery.min.js",
+        "bower_components/angular/angular.min.js",
+        "bower_components/bootstrap/dist/js/bootstrap.min.js"
+];
+var thirdPartyCss = [
+        "bower_components/bootstrap/dist/js/bootstrap-theme.min.css",
+        "bower_components/bootstrap/dist/js/bootstrap.min.css"
+];
+var thirdPartyFonts = [
+        "bower_components/bootstrap/dist/js/bootstrap.min.js",
 ];
 
 
-// --------------------------------------------------------------------------------------------------
-// Tarea para generar el directorio de librerias de terceros desde las dependencias de bower y node
-// - Limpia el directorio lib del sitio web de salida y copia los scripts en el.
-gulp.task("generate-lib", function () {
+/**
+ * Task for generate output web libraries folder from third party (bower, node, etc.)
+ * @remarks this task delete output web libraries folder before generate new libs
+ */
+gulp.task("generate-thirdparty", function () {
 
-    del(www_lib).then(function () {
+    deleteAndCopyOutput(thirdPartyLibs, wwwlib);
+    deleteAndCopyOutput(thirdPartyCss, wwwcss);
+    deleteAndCopyOutput(thirdPartyFonts, wwwfonts);
+});
 
-        console.log("Eliminados archivos:\n", www_lib);
-        
-        // copiar las librerias de terceros en el directorio de salida
-        //gulp.src(allDependencies)
-        //.pipe(gulp.dest(www_lib));
 
-        console.log("copiados archivos nuevos:\n", www_lib);
+function deleteAndCopyOutput(_files, _outputFolder)
+{
+    del(_outputFolder).then(function () {
+
+        console.log("Deleted folder:\n", _outputFolder);
+
+        gulp.src(_files)
+        .pipe(gulp.dest(_outputFolder));
+
+        console.log("Generated folder:\n", _outputFolder);
 
     });
-});
+}
+
