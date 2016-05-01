@@ -3,7 +3,7 @@
 // This task delete output folder and publish third party files.
 
 var gulp = require("gulp");
-var del = require("del"); // delete files/directories
+var del = require("del");
 
 // output web libraries folder
 var wwwlib = "wwwroot/lib/";
@@ -35,13 +35,13 @@ var thirdPartyFonts = [
  */
 gulp.task("publish-thirdparty", function () {
   
-    deleteAndPublish(thirdPartyLibs, wwwlib);
-    deleteAndPublish(thirdPartyCss, wwwcss);
-    deleteAndPublish(thirdPartyFonts, wwwfonts);
+    _deleteAndPublish(thirdPartyLibs, wwwlib);
+    _deleteAndPublish(thirdPartyCss, wwwcss);
+    _deleteAndPublish(thirdPartyFonts, wwwfonts);
 });
 
 
-function deleteAndPublish(_files, _outputFolder)
+function _deleteAndPublish(_files, _outputFolder)
 {
     del(_outputFolder).then(function () {
 

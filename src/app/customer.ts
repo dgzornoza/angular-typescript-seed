@@ -1,11 +1,16 @@
 class Customer {
-    name: string;
+
+    private name: string;
 
     constructor(name: string) {
         this.name = name;
     }
 
-    getName() {
+    public getName(): string {
         return this.name;
+    }
+    
+    public getName2(): string {
+        return "qwerqwerqwer55555";
     }
 }
