@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "module": "amd",
-        "moduleResolution": "classic",        
+        "moduleResolution": "classic",
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "noImplicitAny": false,

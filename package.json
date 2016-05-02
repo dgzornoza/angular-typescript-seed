@@ -12,7 +12,7 @@
     "build.modernizr": "cd ./bower_components/modernizr && npm install && node ./bin/modernizr -c ../../tools/modernizr-config.json -d ./dist",
 
     "gulp.publish-thirdparty": "gulp publish-thirdparty",
-    "gulp.build-typescript": "gulp build-ts && gulp watch",
+    "gulp.build-typescript": "gulp build-ts",
     "gulp.rebuild-typescript": "gulp build-ts"
   },
   "repository": {
@@ -32,13 +32,13 @@
   "homepage": "https://github.com/dgzornoza/angular-typescript-seed#readme",
   "devDependencies": {
     "bower": "^1.7.9",
-    "typescript": "1.8.10",    
+    "typescript": "1.8.10",
     "gulp": "^3.9.1",
     "tslint": "^3.8.1",
     "gulp-debug": "^2.1.2",
     "del": "^2.2.0",
     "gulp-postcss": "^6.1.0",
-    "gulp-typescript": "2.13.0", 
+    "gulp-typescript": "2.13.0",
     "gulp-tslint": "^5.0.0"
   }
 }

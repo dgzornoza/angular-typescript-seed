@@ -5,6 +5,7 @@ var gulp = require("gulp");
 var tsc = require("gulp-typescript");
 var tslint = require("gulp-tslint");
 var del = require("del");
+var debug = require("gulp-debug");
 
 // source typescript files
 var sourceFiles = "src/app/**/*.ts";
@@ -14,15 +15,14 @@ var outputFiles = "wwwroot/app/**/*.js";
 var outputFolder = "wwwroot/app/";
 
 // configure typescript for use tsconfig.json
-var tsProject = tsc.createProject("tsconfig.json");
+var tsProject = tsc.createProject("tsconfig.json", { typescript: require("typescript") });
 
 /**
  * Compile TypeScript task using tsconfig.json
  */
-gulp.task("build-ts", function () {
+gulp.task("build-ts", ["lint-ts"], function () {
 
-    return _tslint()
-    .pipe(_compileTypescript());
+    return _compileTypescript();
 
     // minificar (NOTA: Comentar si no se quiere minificar)
     //.pipe(uglify_module())
@@ -32,10 +32,9 @@ gulp.task("build-ts", function () {
 /**
  * Clean javascript output and compile typescript task using tsconfig.json
  */
-gulp.task("rebuild-ts", function () {
+gulp.task("rebuild-ts", ["lint-ts"], function () {
 
     return _cleanOutput()
-    .pipe(_tslint)
     .pipe(_compileTypescript());
 
     // minificar (NOTA: Comentar si no se quiere minificar)
@@ -43,13 +42,35 @@ gulp.task("rebuild-ts", function () {
 
 });
 
+/**
+ * lint typescript source code
+ */
+gulp.task("lint-ts", function () {
+
+    return gulp.src(sourceFiles)
+    .pipe(tslint())
+    .pipe(tslint.report("prose",
+    {
+        emitError: false,
+        summarizeFailureOutput: true
+    } ));
+});
+
+/**
+ * watch for typescript files
+ */
+gulp.task("watch-ts", function() {
+    gulp.watch([sourceFiles], ["build-ts"]);
+});
+
+
 function _compileTypescript()
 {
     // compile typescript
     var tsResult = tsProject.src()
     .pipe(tsc(tsProject));
     // send javascript to outpu folder
-    return tsResult.js.pipe(gulp.dest(outputFolder)); 
+    return tsResult.js.pipe(debug()).pipe(gulp.dest(outputFolder));
 }
 
 function _cleanOutput()
@@ -57,18 +78,7 @@ function _cleanOutput()
     return del.sync(outputFiles);
 }
 
-function _tslint()
-{
-    return gulp.src(sourceFiles)
-    .pipe(tslint())
-    .pipe(tslint.report("prose", 
-    {
-        emitError: false,
-        summarizeFailureOutput: true
-    } ));
-}
 
 
-gulp.task("watch", function() {
-    gulp.watch([sourceFiles], ["build-ts"]);
-});
+
+

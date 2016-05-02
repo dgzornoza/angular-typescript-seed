@@ -9,8 +9,8 @@ class Customer {
     public getName(): string {
         return this.name;
     }
-    
+
     public getName2(): string {
-        return "qwerqwerqwer55555";
+        return "qwerqwerqwer2";
     }
 }

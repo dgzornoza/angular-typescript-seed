@@ -239,4 +239,7 @@ bower_components
 node_modules
 
 # published app
-wwwroot/app
+wwwroot/app/
+wwwroot/css/
+wwwroot/fonts/
+wwwroot/lib/
