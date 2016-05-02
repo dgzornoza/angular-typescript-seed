@@ -1,14 +1,14 @@
 // -----------------------------------------------
 // Configuration file for gulp tasks
-
 'use strict';
 
 var tasksConfig = (function () 
 {
     return {
         
-        sourceScriptFiles: "src/**/*.ts",
-        outputScriptFiles: "wwwroot/**/*.js",
+        sourceScriptFiles: "src/**/*.ts",        
+        sourceHtmlFiles: "src/**/*.html",
+        sourceCssFiles: "src/**/*.css",
         
         sourceFolder: "src/",
         outputFolder: "wwwroot/",

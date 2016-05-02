@@ -6,9 +6,9 @@ var postcss = require("gulp-postcss");
 
 var thirdpartyTasks = require("./tools/tasks/gulp-thirdparty");
 var typescriptTasks = require("./tools/tasks/gulp-typescript");
+var htmlTasks = require("./tools/tasks/gulp-html");
+var cssTasks = require("./tools/tasks/gulp-css");
 
-// watch project files
-//var compileTypescript = require("./tools/tasks/gulp-watch");
 
 
 //gulp.task('default', ['ts-lint', 'compile-ts']);
@@ -62,4 +62,25 @@ gulp.task("clean-ts", function () {
  */
 gulp.task("lint-ts", function () {
     return typescriptTasks.lint();
+});
+
+/* ------------------------------------------------------------------------------------------------
+html tasks
+*/
+
+/* ------------------------------------------------------------------------------------------------
+css tasks
+*/
+
+/* ------------------------------------------------------------------------------------------------
+watch tasks
+*/
+
+/**
+ * watch soucrce files
+ */
+gulp.task("watch-source", function() {
+        gulp.watch([tasksConfig.sourceScriptFiles], ["build-ts"]);
+        gulp.watch([tasksConfig.sourceHtmlFiles], ["publish-html"]);
+        //gulp.watch([tasksConfig.sourceCssFiles], ["postcss"]);
 });

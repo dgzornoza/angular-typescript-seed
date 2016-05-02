@@ -25,7 +25,11 @@ var typescriptTasks = (function()
 
     var _cleanOutput = function()
     {
-        del.sync(tasksConfig.outputScriptFiles);
+        del.sync(function(_file)
+        {
+            console.log(_file);
+            return "wwwroot/app";
+        });
     };
     
     var _lint = function()
