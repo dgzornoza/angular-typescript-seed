@@ -1,15 +1,13 @@
 // -----------------------------------------------
-// Task for compile typescript
+// Task for lint and compile typescript
 
 var gulp = require("gulp");
 var tsc = require("gulp-typescript");
 var tslint = require("gulp-tslint");
 var del = require("del");
-var debug = require("gulp-debug");
 
 // source typescript files
 var sourceFiles = "src/app/**/*.ts";
-
 // output web app javascript files and folder
 var outputFiles = "wwwroot/app/**/*.js";
 var outputFolder = "wwwroot/app/";
@@ -56,13 +54,6 @@ gulp.task("lint-ts", function () {
     } ));
 });
 
-/**
- * watch for typescript files
- */
-gulp.task("watch-ts", function() {
-    gulp.watch([sourceFiles], ["build-ts"]);
-});
-
 
 function _compileTypescript()
 {
@@ -70,7 +61,7 @@ function _compileTypescript()
     var tsResult = tsProject.src()
     .pipe(tsc(tsProject));
     // send javascript to outpu folder
-    return tsResult.js.pipe(debug()).pipe(gulp.dest(outputFolder));
+    return tsResult.js.pipe(gulp.dest(outputFolder));
 }
 
 function _cleanOutput()

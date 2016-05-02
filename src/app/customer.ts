@@ -11,6 +11,6 @@ class Customer {
     }
 
     public getName2(): string {
-        return "qwerqwerqwer2";
+        return "Hello 5";
     }
 }

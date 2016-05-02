@@ -12,8 +12,9 @@
     "build.modernizr": "cd ./bower_components/modernizr && npm install && node ./bin/modernizr -c ../../tools/modernizr-config.json -d ./dist",
 
     "gulp.publish-thirdparty": "gulp publish-thirdparty",
-    "gulp.build-typescript": "gulp build-ts",
-    "gulp.rebuild-typescript": "gulp build-ts"
+    "gulp.build-ts": "gulp build-ts",
+    "gulp.rebuild-ts": "gulp rebuild-ts",
+    "gulp.watch-ts": "gulp watch-ts"
   },
   "repository": {
     "type": "git",
