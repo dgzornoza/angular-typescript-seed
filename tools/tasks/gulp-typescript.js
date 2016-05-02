@@ -7,11 +7,7 @@ var tsc = require("gulp-typescript");
 var tslint = require("gulp-tslint");
 var del = require("del");
 
-// source typescript files
-var sourceFiles = "src/app/**/*.ts";
-// output web app javascript files and folder
-var outputFiles = "wwwroot/app/**/*.js";
-var outputFolder = "wwwroot/app/";
+var tasksConfig = require("./gulp-config");
 
 var typescriptTasks = (function()
 {
@@ -23,18 +19,18 @@ var typescriptTasks = (function()
         // compile typescript
         var tsResult = _tsProject.src()
         .pipe(tsc(_tsProject));
-        // send javascript to outpu folder
-        return tsResult.js.pipe(gulp.dest(outputFolder));
+        // send javascript to output folder
+        return tsResult.js.pipe(gulp.dest(tasksConfig.outputFolder));
     };
 
     var _cleanOutput = function()
     {
-        del.sync(outputFiles);
+        del.sync(tasksConfig.outputScriptFiles);
     };
     
     var _lint = function()
     {
-        return gulp.src(sourceFiles)
+        return gulp.src(tasksConfig.sourceScriptFiles)
         .pipe(tslint())
         .pipe(tslint.report("prose",
         {

@@ -2,20 +2,23 @@
 // Configuration file for gulp tasks
 
 'use strict';
-var GulpConfig = (function () {
-    function gulpConfig() {
-        //Got tired of scrolling through all the comments so removed them
-        //Don't hurt me AC :-)
-        this.source = './src/';
-        this.sourceApp = this.source + 'app/';
 
-        this.tsOutputPath = this.source + '/js';
-        this.allJavaScript = [this.source + '/js/**/*.js'];
-        this.allTypeScript = this.sourceApp + '/**/*.ts';
+var tasksConfig = (function () 
+{
+    return {
+        
+        sourceScriptFiles: "src/**/*.ts",
+        outputScriptFiles: "wwwroot/**/*.js",
+        
+        sourceFolder: "src/",
+        outputFolder: "wwwroot/",
+        
+        outpuLibFolder: "wwwroot/lib/",
+        outputCssFolder: "wwwroot/css/",
+        outputFontsFolder: "wwwroot/fonts/"
 
-        this.typings = './typings/';
-        this.libraryTypeScriptDefinitions = './typings/main/**/*.ts';
-    }
-    return gulpConfig;
+    };
+    
 })();
-module.exports = GulpConfig
+
+module.exports = tasksConfig

@@ -5,10 +5,7 @@
 var gulp = require("gulp");
 var del = require("del");
 
-// output web libraries folder
-var wwwlib = "wwwroot/lib/";
-var wwwcss = "wwwroot/css/";
-var wwwfonts = "wwwroot/fonts/";
+var tasksConfig = require("./gulp-config");
 
 // thirdparty files
 var thirdPartyLibs = [
@@ -33,14 +30,14 @@ var thirdPartyTasks = (function()
 {
     var _publish = function()
     {
-        gulp.src(thirdPartyLibs).pipe(gulp.dest(wwwlib));
-        gulp.src(thirdPartyCss).pipe(gulp.dest(wwwcss));
-        gulp.src(thirdPartyFonts).pipe(gulp.dest(wwwfonts));
+        gulp.src(thirdPartyLibs).pipe(gulp.dest(tasksConfig.outpuLibFolder));
+        gulp.src(thirdPartyCss).pipe(gulp.dest(tasksConfig.outputCssFolder));
+        gulp.src(thirdPartyFonts).pipe(gulp.dest(tasksConfig.outputFontsFolder));
     }
 
     var _cleanOutput = function()
     {
-        del.sync([wwwlib, wwwcss, wwwfonts]);
+        del.sync([tasksConfig.outpuLibFolder, tasksConfig.outputCssFolder, tasksConfig.outputFontsFolder]);
     };
     
     return { publish: _publish, cleanOutput: _cleanOutput };
