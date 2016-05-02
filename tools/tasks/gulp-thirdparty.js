@@ -1,6 +1,6 @@
 // -----------------------------------------------
-// Task for publish thirdparty dependencies.
-// This task delete output folder and publish third party files.
+// Task for manage thirdparty dependencies.
+'use strict';
 
 var gulp = require("gulp");
 var del = require("del");
@@ -29,28 +29,23 @@ var thirdPartyFonts = [
     "bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2"
 ];
 
-/**
- * Task for generate output web libraries folder from third party (bower, node, etc.)
- * @remarks this task delete output web libraries folder before generate new libs
- */
-gulp.task("publish-thirdparty", function () {
-  
-    _deleteAndPublish(thirdPartyLibs, wwwlib);
-    _deleteAndPublish(thirdPartyCss, wwwcss);
-    _deleteAndPublish(thirdPartyFonts, wwwfonts);
-});
-
-
-function _deleteAndPublish(_files, _outputFolder)
+var thirdPartyTasks = (function()
 {
-    del(_outputFolder).then(function () {
+    var _publish = function()
+    {
+        gulp.src(thirdPartyLibs).pipe(gulp.dest(wwwlib));
+        gulp.src(thirdPartyCss).pipe(gulp.dest(wwwcss));
+        gulp.src(thirdPartyFonts).pipe(gulp.dest(wwwfonts));
+    }
 
-        console.log("Deleted folder:\n", _outputFolder);
-        
-        gulp.src(_files)
-        .pipe(gulp.dest(_outputFolder));
+    var _cleanOutput = function()
+    {
+        del.sync([wwwlib, wwwcss, wwwfonts]);
+    };
+    
+    return { publish: _publish, cleanOutput: _cleanOutput };
 
-        console.log("Generated folder:\n", _outputFolder);
+})();
 
-    });
-}
+
+module.exports = thirdPartyTasks;

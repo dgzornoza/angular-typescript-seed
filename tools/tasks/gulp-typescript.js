@@ -1,5 +1,6 @@
 // -----------------------------------------------
 // Task for lint and compile typescript
+'use strict';
 
 var gulp = require("gulp");
 var tsc = require("gulp-typescript");
@@ -12,64 +13,40 @@ var sourceFiles = "src/app/**/*.ts";
 var outputFiles = "wwwroot/app/**/*.js";
 var outputFolder = "wwwroot/app/";
 
-// configure typescript for use tsconfig.json
-var tsProject = tsc.createProject("tsconfig.json", { typescript: require("typescript") });
+var typescriptTasks = (function()
+{
+    // configure typescript for use tsconfig.json
+    var _tsProject = tsc.createProject("tsconfig.json", { typescript: require("typescript") });
 
-/**
- * Compile TypeScript task using tsconfig.json
- */
-gulp.task("build-ts", ["lint-ts"], function () {
-
-    return _compileTypescript();
-
-    // minificar (NOTA: Comentar si no se quiere minificar)
-    //.pipe(uglify_module())
-
-});
-
-/**
- * Clean javascript output and compile typescript task using tsconfig.json
- */
-gulp.task("rebuild-ts", ["lint-ts"], function () {
-
-    return _cleanOutput()
-    .pipe(_compileTypescript());
-
-    // minificar (NOTA: Comentar si no se quiere minificar)
-    //.pipe(uglify_module())
-
-});
-
-/**
- * lint typescript source code
- */
-gulp.task("lint-ts", function () {
-
-    return gulp.src(sourceFiles)
-    .pipe(tslint())
-    .pipe(tslint.report("prose",
+    var _compile = function()
     {
-        emitError: false,
-        summarizeFailureOutput: true
-    } ));
-});
+        // compile typescript
+        var tsResult = _tsProject.src()
+        .pipe(tsc(_tsProject));
+        // send javascript to outpu folder
+        return tsResult.js.pipe(gulp.dest(outputFolder));
+    };
 
+    var _cleanOutput = function()
+    {
+        del.sync(outputFiles);
+    };
+    
+    var _lint = function()
+    {
+        return gulp.src(sourceFiles)
+        .pipe(tslint())
+        .pipe(tslint.report("prose",
+        {
+            emitError: false,
+            summarizeFailureOutput: true
+        }));
+    };
+   
+   return { compile: _compile, cleanOutput: _cleanOutput, lint: _lint };
+})();
 
-function _compileTypescript()
-{
-    // compile typescript
-    var tsResult = tsProject.src()
-    .pipe(tsc(tsProject));
-    // send javascript to outpu folder
-    return tsResult.js.pipe(gulp.dest(outputFolder));
-}
-
-function _cleanOutput()
-{
-    return del.sync(outputFiles);
-}
-
-
+module.exports = typescriptTasks;
 
 
 
