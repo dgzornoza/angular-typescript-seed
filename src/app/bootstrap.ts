@@ -1,4 +1,5 @@
-﻿
+﻿/// <reference path="../../typings/browser.d.ts" />
+
 // base url for website/virtual directory/platform
 var BASE_URL = "/";
 // Application name
@@ -15,7 +16,6 @@ require.config({
 
         // Jquery
         "jquery": "../Scripts/jquery-2.1.4.min",
-        "jquery.signalr": "../Scripts/jquery.signalR-2.2.0.min",
 
         // Angular
         "angular": "../Scripts/angular.min",
@@ -33,7 +33,6 @@ require.config({
 
     },
     shim: {
-        "jquery.signalr": ["jquery"],
         "bootstrap": {
             deps: ["jquery"]
         },

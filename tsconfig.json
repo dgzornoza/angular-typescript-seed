@@ -11,7 +11,7 @@
         "target": "es5",
         "declaration": false,
         "inlineSourceMap": true,
-        "inlineSources": false
+        "inlineSources": false        
     },
     "exclude": [
         "bower_components",
