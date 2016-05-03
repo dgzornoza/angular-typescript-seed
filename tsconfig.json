@@ -17,6 +17,7 @@
         "bower_components",
         "node_modules",
         "tools",
+        "typings",
         "wwwroot"
     ]
 }

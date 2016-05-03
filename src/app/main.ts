@@ -1,9 +1,9 @@
 ﻿/// <reference path="../../typings/browser.d.ts" />
 
 // base url for website/virtual directory/platform
-var BASE_URL = "/";
-// Application name
-var APP_NAME = "Angular.Typescript.Seed";
+const BASE_URL: string = "/";
+// application name
+const APP_NAME: string = "Angular.Typescript.Seed";
 
 
 // requirejs configuration
@@ -11,46 +11,41 @@ require.config({
     baseUrl: "/",
     paths: {
 
-        // Jquery
-        "jquery": ["//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.3.min", "lib/jquery.min"],
-
-        // Angular
         "angular": "lib/angular.min",
-        "angular-cookie": "../Scripts/angular-cookies.min",
-        "angular-animate": "../Scripts/angular-animate.min",
-        "angular-sanitize": "../Scripts/angular-sanitize.min",
-        "angular-translate": "../Scripts/angular-translate.min",
+        "angular-animate": "lib/angular-animate.min",
+        "angular-cookies": "lib/angular-cookies.min",
+        "angular-route": "lib/angular-route.min",
+        "angular-sanitize": "lib/angular-sanitize.min",
+        "angular-translate": "lib/angular-translate.min",
 
-        // bootstrap
-        "bootstrap": "../Scripts/bootstrap.min",
+        "bootstrap": ["//ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.min.js", "lib/bootstrap.min"],
+        "jquery": ["//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.3.min", "lib/jquery.min"],
+        "modernizr": "lib/modernizr",
+        "domReady": "lib/domReady"
 
-        // require
-        "domReady": "../Scripts/domReady"
-        
     },
     shim: {
+
+        "angular": {
+            deps: ["jquery"],
+            exports: "angular"
+        },
+        "angular-animate": ["angular"],
+        "angular-cookies": ["angular"],
+        "angular-route": ["angular"],
+        "angular-sanitize": ["angular"],
+        "angular-translate": ["angular"],
+
         "bootstrap": {
             deps: ["jquery"]
-        },
-        "angular": {
-            exports: "angular",
-            deps: ["jquery", ]
-        },
-        "angular-ui-router": ["angular"],
-        "angular-cookie": ["angular"],
-        "angular-animate": ["angular"],
-        "angular-sanitize": ["angular"],
-        "angular-translate": ["angular"]
-
+        }
     }
 
 });
 
 
 // inicializar la aplicacion (sera invocada al cargarse el dom)
-require(["../Scripts/domReady!", "appModule"],
-    (app) =>
-    {
-        "use strict";
+require(["lib/domReady!", "appModule"], (app: any) => {
+        // TODO: falta implementar
     }
 );
