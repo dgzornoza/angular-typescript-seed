@@ -6,20 +6,16 @@ var BASE_URL = "/";
 var APP_NAME = "Angular.Typescript.Seed";
 
 
-
-// #region [Configuracion require]
-
-// configuracion requirejs
+// requirejs configuration
 require.config({
-    baseUrl: "app",
+    baseUrl: "/",
     paths: {
 
         // Jquery
-        "jquery": "../Scripts/jquery-2.1.4.min",
+        "jquery": ["//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.3.min", "lib/jquery.min"],
 
         // Angular
-        "angular": "../Scripts/angular.min",
-        "angular-ui-router": "../Scripts/angular-ui-router.min",
+        "angular": "lib/angular.min",
         "angular-cookie": "../Scripts/angular-cookies.min",
         "angular-animate": "../Scripts/angular-animate.min",
         "angular-sanitize": "../Scripts/angular-sanitize.min",
@@ -30,7 +26,7 @@ require.config({
 
         // require
         "domReady": "../Scripts/domReady"
-
+        
     },
     shim: {
         "bootstrap": {
@@ -50,10 +46,6 @@ require.config({
 
 });
 
-// #endregion [Configuracion require]
-
-
-// #region [Iniializacion aplicacion]
 
 // inicializar la aplicacion (sera invocada al cargarse el dom)
 require(["../Scripts/domReady!", "appModule"],
@@ -62,5 +54,3 @@ require(["../Scripts/domReady!", "appModule"],
         "use strict";
     }
 );
-
-// #endregion [Iniializacion aplicacion]
