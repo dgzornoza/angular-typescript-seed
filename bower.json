@@ -20,6 +20,7 @@
     "tests"
   ],
   "dependencies": {
+    "requirejs": "2.2.0",
     "jquery": "2.2.3",
     "angular": "1.5.5",
     "bootstrap": "3.3.6",

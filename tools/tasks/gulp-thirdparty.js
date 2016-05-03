@@ -19,7 +19,8 @@ var thirdPartyLibs = [
     "bower_components/modernizr/dist/modernizr.js",
     "bower_components/jquery/dist/jquery.min.js",
     "bower_components/angular/angular.min.js",
-    "bower_components/bootstrap/dist/js/bootstrap.min.js"
+    "bower_components/bootstrap/dist/js/bootstrap.min.js",
+    "bower_components/requirejs/require.js"
 ];
 var thirdPartyCss = [
     "bower_components/bootstrap/dist/css/bootstrap.min.css",
