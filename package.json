@@ -14,7 +14,8 @@
     "rebuild": "gulp rebuild",
     "watch": "gulp watch-source",
 
-    "bower": "bower"
+    "bower": "bower",
+    "typings": "typings"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,7 @@
     "bower": "^1.7.9",
     "typescript": "1.8.10",
     "tslint": "^3.8.1",
+    "typings": "^0.8.1",
 
     "gulp": "^3.9.1",
     "gulp-debug": "^2.1.2",
