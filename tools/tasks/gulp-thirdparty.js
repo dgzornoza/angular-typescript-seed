@@ -3,9 +3,16 @@
 'use strict';
 
 var gulp = require("gulp");
-var del = require("del");
 
 var tasksConfig = require("./gulp-config");
+
+/**
+ * copy output third party libs (bower, node, etc.)
+ */
+gulp.task("publish-thirdparty", function () {
+    return publish();
+});
+
 
 // thirdparty files
 var thirdPartyLibs = [
@@ -16,7 +23,7 @@ var thirdPartyLibs = [
 ];
 var thirdPartyCss = [
     "bower_components/bootstrap/dist/css/bootstrap.min.css",
-    "bower_components/bootstrap/dist/css/bootstrap-theme.min.css"        
+    "bower_components/bootstrap/dist/css/bootstrap-theme.min.css"
 ];
 var thirdPartyFonts = [
     "bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.eot",
@@ -26,23 +33,9 @@ var thirdPartyFonts = [
     "bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2"
 ];
 
-var thirdPartyTasks = (function()
+function publish()
 {
-    var _publish = function()
-    {
-        gulp.src(thirdPartyLibs).pipe(gulp.dest(tasksConfig.outpuLibFolder));
-        gulp.src(thirdPartyCss).pipe(gulp.dest(tasksConfig.outputCssFolder));
-        gulp.src(thirdPartyFonts).pipe(gulp.dest(tasksConfig.outputFontsFolder));
-    }
-
-    var _cleanOutput = function()
-    {
-        del.sync([tasksConfig.outpuLibFolder, tasksConfig.outputCssFolder, tasksConfig.outputFontsFolder]);
-    };
-    
-    return { publish: _publish, cleanOutput: _cleanOutput };
-
-})();
-
-
-module.exports = thirdPartyTasks;
+    gulp.src(thirdPartyLibs).pipe(gulp.dest(tasksConfig.outputLibFolder));
+    gulp.src(thirdPartyCss).pipe(gulp.dest(tasksConfig.outputCssFolder));
+    gulp.src(thirdPartyFonts).pipe(gulp.dest(tasksConfig.outputFontsFolder));
+}

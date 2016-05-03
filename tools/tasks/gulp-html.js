@@ -3,24 +3,33 @@
 'use strict';
 
 var gulp = require("gulp");
+var html5Lint = require("gulp-html5-lint");
 
 var tasksConfig = require("./gulp-config");
 
+/**
+ * lint and build html files
+ */
+gulp.task("build-html", ["lint-html5"], function () {
+    return build();
+});
 
-var htmlTasks = (function()
+/**
+ * lint html5 source code
+ */
+gulp.task("lint-html5", function () {
+    return lint();
+});
+
+function build()
 {
-    var _publish = function()
-    {
-        gulp.src(tasksConfig.sourceHtmlFiles).pipe(gulp.dest(tasksConfig.outputFolder));
-    }
+    // send html to output folder
+    gulp.src(tasksConfig.sourceHtmlFiles)
+    .pipe(gulp.dest(tasksConfig.outputFolder));
+}
 
-    var _cleanOutput = function()
-    {
-        del.sync([tasksConfig.outpuLibFolder, tasksConfig.outputCssFolder, tasksConfig.outputFontsFolder]);
-    };
-    
-    return { publish: _publish, cleanOutput: _cleanOutput };
-
-})();
-
-module.exports = htmlTasks;
+function lint()
+{
+    return gulp.src(tasksConfig.sourceHtmlFiles)
+    .pipe(html5Lint());
+};
