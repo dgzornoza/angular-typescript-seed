@@ -9,8 +9,7 @@ class Customer {
     public getName(): string {
         return this.name;
     }
-
     public getName2(): string {
-        return "Hello 5";
+        return "Hello";
     }
 }
