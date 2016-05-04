@@ -14,8 +14,7 @@
     "rebuild": "gulp rebuild",
     "watch": "gulp watch-source",
 
-    "bower": "bower",
-    "typings": "typings"
+    "bower": "bower"    
   },
   "repository": {
     "type": "git",

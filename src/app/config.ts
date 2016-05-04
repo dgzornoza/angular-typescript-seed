@@ -1,14 +1,16 @@
-﻿/// <reference path="../../typings/browser.d.ts" />
+﻿/* tslint:disable no-reference */
+/// <reference path="../../typings/browser.d.ts" />
+
 
 // base url for website/virtual directory/platform
 const BASE_URL: string = "/";
 // application name
 const APP_NAME: string = "Angular.Typescript.Seed";
 
-
+/// <reference path="../../typings/browser.d.ts" />
 // requirejs configuration
-require.config({
-    baseUrl: "/",
+requirejs.config({
+    baseUrl: BASE_URL,
     paths: {
 
         "angular": "lib/angular.min",
@@ -44,8 +46,6 @@ require.config({
 });
 
 
-// inicializar la aplicacion (sera invocada al cargarse el dom)
-require(["lib/domReady!", "appModule"], (app: any) => {
-        // TODO: falta implementar
-    }
+// start app when dom is loaded
+requirejs(["lib/domReady!", "appModule"], (app: any) => { }
 );
