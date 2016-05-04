@@ -16,6 +16,7 @@
     "exclude": [
         "bower_components",
         "node_modules",
+		"typings",
         "tools",
         "wwwroot"
     ]
