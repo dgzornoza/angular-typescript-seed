@@ -3,23 +3,16 @@
 'use strict';
 
 var gulp = require("gulp");
-var html5Lint = require("gulp-html5-lint");
 
 var tasksConfig = require("./gulp-config");
 
 /**
- * lint and build html files
+ * build html files
  */
-gulp.task("build-html", ["lint-html5"], function () {
+gulp.task("build-html", function () {
     return build();
 });
 
-/**
- * lint html5 source code
- */
-gulp.task("lint-html5", function () {
-    return lint();
-});
 
 function build()
 {
@@ -27,9 +20,3 @@ function build()
     gulp.src(tasksConfig.sourceHtmlFiles)
     .pipe(gulp.dest(tasksConfig.outputFolder));
 }
-
-function lint()
-{
-    return gulp.src(tasksConfig.sourceHtmlFiles)
-    .pipe(html5Lint());
-};

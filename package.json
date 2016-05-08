@@ -41,7 +41,6 @@
     "del": "^2.2.0",
     "gulp-postcss": "^6.1.0",
     "gulp-typescript": "2.13.0",
-    "gulp-tslint": "^5.0.0",
-    "gulp-html5-lint": "^1.1.0"
+    "gulp-tslint": "^5.0.0"
   }
 }

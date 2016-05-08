@@ -2,10 +2,10 @@
 /// <reference path="../../typings/browser.d.ts" />
 
 
-// base url for website/virtual directory/platform
+// base url for website/virtual directory/platform (Ended with'/')
 const BASE_URL: string = "/";
 // application name
-const APP_NAME: string = "Angular.Typescript.Seed";
+const APP_NAME: string = "angular.ts.sample";
 
 /// <reference path="../../typings/browser.d.ts" />
 // requirejs configuration
@@ -47,9 +47,8 @@ requirejs.config({
 
 
 // start app when dom is loaded
-requirejs(["lib/domReady!", "app/main"], (_document: Document, _main: any) => 
-    {
-        
+requirejs(["lib/domReady!", "app/app"], (_document: Document, _main: any) => 
+    {        
         alert("start require");
     }
 );
