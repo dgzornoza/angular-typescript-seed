@@ -1,12 +1,9 @@
-import * as angular from "angular";
-import { App } from "../../app";
+import { app } from "../../app";
 
-class HomeController
-{
-    
+class HomeController {
+
     /** Constructor por defecto de la clase */
-    constructor(private $scope: ng.IScope)
-    {
+    constructor($scope: ng.IScope) {
         alert("HomeController");
     }
 
@@ -18,4 +15,4 @@ class HomeController
 HomeController.$inject = ["$scope"];
 
 // registrar el viewmodel en la aplicacion
-App.registerController("HomeController", HomeController);
+app.registerController("HomeController", HomeController);
