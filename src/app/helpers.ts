@@ -20,6 +20,7 @@ class Helpers
     }
 }
 
+
 /** Extend StringConstructor interface with new features */
 interface StringConstructor
 {
@@ -34,6 +35,7 @@ String.isString = function (_obj: any): boolean
 {
     return typeof _obj === "string" || _obj instanceof String;
 }
+
 
 
 /**  Extend string interface with new features  */
