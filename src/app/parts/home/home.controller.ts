@@ -4,7 +4,6 @@ class HomeController {
 
     /** Constructor por defecto de la clase */
     constructor($scope: ng.IScope) {
-        alert("HomeController");
     }
 
 

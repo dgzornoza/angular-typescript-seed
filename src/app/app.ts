@@ -5,13 +5,13 @@ import "angular-route";
 import "angular-sanitize";
 import "angular-translate";
 
-import { RouteResolverProvider } from "app/services/routeResolver.provider";
+import { IRouteResolverProvider } from "app/services/routeResolver.provider";
 import "app/services/routeResolver.provider";
 
 import "app/helpers";
 
 /** Interface for declare angular register methods */
-interface AngularRegister {
+interface IAngularRegister {
 
     /** function definition for register controller in angular. ::ng.IControllerProvider.register()
      * @see http://docs.angularjs.org/api/ng.$controller
@@ -62,13 +62,11 @@ class AngularApp {
     /** Main angular module */
     private _module: ng.IModule;
     /** Object for angular register components */
-    private _angularRegister: AngularRegister;
+    private _angularRegister: IAngularRegister;
 
 
     /** Default constructor */
     constructor() {
-
-        alert("constructor");
 
         // create angular main module
         let modules: string[] = ["ngSanitize", "ngAnimate", "ngRoute", "ngCookies", "pascalprecht.translate",
@@ -162,7 +160,7 @@ class AngularApp {
             // $translateProvider: ng.translate.ITranslateProvider,
             // $translatePartialLoaderProvider: ng.translate.ITranslatePartialLoaderProvider,
             $routeProvider: ng.route.IRouteProvider,
-            $RouteResolverProvider: RouteResolverProvider
+            $RouteResolverProvider: IRouteResolverProvider
             ) => {
 
                 // asign angular register functions

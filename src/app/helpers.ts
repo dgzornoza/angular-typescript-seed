@@ -22,7 +22,7 @@ class Helpers {
     }
 }
 
-
+/* tslint:disable interface-name */
 /** Extend StringConstructor interface with new features */
 interface StringConstructor {
     /** @brief Method declaration to check whether an object is of type string
@@ -51,6 +51,7 @@ interface String {
     /** Metodo extensor para asegurar que la cadena finalice con barra '/', usado para formar rutas */
     ensureSlash(): string;
 }
+/* tslint:enable interface-name */
 
 /* tslint:disable no-invalid-this */
 String.prototype.splitWithRemove = function (separator: string | RegExp, removeItemString: string, limit?: number): string[] {

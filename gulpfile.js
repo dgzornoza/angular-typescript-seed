@@ -5,10 +5,10 @@ var del = require("del");
 
 // Custom tasks modules
 var tasksConfig = require("./tools/tasks/gulp-config");
-var thirdpartyTasks = require("./tools/tasks/gulp-thirdparty");
-var typescriptTasks = require("./tools/tasks/gulp-typescript");
-var htmlTasks = require("./tools/tasks/gulp-html");
-var cssTasks = require("./tools/tasks/gulp-css");
+require("./tools/tasks/gulp-thirdparty");
+require("./tools/tasks/gulp-typescript");
+require("./tools/tasks/gulp-html");
+require("./tools/tasks/gulp-css");
 
 
 /**

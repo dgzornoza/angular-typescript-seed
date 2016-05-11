@@ -1,14 +1,14 @@
 
 import * as angular from "angular";
 
-/** Model for custom route definition */
-export interface RouteDefinition extends ng.route.IRoute {
+/** Interface for custom route definition model */
+export interface IRouteDefinition extends ng.route.IRoute {
     /** flag indicating whether the route requires authentication */
     requireAuth: boolean;
 }
 
-/** Model for define dynamic routes resolution */
-export interface ResolveModel {
+/** Interface for define dynamic routes model resolution */
+export interface IResolveModel {
     /** path and name relative (without postfix) to the appropriate folder 
      * (must match the path of the view/controller following the convention) 
      */
@@ -22,7 +22,7 @@ export interface ResolveModel {
 }
 
 /** Interface for declare ::RouteResolver provider */
-export interface RouteResolverProvider extends ng.IServiceProvider {
+export interface IRouteResolverProvider extends ng.IServiceProvider {
     /** Property for the controllers base path */
     controllersBasePath: string;
 
@@ -33,7 +33,7 @@ export interface RouteResolverProvider extends ng.IServiceProvider {
      * @param _data ::ResolveModel defining a route
      * @return Route definition for use in the angular route provider
      */
-    resolve(_data: ResolveModel): RouteDefinition;
+    resolve(_data: IResolveModel): IRouteDefinition;
 }
 
 /** @Brief Class to implement the routing system in Views/Controllers of the application,
@@ -46,13 +46,13 @@ export interface RouteResolverProvider extends ng.IServiceProvider {
  * The alias of the controllers in the view, will be the same as the class name of controller without the suffix,
  * e.g 'oneController' = 'one'
  */
-class RouteResolver implements RouteResolverProvider {
+class RouteResolver implements IRouteResolverProvider {
 
     private _controllersBasePath: string = "";
     private _viewsBasePath: string = "";
 
 
-    public $get(): RouteResolverProvider {
+    public $get(): IRouteResolverProvider {
         return this;
     };
 
@@ -71,7 +71,7 @@ class RouteResolver implements RouteResolverProvider {
         this._viewsBasePath = viewsBasePath.ensureSlash();
     }
 
-    public resolve(data: ResolveModel): RouteDefinition {
+    public resolve(data: IResolveModel): IRouteDefinition {
 
         let viewPath: string = this._viewsBasePath + data.path + ".html";
         let controllerPath: string = this._viewsBasePath + data.path + ".controller.js";
@@ -79,7 +79,7 @@ class RouteResolver implements RouteResolverProvider {
         let controllerClass: string = controllerName.charAt(0).toUpperCase() + controllerName.slice(1) + "Controller";
 
         // create return object with route definition
-        let route: RouteDefinition = {
+        let route: IRouteDefinition = {
             // HACK: set 'as' also in the controller, in some frameworks like Ionic does not work 'controllerAs'
             controller: controllerClass + " as " + data.controllerAs,
             controllerAs: data.controllerAs,
