@@ -7,6 +7,7 @@ import "angular-translate";
 
 import { IRouteResolverProvider } from "app/services/routeResolver.provider";
 import "app/services/routeResolver.provider";
+import { RoutesConfig } from "app/routesConfig";
 
 import "app/helpers";
 
@@ -148,8 +149,7 @@ class AngularApp {
             "$filterProvider",
             "$provide",
             "$httpProvider",
-            // "$translateProvider",
-            // "translatePartialLoaderProvider",
+            "$translateProvider",
             "$routeProvider",
             "RouteResolverProvider",
             ($controllerProvider: ng.IControllerProvider,
@@ -157,8 +157,7 @@ class AngularApp {
             $filterProvider: ng.IFilterProvider,
             $provide: ng.auto.IProvideService,
             $httpProvider: ng.IHttpProvider,
-            // $translateProvider: ng.translate.ITranslateProvider,
-            // $translatePartialLoaderProvider: ng.translate.ITranslatePartialLoaderProvider,
+            $translateProvider: ng.translate.ITranslateProvider,
             $routeProvider: ng.route.IRouteProvider,
             $RouteResolverProvider: IRouteResolverProvider
             ) => {
@@ -172,23 +171,20 @@ class AngularApp {
                     service: $provide.service
                 };
 
-                // configurar las rutas de la aplicacion (usar rutas con el tema actual)
+                // Configure routes
                 $RouteResolverProvider.controllersBasePath = "app/parts/";
                 $RouteResolverProvider.viewsBasePath = "app/parts/";
+                RoutesConfig.initialize($routeProvider, $RouteResolverProvider);
 
-                // configurar sistema de gestion de idiomas
+                // configure languages
                 // $translateProvider.fallbackLanguage("en")
                 // .preferredLanguage("en")
                 // .useLoaderCache("$translationCache")
                 // .useLoader("$translatePartialLoader", {
                 //     urlTemplate: "app/{part}/lang/{lang}.json"
-                // })
+                // })                    
 
-                $routeProvider
-                    .when("/home", $RouteResolverProvider.resolve({ controllerAs: "Home", path: "home/home" }))
-                    .otherwise({ redirectTo: "/home" });
-
-
+                
             }];
 
         // initialize angular config function

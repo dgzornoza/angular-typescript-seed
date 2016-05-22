@@ -10,10 +10,15 @@
 
     "test": "echo \"Error: no test specified\" && exit 1",
 
-    "build" : "gulp build",
-    "rebuild": "gulp rebuild",
+    "build-debug" : "gulp build-debug",
+    "rebuild-debug": "gulp rebuild-debug",
+    
     "watch": "gulp watch-source",
 
+    "iexplore": "gulp build-debug && start iexplore http://localhost:5000/",
+    "chrome": "gulp build-debug && start chrome http://localhost:5000/",
+    "edge": "gulp build-debug && start edge http://localhost:5000/",
+    
     "bower": "bower"    
   },
   "repository": {

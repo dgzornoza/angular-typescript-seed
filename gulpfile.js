@@ -14,18 +14,18 @@ require("./tools/tasks/gulp-css");
 /**
  * cleand output and build all project in output directory
  */
-gulp.task("rebuild", ["clean-output", "build"]);
+gulp.task("rebuild-debug", ["clean-output", "build-debug"]);
 
 /**
  * Build all project in output directory
  */
-gulp.task("build", ["publish-thirdparty", "build-ts", "build-html"]);
+gulp.task("build-debug", ["publish-thirdparty", "build-ts-debug", "build-html"]);
 
 /**
  * watch source files
  */
 gulp.task("watch-source", function() {
-        gulp.watch([tasksConfig.sourceScriptFiles], ["build-ts"]);
+        gulp.watch([tasksConfig.sourceScriptFiles], ["build-ts-debug"]);
         gulp.watch([tasksConfig.sourceHtmlFiles], ["build-html"]);
         //gulp.watch([tasksConfig.sourceCssFiles], ["postcss"]);
 });

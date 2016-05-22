@@ -11,7 +11,7 @@ var tasksConfig = require("./gulp-config");
 /**
  * lint and build TypeScript
  */
-gulp.task("build-ts", ["lint-ts"], function () {
+gulp.task("build-ts-debug", ["lint-ts"], function () {
     return build();
 });
 
