@@ -1,4 +1,3 @@
-
 import * as angular from "angular";
 
 /** Interface for custom route definition model */

@@ -47,7 +47,7 @@ requirejs.config({
 
 
 // start app when dom is loaded
-requirejs(["lib/domReady!", "app/app"], (_document: Document, _main: any) => 
+requirejs(["lib/domReady!", "app/main"], (_document: Document, _main: any) => 
     {                
     }
 );
