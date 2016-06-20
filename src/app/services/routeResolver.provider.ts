@@ -73,9 +73,9 @@ class RouteResolver implements IRouteResolverProvider {
     public resolve(data: IResolveModel): IRouteDefinition {
 
         let viewPath: string = this._viewsBasePath + data.path + ".html";
-        let controllerPath: string = this._viewsBasePath + data.path + ".controller.js";
+        let controllerPath: string = this._controllersBasePath + data.path + ".controller.js";
         let controllerName: string = data.path.split("/").pop();
-        let controllerClass: string = controllerName.charAt(0).toUpperCase() + controllerName.slice(1) + "Controller";
+        let controllerClass: string = controllerName + "Controller";
 
         // create return object with route definition
         let route: IRouteDefinition = {

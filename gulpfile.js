@@ -9,6 +9,7 @@ require("./tools/tasks/gulp-thirdparty");
 require("./tools/tasks/gulp-typescript");
 require("./tools/tasks/gulp-html");
 require("./tools/tasks/gulp-css");
+require("./tools/tasks/gulp-mocks");
 
 
 /**
@@ -19,7 +20,7 @@ gulp.task("rebuild-debug", ["clean-output", "build-debug"]);
 /**
  * Build all project in output directory
  */
-gulp.task("build-debug", ["publish-thirdparty", "build-ts-debug", "build-html"]);
+gulp.task("build-debug", ["publish-thirdparty", "build-ts-debug", "build-html", "build-mocks"]);
 
 /**
  * watch source files

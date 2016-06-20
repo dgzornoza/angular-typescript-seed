@@ -1,51 +1,49 @@
 {
-  "name": "angular-typescript-seed",
-  "version": "1.0.0",
-  "description": "Seed project for angular1 with typescript apps. http://angularjs.org/",
-  "main": "index.js",
-  "scripts": {
-
-    "postinstall": "bower install && npm run build.modernizr && typings install",
-    "build.modernizr": "cd ./bower_components/modernizr && npm install && node ./bin/modernizr -c ../../tools/modernizr-config.json -d ./dist",
-
-    "test": "echo \"Error: no test specified\" && exit 1",
-
-    "build-debug" : "npm install && gulp build-debug",
-    "rebuild-debug": "npm install && gulp rebuild-debug",
+    "name": "angular-typescript-seed",
+    "version": "1.0.0",
+    "private": true,
+    "description": "Seed project for angular1 with typescript apps. http://angularjs.org/",
+    "main": "index.js",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/dgzornoza/angular-typescript-seed.git"
+    },
+    "keywords": [
+      "angular",
+      "seed",
+      "typescript"
+    ],
+    "author": "David González Zornoza",
+    "license": "MIT",
+    "bugs": {
+      "url": "https://github.com/dgzornoza/angular-typescript-seed/issues"
+    },
+    "homepage": "https://github.com/dgzornoza/angular-typescript-seed#readme",
     
-    "watch": "gulp watch-source",
+    "scripts": {
+        "postinstall": "bower install && npm run build.modernizr && typings install",
+        "build.modernizr": "cd ./bower_components/modernizr && npm install && node ./bin/modernizr -c ../../tools/modernizr-config.json -d ./dist",
+        "prestart": "npm install && npm run iexplore",
+        "start": "dnx web",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build-debug": "npm install && gulp build-debug",
+        "rebuild-debug": "npm install && gulp rebuild-debug",
+        "watch": "gulp watch-source",
+        "iexplore": "gulp build-debug && start iexplore http://localhost:5000/",
+        "chrome": "gulp build-debug && start chrome http://localhost:5000/",
+        "edge": "gulp build-debug && start edge http://localhost:5000/",
+        "bower": "bower"
+    },
 
-    "iexplore": "gulp build-debug && start iexplore http://localhost:5000/",
-    "chrome": "gulp build-debug && start chrome http://localhost:5000/",
-    "edge": "gulp build-debug && start edge http://localhost:5000/",
-    
-    "bower": "bower"    
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dgzornoza/angular-typescript-seed.git"
-  },
-  "keywords": [
-    "angular",
-    "seed",
-    "typescript"
-  ],
-  "author": "David González Zornoza",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/dgzornoza/angular-typescript-seed/issues"
-  },
-  "homepage": "https://github.com/dgzornoza/angular-typescript-seed#readme",
-  "devDependencies": {
-    "bower": "^1.7.9",
-    "typescript": "1.8.10",
-    "tslint": "^3.8.1",    
-
-    "gulp": "^3.9.1",
-    "gulp-debug": "^2.1.2",
-    "del": "^2.2.0",
-    "gulp-postcss": "^6.1.0",
-    "gulp-typescript": "2.13.0",
-    "gulp-tslint": "^5.0.0"
-  }
+    "devDependencies": {
+        "bower": "^1.7.9",
+        "typescript": "1.8.10",
+        "tslint": "^3.8.1",
+        "gulp": "^3.9.1",
+        "gulp-debug": "^2.1.2",
+        "del": "^2.2.0",
+        "gulp-postcss": "^6.1.0",
+        "gulp-typescript": "2.13.0",
+        "gulp-tslint": "^5.0.0"
+    }
 }

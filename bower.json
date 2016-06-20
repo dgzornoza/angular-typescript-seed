@@ -1,35 +1,35 @@
 {
-  "name": "angular-typescript-seed",
-  "description": "Seed project for angular1 with typescript apps. http://angularjs.org/",
-  "main": "index.js",
-  "authors": [
-    "David González Zornoza"
-  ],
-  "license": "MIT",
-  "keywords": [
-    "angular",
-    "seed",
-    "typescript"
-  ],
-  "homepage": "https://github.com/dgzornoza/angular-typescript-seed",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
-    "angular": "1.5.5",
-    "angular-animate": "1.5.5",
-    "angular-cookies": "1.5.5",
-    "angular-route": "1.5.5",
-    "angular-sanitize": "1.5.5",
-    "angular-translate": "2.11.0",
-    "bootstrap": "3.3.6",
-    "jquery": "2.2.3",
-    "modernizr": "3.3.1",
-    "requirejs": "2.2.0",
-    "requirejs-domready": "2.0.1"    
-  }
+    "name": "angular-typescript-seed",
+    "description": "Seed project for angular1 with typescript apps. http://angularjs.org/",
+    "main": "index.js",
+    "authors": [
+        "David González Zornoza"
+    ],
+    "license": "MIT",
+    "keywords": [
+        "angular",
+        "seed",
+        "typescript"
+    ],
+    "homepage": "https://github.com/dgzornoza/angular-typescript-seed",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "angular": "1.5.5",
+        "angular-animate": "1.5.5",
+        "angular-cookies": "1.5.5",
+        "angular-route": "1.5.5",
+        "angular-sanitize": "1.5.5",
+        "angular-translate": "2.11.0",
+        "bootstrap": "3.3.6",
+        "jquery": "2.2.3",
+        "modernizr": "3.3.1",
+        "requirejs": "2.2.0",
+        "requirejs-domready": "2.0.1"    
+    }
 }

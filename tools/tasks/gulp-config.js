@@ -15,6 +15,7 @@ var tasksConfig = (function ()
         sourceScriptFiles: _sourceFolder + "**/*.ts",
         sourceHtmlFiles: _sourceFolder + "**/*.html",
         sourceCssFiles: _sourceFolder + "**/*.css",
+        sourceMocksFiles: _sourceFolder + "mocks/*.json",
 
         // output resources
         outputFolder: _outputFolder,
@@ -22,7 +23,8 @@ var tasksConfig = (function ()
         outputAppFolder: _outputFolder + "app/",
         outputLibFolder: _outputFolder + "lib/",
         outputCssFolder: _outputFolder + "css/",
-        outputFontsFolder: _outputFolder + "fonts/"
+        outputFontsFolder: _outputFolder + "fonts/",
+        outputMocksFolder: _outputFolder + "mocks/"
 
     };
 

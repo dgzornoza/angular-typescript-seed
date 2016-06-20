@@ -20,7 +20,7 @@ requirejs.config({
         "angular-sanitize": "lib/angular-sanitize.min",
         "angular-translate": "lib/angular-translate.min",
 
-        "bootstrap": ["//ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.min.js", "lib/bootstrap.min"],
+        "bootstrap": ["//ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.min", "lib/bootstrap.min"],
         "jquery": ["//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.3.min", "lib/jquery.min"],
         "modernizr": "lib/modernizr",
         "domReady": "lib/domReady"

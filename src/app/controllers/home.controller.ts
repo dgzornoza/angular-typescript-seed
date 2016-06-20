@@ -13,9 +13,9 @@ class HomeController {
 
 }
 
-// establecer variables a inyectar en el viewmodel
-// NOTA: (Deben seguir el mismo orden que el constructor del viewmodel)
+// establecer variables a inyectar en el controlador
+// NOTA: (Deben seguir el mismo orden que el constructor del controlador)
 HomeController.$inject = ["$scope"];
 
-// registrar el viewmodel en la aplicacion
-app.registerController("HomeController", HomeController);
+// registrar el controlador en la aplicacion
+app.registerController("homeController", HomeController);

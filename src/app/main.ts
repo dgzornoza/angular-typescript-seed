@@ -164,6 +164,9 @@ class AngularApp {
                     service: $provide.service
                 };
 
+                // configure http interceptor
+                $httpProvider.interceptors.push();
+
                 // Configure routes
                 $RouteResolverProvider.controllersBasePath = "app/controllers/";
                 $RouteResolverProvider.viewsBasePath = "app/views/";
