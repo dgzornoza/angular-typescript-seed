@@ -15,18 +15,15 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'test-main.js',
-      { pattern: '../wwwroot/lib/**/*.js', included: false },
-      '../bower_components/angular-mocks/angular-mocks.js',
-      { pattern: '../wwwroot/app/**/*.js', included: false },
-      { pattern: '**/*.js', included: false }      
+      'tests/test-main.js',
+      { pattern: 'wwwroot/app/**/*.js', included: false },
+      { pattern: 'tests/**/*.js', included: false }      
     ],
 
 
     // list of files to exclude
-    exclude: [
-      'karma.config.js',      
-      '../wwwroot/app/config.js'
+    exclude: [       
+      'wwwroot/app/config.js'
     ],
 
 
