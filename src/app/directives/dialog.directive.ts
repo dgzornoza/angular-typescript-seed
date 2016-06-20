@@ -1,4 +1,4 @@
-import { app } from "app/app";
+import { app } from "app/main";
 import "angular";
 
 

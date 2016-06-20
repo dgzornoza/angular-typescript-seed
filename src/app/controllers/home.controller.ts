@@ -2,8 +2,12 @@ import { app } from "app/main";
 
 class HomeController {
 
+    // services
+    private _scope: ng.IScope;
+
     /** Constructor por defecto de la clase */
     constructor($scope: ng.IScope) {
+        this._scope = $scope;
     }
 
 

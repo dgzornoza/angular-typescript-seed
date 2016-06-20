@@ -1,11 +1,4 @@
-﻿import "angular";
-import "angular-animate";
-import "angular-cookies";
-import "angular-route";
-import "angular-sanitize";
-import "angular-translate";
-
-import { IRouteResolverProvider } from "app/services/routeResolver.provider";
+﻿import { IRouteResolverProvider } from "app/services/routeResolver.provider";
 import "app/services/routeResolver.provider";
 import { RoutesConfig } from "app/routesConfig";
 
@@ -172,8 +165,8 @@ class AngularApp {
                 };
 
                 // Configure routes
-                $RouteResolverProvider.controllersBasePath = "app/parts/";
-                $RouteResolverProvider.viewsBasePath = "app/parts/";
+                $RouteResolverProvider.controllersBasePath = "app/controllers/";
+                $RouteResolverProvider.viewsBasePath = "app/views/";
                 RoutesConfig.initialize($routeProvider, $RouteResolverProvider);
 
                 // configure languages
@@ -184,7 +177,7 @@ class AngularApp {
                 //     urlTemplate: "app/{part}/lang/{lang}.json"
                 // })                    
 
-                
+
             }];
 
         // initialize angular config function

@@ -10,8 +10,8 @@
 
     "test": "echo \"Error: no test specified\" && exit 1",
 
-    "build-debug" : "gulp build-debug",
-    "rebuild-debug": "gulp rebuild-debug",
+    "build-debug" : "npm install && gulp build-debug",
+    "rebuild-debug": "npm install && gulp rebuild-debug",
     
     "watch": "gulp watch-source",
 

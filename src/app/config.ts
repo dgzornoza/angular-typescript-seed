@@ -47,7 +47,21 @@ requirejs.config({
 
 
 // start app when dom is loaded
-requirejs(["lib/domReady!", "app/main"], (_document: Document, _main: any) => 
-    {                
-    }
+requirejs(["lib/domReady!",
+            "angular",
+            "angular-animate",
+            "angular-cookies",
+            "angular-route",
+            "angular-sanitize",
+            "angular-translate",
+            "bootstrap"], 
+            (_document: Document, _main: any) => {
+
+                // start app when dom is loaded
+            requirejs(["app/main"], (_document: Document, _main: any) => 
+                {  
+                                  
+                });
+
+            }
 );
