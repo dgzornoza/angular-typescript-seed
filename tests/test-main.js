@@ -53,7 +53,7 @@ require.config({
     },
 
     // dynamically load all test files
-    deps: allTestFiles,
+    //deps: allTestFiles,
 
     // we have to kickoff jasmine, as it is asynchronous
     callback: lazyStart
@@ -71,7 +71,10 @@ function lazyStart() {
             "angular-translate",
             "bootstrap"], function() {
 
-                window.__karma__.start();
+                requirejs(allTestFiles, function() {
+                    window.__karma__.start();
+                })
+
             });
 }
 
