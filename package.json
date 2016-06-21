@@ -23,11 +23,11 @@
     "scripts": {
         "postinstall": "bower install && npm run build.modernizr && typings install",
         "build.modernizr": "cd ./bower_components/modernizr && npm install && node ./bin/modernizr -c ../../tools/modernizr-config.json -d ./dist",
-        
+
         "prestart": "npm install && npm run iexplore",
         "start": "dnx web",
-        
-	      "test": "karma start karma.conf.js",        
+
+	    "test": "karma start karma.conf.js",
 
         "build-debug": "npm install && gulp build-debug",
         "rebuild-debug": "npm install && gulp rebuild-debug",
@@ -59,7 +59,7 @@
         "karma-jasmine": "^1.0.2",
         "karma-requirejs": "^1.0.0",
 
-        "requirejs": "^2.2.0",
+        "requirejs": "2.2.0",
         "tslint": "^3.8.1",
         "typescript": "1.8.10"
     }

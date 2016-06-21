@@ -30,6 +30,6 @@
         "bootstrap": "3.3.6",
         "jquery": "2.2.3",
         "modernizr": "3.3.1",
-        "requirejs-domready": "2.0.1"    
+        "requirejs-domready": "2.0.1"
     }
 }

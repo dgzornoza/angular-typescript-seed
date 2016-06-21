@@ -15,14 +15,16 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'tests/test-main.js',
-      { pattern: 'wwwroot/app/**/*.js', included: false },
-      { pattern: 'tests/**/*.js', included: false }      
+        'tests/test-main.js',
+        { pattern: 'bower_components/angular-mocks/angular-mocks.js', included: false },
+        { pattern: 'wwwroot/app/**/*.js', included: false },
+        { pattern: 'wwwroot/lib/**/*.js', included: false },
+        { pattern: 'tests/**/*.js', included: false }
     ],
 
 
     // list of files to exclude
-    exclude: [       
+    exclude: [
       'wwwroot/app/config.js'
     ],
 
