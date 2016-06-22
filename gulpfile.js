@@ -12,6 +12,7 @@ require("./tools/tasks/gulp-css");
 require("./tools/tasks/gulp-mocks");
 
 
+
 /**
  * cleand output and build all project in output directory
  */
@@ -21,6 +22,12 @@ gulp.task("rebuild-debug", ["clean-output", "build-debug"]);
  * Build all project in output directory
  */
 gulp.task("build-debug", ["publish-thirdparty", "build-ts-debug", "build-html", "build-mocks"]);
+
+/**
+ * Build all test project
+ */
+gulp.task("build-tests", ["build-ts-tests"]);
+
 
 /**
  * watch source files

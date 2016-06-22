@@ -29,6 +29,7 @@
 
 	    "test": "karma start ./tests/karma.conf.js",
 
+        "build-tests": "gulp build-tests",
         "build-debug": "npm install && gulp build-debug",
         "rebuild-debug": "npm install && gulp rebuild-debug",
 

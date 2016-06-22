@@ -5,7 +5,9 @@
 var tasksConfig = (function ()
 {
     var _sourceFolder = "src/";
+    var _sourceTestsFolder = "tests/";
     var _outputFolder = "wwwroot/";
+    
 
     return {
 
@@ -16,6 +18,9 @@ var tasksConfig = (function ()
         sourceHtmlFiles: _sourceFolder + "**/*.html",
         sourceCssFiles: _sourceFolder + "**/*.css",
         sourceMocksFiles: _sourceFolder + "mocks/*.json",
+
+        sourceTestsFolder: _sourceTestsFolder,
+        sourceTestsScriptFiles: _sourceTestsFolder + "**/*.ts",
 
         // output resources
         outputFolder: _outputFolder,
