@@ -54,13 +54,13 @@ requirejs(["lib/domReady!",
             "angular-route",
             "angular-sanitize",
             "angular-translate",
-            "bootstrap"], 
-            (_document: Document, _main: any) => {
+            "bootstrap"],
+            (_document: Document) => {
 
-                // start app when dom is loaded
-            requirejs(["app/main"], (_document: Document, _main: any) => 
-                {  
-                                  
+	        // start app when dom is loaded
+            requirejs(["app/main"], (_main: any) =>
+                {
+
                 });
 
             }
