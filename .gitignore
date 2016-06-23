@@ -244,3 +244,5 @@ wwwroot/app/
 wwwroot/css/
 wwwroot/fonts/
 wwwroot/lib/
+wwwroot/views/
+wwwroot/tests/

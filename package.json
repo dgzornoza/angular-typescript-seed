@@ -27,7 +27,7 @@
         "prestart": "npm install && npm run iexplore",
         "start": "dnx web",
 
-	    "test": "karma start ./tests/karma.conf.js",
+	    "test": "karma start ./wwwroot/tests/karma.conf.js",
 
         "build-tests": "gulp build-tests",
         "build-debug": "npm install && gulp build-debug",

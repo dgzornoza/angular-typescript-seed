@@ -17,8 +17,8 @@
         "bower_components",
         "node_modules",
         "src/app",
-		"typings",
         "tools",
+        "typings",
         "wwwroot"
     ]
 }

@@ -1,6 +1,8 @@
 // Karma configuration
 // Generated on Mon Jun 20 2016 23:09:25 GMT+0200 (Hora de verano romance)
 
+var module: any;
+
 module.exports = function(config) {
   config.set({
 
@@ -16,16 +18,16 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
         'tests/test-main.js',
-        { pattern: 'bower_components/angular-mocks/angular-mocks.js', included: false },
-        { pattern: 'wwwroot/app/**/*.js', included: false },
-        { pattern: 'wwwroot/lib/**/*.js', included: false },
+        { pattern: '../bower_components/angular-mocks/angular-mocks.js', included: false },
+        { pattern: 'app/**/*.js', included: false },
+        { pattern: 'lib/**/*.js', included: false },
         { pattern: 'tests/**/*.js', included: false }
     ],
 
 
     // list of files to exclude
     exclude: [
-      'wwwroot/app/config.js'
+      'app/config.js'
     ],
 
 

@@ -43,4 +43,5 @@ class UsersController {
 UsersController.$inject = ["$scope", "usersService"];
 
 // registrar el controlador en la aplicacion
-app.registerController("usersController", UsersController);
+//app.registerController("usersController", UsersController);
+app.module.controller("usersController", UsersController);

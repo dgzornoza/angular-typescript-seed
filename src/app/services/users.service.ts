@@ -51,4 +51,5 @@ class UsersService implements IUsersService {
 UsersService.$inject = ["$http", "$q"];
 
 // registrar el servicio en la aplicacion
-app.registerService("usersService", UsersService);
+//app.registerService("usersService", UsersService);
+app.module.service("usersService", UsersService);

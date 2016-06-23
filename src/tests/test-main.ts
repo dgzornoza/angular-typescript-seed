@@ -5,8 +5,7 @@
 var allTestFiles = [];
 var TEST_REGEXP = /(spec|test)\.js$/i;
 
-interface Window
-{
+interface Window {
     __karma__: any;
 }
 
@@ -32,13 +31,14 @@ const APP_NAME: string = "angular.ts.sample";
 
 require.config({
   // Karma serves files under /base, which is the basePath from your config file
-  baseUrl: '/base/wwwroot',
+  baseUrl: '/base',
 
   paths: {
         "angular": "lib/angular",
         "angular-animate": "lib/angular-animate.min",
         "angular-cookies": "lib/angular-cookies.min",
-        "angular-mocks": "../bower_components/angular-mocks/angular-mocks",
+        //"angular-mocks": "../bower_components/angular-mocks/angular-mocks",
+        "angular-mocks": "lib/angular-mocks",
         "angular-route": "lib/angular-route.min",
         "angular-sanitize": "lib/angular-sanitize.min",
         "angular-translate": "lib/angular-translate.min",
