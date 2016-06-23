@@ -16,9 +16,9 @@
     "exclude": [
         "bower_components",
         "node_modules",
-		"tests",
+        "src/app",
+		"typings",
         "tools",
-        "typings",
         "wwwroot"
     ]
 }

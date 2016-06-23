@@ -56,7 +56,7 @@ function buildTest()
     var tsResult = tsTestProject.src()
     .pipe(tsc(tsTestProject));
     // send javascript to output folder
-    return tsResult.js.pipe(gulp.dest(tasksConfig.sourceTestsFolder));
+    return tsResult.js.pipe(gulp.dest(tasksConfig.outputTestsFolder));
 };
 
 function lint(source)

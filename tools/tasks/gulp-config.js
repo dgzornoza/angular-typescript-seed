@@ -5,22 +5,20 @@
 var tasksConfig = (function ()
 {
     var _sourceFolder = "src/";
-    var _sourceTestsFolder = "tests/";
     var _outputFolder = "wwwroot/";
-    
+
 
     return {
 
         // source resources
         sourceFolder: _sourceFolder,
 
-        sourceScriptFiles: _sourceFolder + "**/*.ts",
-        sourceHtmlFiles: _sourceFolder + "**/*.html",
-        sourceCssFiles: _sourceFolder + "**/*.css",
+        sourceScriptFiles: _sourceFolder + "app/**/*.ts",
+        sourceHtmlFiles: _sourceFolder + "app/**/*.html",
+        sourceCssFiles: _sourceFolder + "app/**/*.css",
         sourceMocksFiles: _sourceFolder + "mocks/*.json",
 
-        sourceTestsFolder: _sourceTestsFolder,
-        sourceTestsScriptFiles: _sourceTestsFolder + "**/*.ts",
+        sourceTestsScriptFiles: _sourceFolder + "tests/**/*.ts",
 
         // output resources
         outputFolder: _outputFolder,
@@ -29,7 +27,9 @@ var tasksConfig = (function ()
         outputLibFolder: _outputFolder + "lib/",
         outputCssFolder: _outputFolder + "css/",
         outputFontsFolder: _outputFolder + "fonts/",
-        outputMocksFolder: _outputFolder + "mocks/"
+        outputMocksFolder: _outputFolder + "mocks/",
+
+        outputTestsFolder: "tests_output/",
 
     };
 

@@ -1,6 +1,5 @@
 /* tslint:disable no-reference */
-/// <reference path="../typings/browser.d.ts" />
-
+/// <reference path="../../typings/browser.d.ts" />
 var allTestFiles = [];
 var TEST_REGEXP = /(spec|test)\.js$/i;
 // Get a list of all the test files to include
@@ -17,9 +16,9 @@ for (var file in window.__karma__.files) {
     }
 }
 // base url for website/virtual directory/platform (Ended with'/')
-//const BASE_URL: string = "/";
+var BASE_URL = "/";
 // application name
-//const APP_NAME: string = "angular.ts.sample";
+var APP_NAME = "angular.ts.sample";
 require.config({
     // Karma serves files under /base, which is the basePath from your config file
     baseUrl: '/base/wwwroot',

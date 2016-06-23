@@ -7,7 +7,6 @@ const BASE_URL: string = "/";
 // application name
 const APP_NAME: string = "angular.ts.sample";
 
-/// <reference path="../../typings/browser.d.ts" />
 // requirejs configuration
 requirejs.config({
     baseUrl: BASE_URL,
