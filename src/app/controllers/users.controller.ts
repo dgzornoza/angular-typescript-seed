@@ -5,7 +5,11 @@ import "app/services/users.service";
 import { IUserModel } from "app/models/users";
 import { IUsersService } from "app/services/users.service";
 
-class UsersController {
+export interface IUsersController {
+        Users: IUserModel[];
+}
+
+class UsersController implements IUsersController {
 
     // services
     private _scope: ng.IScope;
@@ -43,5 +47,4 @@ class UsersController {
 UsersController.$inject = ["$scope", "usersService"];
 
 // registrar el controlador en la aplicacion
-//app.registerController("usersController", UsersController);
-app.module.controller("usersController", UsersController);
+app.registerController("usersController", UsersController);

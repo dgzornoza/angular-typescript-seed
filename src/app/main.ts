@@ -37,16 +37,16 @@ interface IAngularRegister {
      * @see http://docs.angularjs.org/api/AUTO.$provide
      * @param name Service factory name
      * @param serviceFactory Service factory (Internally this is an abbreviation for $provide.provider(name, {$get: $getFn}).
-     * @return Registered service factory instance 
+     * @return Registered service factory instance
      */
     factory: (name: string, serviceFactory: Function) => ng.IServiceProvider;
 
-    /** function definition for register a service constructor in angular, which will be invoked with new to create the service instance. 
+    /** function definition for register a service constructor in angular, which will be invoked with new to create the service instance.
      * ::ng.IProvideService.service()
      * @see http://docs.angularjs.org/api/AUTO.$provide
      * @param name Service constructor name
      * @param service Service class.
-     * @return Registered service constructor instance 
+     * @return Registered service constructor instance
      */
     service: (name: string, service: Function) => ng.IServiceProvider;
 }
@@ -85,8 +85,13 @@ class AngularApp {
      * @param name Controller name
      * @param controller Controller class
      */
-    public registerController(name: string, viewModel: Function): void {
-        this._angularRegister.controller(name, viewModel);
+    public registerController(name: string, controllerClass: Function): void {
+
+        if (undefined == this._angularRegister || IS_RUNNING_TESTS) {
+            this._module.controller(name, controllerClass);
+        } else {
+            this._angularRegister.controller(name, controllerClass);
+        }
     }
 
     /** function definition for register directive in angular. ::ng.ICompileProvider.directive()
@@ -94,10 +99,15 @@ class AngularApp {
      * @see http://docs.angularjs.org/api/ng.$compileProvider
      * @param name Directive name
      * @param directive Directive class
-     * @return Compiler provider itself used for register directive
+     * @return Compiler provider itself used for register directive or IModule if not found
      */
-    public registerDirective(name: string, directive: Function): ng.ICompileProvider {
-        return this._angularRegister.directive(name, directive);
+    public registerDirective(name: string, directive: Function): ng.ICompileProvider | ng.IModule {
+
+        if (undefined == this._angularRegister || IS_RUNNING_TESTS) {
+            return this._module.directive(name, directive as any);
+        } else {
+            return this._angularRegister.directive(name, directive);
+        }
     }
 
     /** function definition for register filter in angular. ::ng.IFilterProvider.register()
@@ -105,20 +115,30 @@ class AngularApp {
      * @see http://docs.angularjs.org/api/ng.$filterProvider
      * @param name Filter name
      * @param filter Filter class
-     * @return Instance of registered filter or instances map of registered filters (if filters map has been provided)
+     * @return Instance of registered filter or instances map of registered filters (if filters map has been provided) or IModule if not found
      */
-    public registerFilter(name: string, filter: Function): ng.IServiceProvider {
-        return this._angularRegister.filter(name, filter);
+    public registerFilter(name: string, filter: Function): ng.IServiceProvider | ng.IModule {
+
+        if (undefined == this._angularRegister || IS_RUNNING_TESTS) {
+            return this._module.filter(name, filter);
+        } else {
+            return this._angularRegister.filter(name, filter);
+        }
     }
 
     /** function definition for register a service factory in angular. ::ng.IProvideService.factory()
      * @see http://docs.angularjs.org/api/AUTO.$provide
      * @param name Service factory name
      * @param serviceFactory Service factory (Internally this is an abbreviation for $provide.provider(name, {$get: $getFn}).
-     * @return Registered service factory instance 
+     * @return Registered service factory instance or IModule if not found
      */
-    public registerFactory(name: string, serviceFactory: Function): ng.IServiceProvider {
-        return this._angularRegister.factory(name, serviceFactory);
+    public registerFactory(name: string, serviceFactory: Function): ng.IServiceProvider | ng.IModule {
+
+        if (undefined == this._angularRegister || IS_RUNNING_TESTS) {
+            return this._module.factory(name, serviceFactory);
+        } else {
+            return this._angularRegister.factory(name, serviceFactory);
+        }
     }
 
     /** function definition for register a service constructor in angular, which will be invoked with new to create the service instance.
@@ -126,10 +146,15 @@ class AngularApp {
      * @see http://docs.angularjs.org/api/AUTO.$provide
      * @param name Service constructor name
      * @param service Service class.
-     * @return Registered service constructor instance 
+     * @return Registered service constructor instance or IModule if not found
      */
-    public registerService(name: string, service: Function): ng.IServiceProvider {
-        return this._angularRegister.service(name, service);
+    public registerService(name: string, service: Function): ng.IServiceProvider | ng.IModule {
+
+        if (undefined == this._angularRegister || IS_RUNNING_TESTS) {
+            return this._module.service(name, service);
+        } else {
+            return this._angularRegister.service(name, service);
+        }
     }
 
     /** Initialize angular 'config' function */
@@ -165,7 +190,7 @@ class AngularApp {
                 };
 
                 // configure http interceptor
-                //$httpProvider.interceptors.push();
+                // $httpProvider.interceptors.push();
 
                 // Configure routes
                 $RouteResolverProvider.controllersBasePath = "app/controllers/";
@@ -178,7 +203,7 @@ class AngularApp {
                 // .useLoaderCache("$translationCache")
                 // .useLoader("$translatePartialLoader", {
                 //     urlTemplate: "app/{part}/lang/{lang}.json"
-                // })                    
+                // })
 
 
             }];

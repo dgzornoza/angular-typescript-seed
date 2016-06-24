@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "module": "amd",
-        "rootDir": "src",
+        "rootDir": "..",
         "moduleResolution": "classic",
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,

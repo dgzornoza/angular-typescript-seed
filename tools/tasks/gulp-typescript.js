@@ -38,8 +38,8 @@ gulp.task("lint-ts-tests", function () {
 
 
 // configure typescript for use tsconfig.json
-var tsProject = tsc.createProject("tsconfig.json", { typescript: require("typescript") });
-var tsTestProject = tsc.createProject("tsconfig.tests.json", { typescript: require("typescript") });
+var tsProject = tsc.createProject("src/app/tsconfig.json", { typescript: require("typescript") });
+var tsTestProject = tsc.createProject("src/tests/tsconfig.json", { typescript: require("typescript") });
 
 
 function build()
@@ -56,7 +56,7 @@ function buildTest()
     var tsResult = tsTestProject.src()
     .pipe(tsc(tsTestProject));
     // send javascript to output folder
-    return tsResult.js.pipe(gulp.dest(tasksConfig.outputTestsFolder));
+    return tsResult.js.pipe(gulp.dest(tasksConfig.outputFolder));
 };
 
 function lint(source)

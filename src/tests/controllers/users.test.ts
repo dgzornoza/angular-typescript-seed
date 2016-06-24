@@ -1,47 +1,40 @@
-
-
 import "angular";
-import { app } from "app/main";
+import "app/main";
+
 import "app/controllers/users.controller";
+import { IUsersController } from "app/controllers/users.controller";
 
-var angularApp = app;
+describe("usersController", () => {
 
+    let $rootScope: ng.IRootScopeService;
+    let $controller: ng.IControllerService;
+    let $scope: IUsersController;
+    let $injector: ng.auto.IInjectorService;
 
-declare module angular {
-    var mock: any;
-    var inject: any;
-}
+    beforeEach(() => {
 
-describe('usersController', () => {
+        angular.mock.module(APP_NAME);
 
-    beforeEach(angular.mock.module(APP_NAME));
+        angular.mock.inject(["injector", "$rootScope", "$controller",
+        (_$injector: ng.auto.IInjectorService, _$rootScope: ng.IRootScopeService, _$controller: ng.IControllerService) => {
 
-    //angular.mock.module(APP_NAME);
-    var a = angular.mock.module(APP_NAME);
-    var $controller;
-    var $injector;
+                $injector = _$injector;
+                $rootScope = _$rootScope;
+                $scope = $rootScope.$new() as any;
+                $controller = _$controller;
+            }
+        ]);
 
-    beforeEach(angular.mock.inject((_$controller_, _$injector_) => {
-        // The injector unwraps the underscores (_) from around the parameter names when matching
-        $controller = _$controller_;
-        $injector = _$injector_;
-    }));
-
-    describe('$scope.Users', () => {
-
-        var $scope, controller;
-
-        beforeEach(() => {
-            $scope = {};
-            controller = $controller('usersController', { $scope: $scope });
-            $scope = controller;
-        });
-
-        it('sets the strength to "strong" if the password length is >8 chars', () => {
-
-            expect($scope.Users).not.toBeNull();
-        });
+        $controller("usersController", {$scope: $scope});
     });
+
+
+    it("Required property Users in controller", () => {
+
+        expect($scope.Users).not.toBeNull();
+    });
+
 });
+
 
 

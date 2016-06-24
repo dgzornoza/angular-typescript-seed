@@ -29,7 +29,7 @@ var tasksConfig = (function ()
         outputFontsFolder: _outputFolder + "fonts/",
         outputMocksFolder: _outputFolder + "mocks/",
 
-        outputTestsFolder: _outputFolder,
+        outputTestsFolder: _outputFolder + "tests/",
 
     };
 

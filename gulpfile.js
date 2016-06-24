@@ -36,6 +36,7 @@ gulp.task("watch-source", function() {
         gulp.watch([tasksConfig.sourceScriptFiles], ["build-ts-debug"]);
         gulp.watch([tasksConfig.sourceHtmlFiles], ["build-html"]);
         //gulp.watch([tasksConfig.sourceCssFiles], ["postcss"]);
+        gulp.watch([tasksConfig.sourceTestsScriptFiles], ["build-ts-tests"]);
 });
 
 /**
@@ -49,6 +50,7 @@ gulp.task("clean-output", function() {
         tasksConfig.outputLibFolder,
         tasksConfig.outputCssFolder,
         tasksConfig.outputFontsFolder,
+        tasksConfig.outputTestsFolder,
         tasksConfig.outputFolder + "index.html"
         ]);
 });

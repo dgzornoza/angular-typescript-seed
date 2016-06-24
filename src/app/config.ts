@@ -6,6 +6,8 @@
 const BASE_URL: string = "/";
 // application name
 const APP_NAME: string = "angular.ts.sample";
+// flag for configure app for running tests execution
+const IS_RUNNING_TESTS: boolean = false;
 
 // requirejs configuration
 requirejs.config({
@@ -15,7 +17,7 @@ requirejs.config({
         "angular": "lib/angular.min",
         "angular-animate": "lib/angular-animate.min",
         "angular-cookies": "lib/angular-cookies.min",
-        "angular-route": "lib/angular-route.min",
+        "angular-route": "lib/angular-route",
         "angular-sanitize": "lib/angular-sanitize.min",
         "angular-translate": "lib/angular-translate.min",
 

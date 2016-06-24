@@ -9,35 +9,32 @@ interface Window {
     __karma__: any;
 }
 
-
 // Get a list of all the test files to include
 var tests = [];
 for (var file in window.__karma__.files) {
   if (window.__karma__.files.hasOwnProperty(file)) {
     if (TEST_REGEXP.test(file)) {
-    //   Normalize paths to RequireJS module names.
-    //   If you require sub-dependencies of test files to be loaded as-is (requiring file extension)
-    //   then do not normalize the paths
-      // var normalizedTestModule = file.replace(/^\/base\/|\.js$/g, '');
       allTestFiles.push(file);
     }
   }
 }
 
 // base url for website/virtual directory/platform (Ended with'/')
-const BASE_URL: string = "/";
+// NOTE: Karma defaults use 'base'
+const BASE_URL: string = "/base";
 // application name
 const APP_NAME: string = "angular.ts.sample";
+// flag for configure app for running tests execution
+const IS_RUNNING_TESTS: boolean = true;
 
 require.config({
   // Karma serves files under /base, which is the basePath from your config file
-  baseUrl: '/base',
+  baseUrl: BASE_URL,
 
   paths: {
-        "angular": "lib/angular",
+        "angular": "lib/angular.min",
         "angular-animate": "lib/angular-animate.min",
         "angular-cookies": "lib/angular-cookies.min",
-        //"angular-mocks": "../bower_components/angular-mocks/angular-mocks",
         "angular-mocks": "lib/angular-mocks",
         "angular-route": "lib/angular-route.min",
         "angular-sanitize": "lib/angular-sanitize.min",
@@ -79,10 +76,10 @@ function lazyStart() {
             "angular-route",
             "angular-sanitize",
             "angular-translate",
-            "bootstrap"], function() {
+            "bootstrap"], () => {
 
-            // start app and init karma tests
-                requirejs(["app/main"].concat(allTestFiles), function(a,b) {
+                // start app and init karma tests
+                requirejs(["app/main"].concat(allTestFiles), () => {
 	                window.__karma__.start();
                 });
             });
