@@ -241,8 +241,6 @@ typings
 
 # published app
 wwwroot/app/
-wwwroot/css/
-wwwroot/fonts/
+wwwroot/content/
 wwwroot/lib/
-wwwroot/views/
 wwwroot/tests/

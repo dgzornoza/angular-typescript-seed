@@ -48,8 +48,7 @@ gulp.task("clean-output", function() {
     del.sync([
         tasksConfig.outputAppFolder,
         tasksConfig.outputLibFolder,
-        tasksConfig.outputCssFolder,
-        tasksConfig.outputFontsFolder,
+        tasksConfig.outputContentFolder,
         tasksConfig.outputTestsFolder,
         tasksConfig.outputFolder + "index.html"
         ]);

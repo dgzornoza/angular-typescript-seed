@@ -18,5 +18,6 @@ function build()
 {
     // send html to output folder
     gulp.src(tasksConfig.sourceHtmlFiles)
-    .pipe(gulp.dest(tasksConfig.outputAppFolder));
+    .pipe(gulp.dest(tasksConfig.outputFolder));
+
 }
