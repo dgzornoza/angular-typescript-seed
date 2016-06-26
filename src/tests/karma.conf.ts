@@ -37,9 +37,12 @@ module.exports = (config: any) => {
     files: [
 
         "tests/test-main.js",
+
         { included: false, pattern: "lib/**/*.js" },
         { included: false, pattern: "app/**/*.js" },
-        { included: false, pattern: "tests/**/*.js" }
+        { included: false, pattern: "tests/**/*.js" },
+
+        {pattern: 'content/mocks/*.json', watched: true, served: true, included: false}
     ],
 
     // frameworks to use

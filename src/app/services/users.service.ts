@@ -31,7 +31,7 @@ class UsersService implements IUsersService {
         return this._http({
                 headers: { "Content-Type": "application/json" },
                 method: "GET",
-                url: "content/mocks/users.json"
+                url: BASE_URL + "/content/mocks/users.json"
             }).then((successCallback: ng.IHttpPromiseCallbackArg<IUserModel[]>): IUserModel[] => {
 
                 return successCallback.data;

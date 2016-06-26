@@ -12,14 +12,14 @@ var tasksConfig = require("./gulp-config");
  * lint and build TypeScript in debug mode
  */
 gulp.task("build-ts-debug", ["lint-ts"], function () {
-    return build();
+    return build(tsProject);
 });
 
 /**
  * lint and build TypeScript for tests
  */
 gulp.task("build-ts-tests", ["lint-ts-tests"], function () {
-    return buildTest();
+    return buildTest(tsTestProject);
 });
 
 /**
@@ -42,11 +42,11 @@ var tsProject = tsc.createProject("src/app/tsconfig.json", { typescript: require
 var tsTestProject = tsc.createProject("src/tests/tsconfig.json", { typescript: require("typescript") });
 
 
-function build()
+function build(tsBuildProject)
 {
     // compile typescript
-    var tsResult = tsProject.src()
-    .pipe(tsc(tsProject));
+    var tsResult = tsBuildProject.src()
+    .pipe(tsc(tsBuildProject));
     // send javascript to output folder
     return tsResult.js.pipe(gulp.dest(tasksConfig.outputFolder));
 };
