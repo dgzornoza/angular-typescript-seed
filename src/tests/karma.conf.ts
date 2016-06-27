@@ -40,9 +40,11 @@ module.exports = (config: any) => {
 
         { included: false, pattern: "lib/**/*.js" },
         { included: false, pattern: "app/**/*.js" },
+        { included: false, pattern: "app/**/*.html" },
         { included: false, pattern: "tests/**/*.js" },
 
-        {pattern: 'content/mocks/*.json', watched: true, served: true, included: false}
+        // serve json files with mocks
+        { included: false, pattern: "content/mocks/*.json", served: true, watched: true }
     ],
 
     // frameworks to use

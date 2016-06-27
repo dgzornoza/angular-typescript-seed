@@ -1,13 +1,16 @@
 /* tslint:disable no-reference */
 /// <reference path="../../typings/browser.d.ts" />
 
-
 var allTestFiles = [];
 var TEST_REGEXP = /(spec|test)\.js$/i;
 
+// define karma var
 interface Window {
     __karma__: any;
 }
+// define ngMidwayTester function
+var ngMidwayTester: (moduleName: string, options?: any) => any;
+
 
 // Get a list of all the test files to include
 var tests = [];
@@ -27,6 +30,15 @@ const APP_NAME: string = "angular.ts.sample";
 // flag for configure app for running tests execution
 const IS_RUNNING_TESTS: boolean = true;
 
+// main page tests template for 'ngMidwayTester'
+const MAIN_PAGE_TEST_TPL: string = `
+<div>
+  <h1>Tests</h1>
+  <div id="view-container">
+  </div>
+</div>`;
+
+
 require.config({
   // Karma serves files under /base, which is the basePath from your config file
   baseUrl: BASE_URL,
@@ -35,6 +47,7 @@ require.config({
         "angular": "lib/angular.min",
         "angular-animate": "lib/angular-animate.min",
         "angular-cookies": "lib/angular-cookies.min",
+        "angular-midwayTester": "lib/ngMidwayTester",
         "angular-mocks": "lib/angular-mocks",
         "angular-route": "lib/angular-route.min",
         "angular-sanitize": "lib/angular-sanitize.min",
@@ -59,6 +72,10 @@ require.config({
 
         "bootstrap": {
             deps: ["jquery"]
+        },
+        "angular-midwayTester": {
+	        deps: ["angular"],
+            exports: "ngMidwayTester"
         }
     },
 

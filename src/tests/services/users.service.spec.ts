@@ -1,5 +1,6 @@
 import "angular";
-import "app/main";
+import { app } from "app/main";
+import "angular-midwayTester";
 
 import "app/services/users.service";
 import { IUsersService } from "app/services/users.service";
@@ -10,27 +11,25 @@ jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
 
 describe("usersService", () => {
 
-    let $rootScope: ng.IRootScopeService;
-    let $injector: ng.auto.IInjectorService;
-
+    let _ngMidwayTester: any;
     let _usersService: IUsersService;
-
 
     beforeEach(() => {
 
-        angular.mock.module(APP_NAME);
+        // create object for real ajax calls
+        _ngMidwayTester = ngMidwayTester(APP_NAME, {
+             template : MAIN_PAGE_TEST_TPL,
+             mockLocationPaths: false
+            });
 
-        angular.mock.inject(["$injector", "$rootScope", "usersService",
-        (_$injector: ng.auto.IInjectorService, _$rootScope: ng.IRootScopeService, usersService: IUsersService) => {
-
-                $injector = _$injector;
-                $rootScope = _$rootScope;
-                _usersService = usersService;
-            }
-        ]);
+        _usersService = _ngMidwayTester.inject("usersService");
 
     });
 
+    afterEach(() => {
+        _ngMidwayTester.destroy();
+        _ngMidwayTester = undefined;
+    });
 
     describe("verify object members", () => {
 
@@ -59,7 +58,9 @@ describe("usersService", () => {
 
                 })
                 .catch((reason: any) => expect(reason).not.toBeDefined())
-                .finally(() => done());
+                .finally(() =>
+                    done()
+                );
 
         });
 

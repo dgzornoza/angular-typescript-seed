@@ -8,12 +8,12 @@ export interface IRouteDefinition extends ng.route.IRoute {
 
 /** Interface for define dynamic routes model resolution */
 export interface IResolveModel {
-    /** path and name relative (without postfix) to the appropriate folder 
-     * (must match the path of the view/controller following the convention) 
+    /** path and name relative (without postfix) to the appropriate folder
+     * (must match the path of the view/controller following the convention)
      */
     path: string;
-    /** (optional) alias for controller name used in view 
-     * (default will be the same as the class name of controller without the suffix, e.g 'oneController' = 'one') 
+    /** (optional) alias for controller name used in view
+     * (default will be the same as the class name of controller without the suffix, e.g 'oneController' = 'one')
      */
     controllerAs?: string;
     /** (optional) flag indicating whether the route requires authentication (default not require authentication) */
@@ -40,7 +40,7 @@ export interface IRouteResolverProvider extends ng.IServiceProvider {
  * @remarks The class uses the convention over configuration to manage views and controllers,
  * you can specify the directory for views/controllers to create the instance,
  * but the names of controllers must be contain the suffix '.controllers'
- * In addition to follow the convention used in script files, file names begin with a lowercase letter, 
+ * In addition to follow the convention used in script files, file names begin with a lowercase letter,
  * in the case of controllers models start with a lowercase letter but the class must begin with a capital letter.
  * The alias of the controllers in the view, will be the same as the class name of controller without the suffix,
  * e.g 'oneController' = 'one'
@@ -72,8 +72,8 @@ class RouteResolver implements IRouteResolverProvider {
 
     public resolve(data: IResolveModel): IRouteDefinition {
 
-        let viewPath: string = this._viewsBasePath + data.path + ".html";
-        let controllerPath: string = this._controllersBasePath + data.path + ".controller.js";
+        let viewPath: string = BASE_URL + this._viewsBasePath + data.path + ".html";
+        let controllerPath: string = BASE_URL + this._controllersBasePath + data.path + ".controller.js";
         let controllerName: string = data.path.split("/").pop();
         let controllerClass: string = controllerName + "Controller";
 
@@ -106,5 +106,5 @@ class RouteResolver implements IRouteResolverProvider {
     }
 }
 
-// Must be a provider since it will be injected into module.config()    
+// Must be a provider since it will be injected into module.config()
 angular.module(`${APP_NAME}.routeResolverService`, []).provider("RouteResolver", RouteResolver);
