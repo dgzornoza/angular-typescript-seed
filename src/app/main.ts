@@ -228,8 +228,6 @@ class AngularApp {
                     //     $translate.refresh();
                     // });
 
-                    // Parametros globales
-                    ($rootScope as any).debugMode = Boolean("<%= DEBUG_MODE %>");
                 }];
 
         this._module.run(fn);

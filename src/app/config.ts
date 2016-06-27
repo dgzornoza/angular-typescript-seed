@@ -12,6 +12,7 @@ const IS_RUNNING_TESTS: boolean = false;
 // requirejs configuration
 requirejs.config({
     baseUrl: BASE_URL,
+    // urlArgs: "bust=" + (new Date()).getTime(),
     paths: {
 
         "angular": "lib/angular.min",

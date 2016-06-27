@@ -80,7 +80,7 @@ var tasksConfig = (function ()
 	            BASE_URL: "/",
                 APP_NAME: "angular.ts.sample",
                 DEBUG_MODE: "false",
-                MINIFIED_EXT: ".min"
+                MINIFIED_EXT: ""
             }
 
         }
