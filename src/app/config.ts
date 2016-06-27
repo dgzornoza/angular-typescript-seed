@@ -3,9 +3,9 @@
 
 
 // base url for website/virtual directory/platform (Ended with'/')
-const BASE_URL: string = "/";
+const BASE_URL: string = "<%= BASE_URL %>";
 // application name
-const APP_NAME: string = "angular.ts.sample";
+const APP_NAME: string = "<%= APP_NAME %>";
 // flag for configure app for running tests execution
 const IS_RUNNING_TESTS: boolean = false;
 

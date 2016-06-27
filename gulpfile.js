@@ -21,7 +21,7 @@ gulp.task("rebuild-debug", ["clean-output", "build-debug"]);
 /**
  * Build all project in output directory
  */
-gulp.task("build-debug", ["publish-thirdparty", "build-ts-debug", "build-html", "build-mocks"]);
+gulp.task("build-debug", ["publish-thirdparty", "build-ts-debug", "build-html", "build-mocks", "configure-debug"]);
 
 /**
  * Build all test project

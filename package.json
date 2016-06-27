@@ -39,7 +39,8 @@
         "chrome": "gulp build-debug && start chrome http://localhost:5000/",
         "edge": "gulp build-debug && start edge http://localhost:5000/",
 
-        "bower": "bower"
+        "bower": "bower",
+        "gulp": "gulp"
     },
 
     "devDependencies": {
@@ -49,6 +50,7 @@
         "gulp": "^3.9.1",
         "gulp-debug": "^2.1.2",
         "gulp-postcss": "^6.1.0",
+        "gulp-template": "^4.0.0",
         "gulp-tslint": "^5.0.0",
         "gulp-typescript": "2.13.0",
 

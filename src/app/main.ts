@@ -55,8 +55,6 @@ class AngularApp {
 
     /** Main angular module */
     private _module: ng.IModule;
-    /** injector service */
-    private _injector: ng.auto.IInjectorService;
 
     /** Object for angular register components */
     private _angularRegister: IAngularRegister;
@@ -82,10 +80,6 @@ class AngularApp {
         return this._module;
     }
 
-    /** Property for angular get main module */
-    public get injector(): ng.auto.IInjectorService {
-        return this._injector;
-    }
 
     /** function definition for register controller in angular. ::ng.IControllerProvider.register()
      * @see http://docs.angularjs.org/api/ng.$controller
@@ -226,17 +220,16 @@ class AngularApp {
         // crear el array con los parametros que seran inyectados en la funcion de ejecucion y crear la funcion de ejecucion de angular
         // NOTA: la funcion debe contener los parametros a inyectar en el mismo orden
         let fn: any[] =
-            ["$rootScope", "$location", "$translate", "$injector",
-                ($rootScope: ng.IRootScopeService, $location: ng.ILocationService, $translate: ng.translate.ITranslateService,
-                $injector: ng.auto.IInjectorService) => {
-
-                    this._injector = $injector;
+            ["$rootScope", "$location", "$translate",
+                ($rootScope: ng.IRootScopeService, $location: ng.ILocationService, $translate: ng.translate.ITranslateService) => {
 
                     // TODO: translate partial
                     // $rootScope.$on("$translatePartialLoaderStructureChanged", () => {
                     //     $translate.refresh();
                     // });
 
+                    // Parametros globales
+                    ($rootScope as any).debugMode = Boolean("<%= DEBUG_MODE %>");
                 }];
 
         this._module.run(fn);
