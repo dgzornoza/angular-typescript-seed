@@ -29,7 +29,6 @@ function configure(obj)
 
     gulp.src(files)
 		.pipe(template(obj))
-        .pipe(debug())
 		.pipe(gulp.dest(tasksConfig.outputAppFolder));
 }
 
