@@ -28,7 +28,7 @@ const BASE_URL: string = "<%= BASE_URL %>";
 // application name
 const APP_NAME: string = "<%= APP_NAME %>";
 // flag for configure app for running tests execution
-const IS_RUNNING_TESTS: boolean = Boolean("<%= DEBUG_MODE %>");
+const IS_RUNNING_TESTS: boolean = true;
 
 // main page tests template for 'ngMidwayTester'
 const MAIN_PAGE_TEST_TPL: string = `
