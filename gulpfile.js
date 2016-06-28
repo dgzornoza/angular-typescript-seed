@@ -14,11 +14,6 @@ require("./tools/tasks/gulp-mocks");
 
 
 /**
- * cleand output and build all project in output directory
- */
-gulp.task("rebuild-debug", ["clean-output", "build-debug"]);
-
-/**
  * Build all project in output directory
  */
 gulp.task("build-debug", ["publish-thirdparty", "build-ts-debug", "build-html", "build-mocks", "configure-debug"]);

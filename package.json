@@ -31,7 +31,8 @@
 
         "build-tests": "gulp build-tests",
         "build-debug": "npm install && gulp build-debug",
-        "rebuild-debug": "npm install && gulp rebuild-debug",
+        "rebuild-debug": "npm install && gulp clean-output && gulp build-debug",
+
 
         "watch": "gulp watch-source",
 
