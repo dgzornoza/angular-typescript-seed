@@ -27,9 +27,9 @@
         "prestart": "npm install && npm run iexplore",
         "start": "dnx web",
 
+        "pretest" :"npm run rebuild-debug && gulp build-tests",
 	    "test": "karma start ./wwwroot/tests/karma.conf.js",
 
-        "build-tests": "gulp build-tests",
         "build-debug": "npm install && gulp build-debug",
         "rebuild-debug": "npm install && gulp clean-output && gulp build-debug",
 
@@ -66,6 +66,7 @@
 
         "requirejs": "2.2.0",
         "tslint": "^3.8.1",
-        "typescript": "1.8.10"
+        "typescript": "1.8.10",
+        "typings": "0.8.1"
     }
 }

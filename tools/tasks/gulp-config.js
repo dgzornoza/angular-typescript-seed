@@ -73,13 +73,13 @@ var tasksConfig = (function ()
 	            BASE_URL: "/",
                 APP_NAME: "angular.ts.sample",
                 DEBUG_MODE: "true",
-                MINIFIED_EXT: ".min"
+                MINIFIED_EXT: ""
             },
             release: {
 	            BASE_URL: "/",
                 APP_NAME: "angular.ts.sample",
                 DEBUG_MODE: "false",
-                MINIFIED_EXT: ""
+                MINIFIED_EXT: ".min"
             }
 
         }

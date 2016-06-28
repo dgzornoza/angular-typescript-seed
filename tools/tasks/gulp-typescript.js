@@ -8,6 +8,12 @@ var tslint = require("gulp-tslint");
 
 var tasksConfig = require("./gulp-config");
 
+
+// configure typescript for use tsconfig.json
+var tsProject = tsc.createProject("src/app/tsconfig.json", { typescript: require("typescript") });
+var tsTestProject = tsc.createProject("src/tests/tsconfig.json", { typescript: require("typescript") });
+
+
 /**
  * lint and build TypeScript in debug mode
  */
@@ -19,7 +25,7 @@ gulp.task("build-ts-debug", ["lint-ts"], function () {
  * lint and build TypeScript for tests
  */
 gulp.task("build-ts-tests", ["lint-ts-tests"], function () {
-    return buildTest(tsTestProject);
+    return build(tsTestProject);
 });
 
 /**
@@ -30,16 +36,13 @@ gulp.task("lint-ts", function () {
 });
 
 /**
- * lint typescript source code
+ * lint typescript source code for test project
  */
 gulp.task("lint-ts-tests", function () {
     return lint(tasksConfig.sourceTestsScriptFiles);
 });
 
 
-// configure typescript for use tsconfig.json
-var tsProject = tsc.createProject("src/app/tsconfig.json", { typescript: require("typescript") });
-var tsTestProject = tsc.createProject("src/tests/tsconfig.json", { typescript: require("typescript") });
 
 
 function build(tsBuildProject)
@@ -50,14 +53,7 @@ function build(tsBuildProject)
     // send javascript to output folder
     return tsResult.js.pipe(gulp.dest(tasksConfig.outputFolder));
 };
-function buildTest()
-{
-    // compile typescript
-    var tsResult = tsTestProject.src()
-    .pipe(tsc(tsTestProject));
-    // send javascript to output folder
-    return tsResult.js.pipe(gulp.dest(tasksConfig.outputFolder));
-};
+
 
 function lint(source)
 {

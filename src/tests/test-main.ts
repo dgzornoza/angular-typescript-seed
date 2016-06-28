@@ -24,11 +24,11 @@ for (var file in window.__karma__.files) {
 
 // base url for website/virtual directory/platform (Ended with'/')
 // NOTE: Karma defaults use 'base'
-const BASE_URL: string = "/base";
+const BASE_URL: string = "<%= BASE_URL %>";
 // application name
-const APP_NAME: string = "angular.ts.sample";
+const APP_NAME: string = "<%= APP_NAME %>";
 // flag for configure app for running tests execution
-const IS_RUNNING_TESTS: boolean = true;
+const IS_RUNNING_TESTS: boolean = Boolean("<%= DEBUG_MODE %>");
 
 // main page tests template for 'ngMidwayTester'
 const MAIN_PAGE_TEST_TPL: string = `
