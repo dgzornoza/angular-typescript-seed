@@ -19,19 +19,24 @@ require("./tools/tasks/gulp-mocks");
 gulp.task("build-debug", ["publish-thirdparty", "build-ts-debug", "build-html", "build-mocks", "configure-debug"]);
 
 /**
+ * Build all project in output directory
+ */
+gulp.task("build-release", ["publish-thirdparty", "build-ts-release", "build-html", "build-mocks", "configure-release"]);
+
+/**
  * Build all test project
  */
-gulp.task("build-tests", ["build-ts-tests"]);
+gulp.task("build-tests", ["build-ts-tests", "configure-debug"]);
 
 
 /**
  * watch source files
  */
 gulp.task("watch-source", function() {
-        gulp.watch([tasksConfig.sourceScriptFiles], ["build-ts-debug"]);
+        gulp.watch([tasksConfig.sourceScriptFiles], ["build-ts-debug", "configure-debug"]);
         gulp.watch([tasksConfig.sourceHtmlFiles], ["build-html"]);
         //gulp.watch([tasksConfig.sourceCssFiles], ["postcss"]);
-        gulp.watch([tasksConfig.sourceTestsScriptFiles], ["build-ts-tests"]);
+        gulp.watch([tasksConfig.sourceTestsScriptFiles], ["build-ts-tests", "configure-debug"]);
 });
 
 /**

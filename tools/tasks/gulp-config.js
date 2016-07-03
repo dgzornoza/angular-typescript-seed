@@ -30,6 +30,14 @@ function configure(obj)
     gulp.src(files)
 		.pipe(template(obj))
 		.pipe(gulp.dest(tasksConfig.outputAppFolder));
+
+    files = [
+        tasksConfig.outputTestsFolder + "test-main.js"
+        ]
+
+	gulp.src(files)
+		.pipe(template(obj))
+		.pipe(gulp.dest(tasksConfig.outputTestsFolder));
 }
 
 
@@ -73,13 +81,13 @@ var tasksConfig = (function ()
 	            BASE_URL: "/",
                 APP_NAME: "angular.ts.sample",
                 DEBUG_MODE: "true",
-                MINIFIED_EXT: ""
+                MINIFIED_EXT: ".min"
             },
             release: {
 	            BASE_URL: "/",
                 APP_NAME: "angular.ts.sample",
                 DEBUG_MODE: "false",
-                MINIFIED_EXT: ".min"
+                MINIFIED_EXT: ""
             }
 
         }
