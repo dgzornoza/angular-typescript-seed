@@ -223,8 +223,8 @@ class AngularApp {
                 $httpProvider.interceptors.push("httpInterceptorService");
 
                 // Configure routes
-                $RouteResolverProvider.controllersBasePath = "/app/controllers/";
-                $RouteResolverProvider.viewsBasePath = "/app/views/";
+                $RouteResolverProvider.controllersBasePath = "app/controllers/";
+                $RouteResolverProvider.viewsBasePath = "app/views/";
                 RoutesConfig.initialize($routeProvider, $RouteResolverProvider);
 
                 // configure languages

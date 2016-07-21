@@ -28,7 +28,9 @@ var thirdPartyLibs = [
     "bower_components/jquery/dist/jquery.min.js",
     "bower_components/modernizr/dist/modernizr.js",
     "node_modules/requirejs/require.js",
-    "bower_components/requirejs-domready/domReady.js"
+    "bower_components/requirejs-domready/domReady.js",
+
+    "node_modules/ng-midway-tester/src/ngMidwayTester.js"
 ];
 var thirdPartyCss = [
     "bower_components/bootstrap/dist/css/bootstrap.min.css",

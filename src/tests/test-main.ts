@@ -41,7 +41,7 @@ const MAIN_PAGE_TEST_TPL: string = `
 
 require.config({
   // Karma serves files under /base, which is the basePath from your config file
-  baseUrl: BASE_URL,
+  baseUrl: "base" + BASE_URL,
 
   paths: {
         "angular": "lib/angular.min",
@@ -90,6 +90,7 @@ function lazyStart() {
             "angular-animate",
             "angular-cookies",
             "angular-mocks",
+            "angular-midwayTester",
             "angular-route",
             "angular-sanitize",
             "angular-translate",

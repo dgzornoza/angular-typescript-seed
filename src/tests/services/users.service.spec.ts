@@ -1,5 +1,5 @@
 import "angular";
-import { app } from "app/main";
+import "app/main";
 import "angular-midwayTester";
 
 import "app/services/users.service";
@@ -18,8 +18,8 @@ describe("usersService", () => {
 
         // create object for real ajax calls
         _ngMidwayTester = ngMidwayTester(APP_NAME, {
-             template : MAIN_PAGE_TEST_TPL,
-             mockLocationPaths: false
+             mockLocationPaths: false,
+             template : MAIN_PAGE_TEST_TPL
             });
 
         _usersService = _ngMidwayTester.inject("usersService");

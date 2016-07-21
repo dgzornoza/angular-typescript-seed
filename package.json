@@ -30,8 +30,8 @@
         "pretest" :"npm run rebuild-debug && gulp build-tests",
 	    "test": "karma start ./wwwroot/tests/karma.conf.js",
 
-        "build-debug": "npm install && gulp build-debug",
-        "rebuild-debug": "npm install && gulp clean-output && gulp build-debug",
+        "build-debug": "gulp build-debug",
+        "rebuild-debug": "gulp clean-output && gulp build-debug",
 
 
         "watch": "gulp watch-source",
