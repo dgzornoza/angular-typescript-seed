@@ -21,9 +21,19 @@ interface IAngularRegister {
      * @param name Directive name
      * @param directive Directive class
      * @return Compiler provider itself used for register directive
+	 * @remarks consider using a component
      */
     directive: (name: string, directive: Function) => ng.ICompileProvider;
 
+	/** function definition for register component in angular. ::ng.ICompileProvider.component()
+     * @see http://docs.angularjs.org/api/ng.$compile
+     * @see http://docs.angularjs.org/api/ng.$compileProvider
+     * @param name Directive name
+     * @param options Component options
+     * @return Compiler provider itself used for register component
+     */
+    component: (name: string, options: ng.IComponentOptions) => ng.ICompileProvider;
+	
     /** function definition for register filter in angular. ::ng.IFilterProvider.register()
      * @see http://docs.angularjs.org/api/ng.$filter
      * @see http://docs.angularjs.org/api/ng.$filterProvider
@@ -102,6 +112,7 @@ class AngularApp {
      * @param name Directive name
      * @param directive Directive class
      * @return Compiler provider itself used for register directive or IModule if not found
+	 * @deprecated for new code, use component instead
      */
     public registerDirective(name: string, directive: Function): ng.ICompileProvider | ng.IModule {
 
@@ -112,6 +123,22 @@ class AngularApp {
         }
     }
 
+	/** function definition for register component in angular. ::ng.ICompileProvider.component()
+     * @see http://docs.angularjs.org/api/ng.$compile
+     * @see http://docs.angularjs.org/api/ng.$compileProvider
+     * @param name Component name
+     * @param options Component options
+     * @return Compiler provider itself used for register component or IModule if not found
+     */
+    public registerComponent(name: string, options: ng.IComponentOptions): ng.ICompileProvider | ng.IModule {
+
+        if (undefined == this._angularRegister || IS_RUNNING_TESTS) {
+            return this._module.component(name, options);
+        } else {
+            return this._angularRegister.component(name, options);
+        }
+    }
+	
     /** function definition for register filter in angular. ::ng.IFilterProvider.register()
      * @see http://docs.angularjs.org/api/ng.$filter
      * @see http://docs.angularjs.org/api/ng.$filterProvider
@@ -184,15 +211,16 @@ class AngularApp {
 
                 // asign angular register functions
                 this._angularRegister = {
-                    controller: $controllerProvider.register,
-                    directive: $compileProvider.directive,
+                    component: $compileProvider.component,
+					controller: $controllerProvider.register,
+                    directive: $compileProvider.directive,					
                     factory: $provide.factory,
                     filter: $filterProvider.register,
                     service: $provide.service
                 };
 
                 // configure http interceptor
-                // $httpProvider.interceptors.push();
+                $httpProvider.interceptors.push("httpInterceptorService");
 
                 // Configure routes
                 $RouteResolverProvider.controllersBasePath = "/app/controllers/";
