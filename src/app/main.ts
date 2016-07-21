@@ -33,7 +33,7 @@ interface IAngularRegister {
      * @return Compiler provider itself used for register component
      */
     component: (name: string, options: ng.IComponentOptions) => ng.ICompileProvider;
-	
+
     /** function definition for register filter in angular. ::ng.IFilterProvider.register()
      * @see http://docs.angularjs.org/api/ng.$filter
      * @see http://docs.angularjs.org/api/ng.$filterProvider
@@ -138,7 +138,7 @@ class AngularApp {
             return this._angularRegister.component(name, options);
         }
     }
-	
+
     /** function definition for register filter in angular. ::ng.IFilterProvider.register()
      * @see http://docs.angularjs.org/api/ng.$filter
      * @see http://docs.angularjs.org/api/ng.$filterProvider
@@ -213,11 +213,14 @@ class AngularApp {
                 this._angularRegister = {
                     component: $compileProvider.component,
 					controller: $controllerProvider.register,
-                    directive: $compileProvider.directive,					
+                    directive: $compileProvider.directive,
                     factory: $provide.factory,
                     filter: $filterProvider.register,
                     service: $provide.service
                 };
+
+                // delete angular DOM anotations
+                $compileProvider.debugInfoEnabled(false);
 
                 // configure http interceptor
                 $httpProvider.interceptors.push("httpInterceptorService");
