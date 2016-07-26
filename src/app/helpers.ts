@@ -1,4 +1,9 @@
 ﻿
+/** Interface for create pair keys/values */
+interface IKeyValueMap<T> {
+    [key: string]: T;
+}
+
 /** @Brief Class for define help methods */
 class Helpers {
 
@@ -20,6 +25,55 @@ class Helpers {
 
         return result;
     }
+	
+	/**
+     * Function for avoid calling a function multiple times between a specified time
+     * @param fn function to invoke
+     * @param limit time between calls
+     * @returns Function to invoke wrapped in throttle function    
+     */
+    public static Throttle(fn: Function, limit: number): Function {
+        let wait: boolean = false;
+
+        // Inicialmente no se espera, se retorna la funcion throttle.
+        // Si no se esta esperando se ejecuta la funcion callback previniendo invocaciones futuras,
+        // despues del periodo de tiempo especificado, se permitira volver a ejecutar la funcion callback.
+        return (thisArg: any, ...argArray: any[]): any => {
+            // verificar que no se esta esperando
+            if (!wait) {
+                // invocar la funcion callback y establecer flag en espera
+                fn.call(thisArg, argArray);
+                wait = true;
+                // establecer el tiempo para permitir volver a invocar la funcion
+                setTimeout(() => { wait = false; }, limit);
+            }
+        };
+    }
+	
+	/**
+     * Returns a function, that, as long as it continues to be invoked, will not be triggered. 
+	 * The function will be called after it stops being called for N milliseconds. 	 
+     * @param fn function to invoke
+     * @param wait time for invoke 'fn' once
+	 * @param immediate true if trigger the function on the leading edge, instead of the trailing.
+     * @returns Function to invoke wrapped in Debounce function    
+     */
+	public static Debounce(fn: Function, wait: number, immediate?: boolean): Function {
+        let timeout: number;
+
+        return (thisArg: any, ...argArray: any[]): any => {
+
+            let later: Function = () => {
+                timeout = undefined;
+                if (!immediate) { fn.call(thisArg, argArray); }
+            };
+
+            let callNow: boolean = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+            if (callNow) { fn.call(thisArg, argArray); }
+        };
+    };
 }
 
 /* tslint:disable interface-name */
