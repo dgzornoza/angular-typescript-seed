@@ -3,7 +3,6 @@
     "version": "1.0.0",
     "private": true,
     "description": "Seed project for angular1 with typescript apps. http://angularjs.org/",
-    "main": "index.js",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/dgzornoza/angular-typescript-seed.git"

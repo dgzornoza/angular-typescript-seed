@@ -22,9 +22,9 @@ gulp.task("build-ts-debug", ["lint-ts"], function () {
 });
 
 /**
- * lint and build TypeScript in debug mode
+ * lint and build TypeScript in release mode
  */
-gulp.task("build-ts-relase", ["lint-ts"], function () {
+gulp.task("build-ts-release", ["lint-ts"], function () {
     return build(tsProject);
 });
 
