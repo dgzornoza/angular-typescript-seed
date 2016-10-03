@@ -24,7 +24,7 @@
         "build.modernizr": "cd ./bower_components/modernizr && npm install && node ./bin/modernizr -c ../../tools/modernizr-config.json -d ./dist",
 
         "prestart": "npm install && npm run iexplore",
-        "start": "dnx web",
+        "start": "http-server -a localhost -p 8000 -c-1 ./wwwroot",
 
         "pretest" :"npm run rebuild-debug && gulp build-tests",
 	    "test": "karma start ./wwwroot/tests/karma.conf.js",
@@ -33,11 +33,11 @@
         "rebuild-debug": "gulp clean-output && gulp build-debug",
 
 
-        "watch": "gulp watch-source",
+        "watch": "npm install && npm run build-debug && gulp watch-source",
 
-        "iexplore": "gulp build-debug && start iexplore http://localhost:5000/",
-        "chrome": "gulp build-debug && start chrome http://localhost:5000/",
-        "edge": "gulp build-debug && start edge http://localhost:5000/",
+        "iexplore": "gulp build-debug && start iexplore http://localhost:8000/",
+        "chrome": "gulp build-debug && start chrome http://localhost:8000/",
+        "edge": "gulp build-debug && start edge http://localhost:8000/",
 
         "bower": "bower",
         "gulp": "gulp"
@@ -53,6 +53,9 @@
         "gulp-template": "^4.0.0",
         "gulp-tslint": "^5.0.0",
         "gulp-typescript": "2.13.0",
+        "gulp-sourcemaps": "^1.6.0",
+
+        "http-server": "^0.9.0",
 
         "jasmine-core": "^2.4.1",
         "karma": "~0.13.22",
