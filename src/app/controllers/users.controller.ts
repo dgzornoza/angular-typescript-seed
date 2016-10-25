@@ -18,6 +18,8 @@ class UsersController implements IUsersController {
     private _scope: ng.IScope;
     private _usersService: IUsersService;
 
+    private _usersService2: IUsersService | IUserModel;
+
     // variables miembro
     private _users: IUserModel[];
 
@@ -45,11 +47,11 @@ class UsersController implements IUsersController {
     }
 
     /** Users */
-    public get pepo(): boolean {
-        return true;
+    public get pepo(): UsersController {
+        return null;
     }
         /** Users */
-    public set pepo(a: boolean) {
+    public set pepo(a: UsersController) {
         let b = 5;;
     }
 

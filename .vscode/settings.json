@@ -9,4 +9,6 @@
         "Dockkerfile": true,
         "project.lock.json": true
     }
+	,
+	"typescript.tsdk": "./node_modules/typescript/lib"
 }

@@ -10,7 +10,9 @@ class HomeController {
         this._scope = $scope;
     }
 
-
+    public test(){
+        //
+    }
 }
 
 // establecer variables a inyectar en el controlador
