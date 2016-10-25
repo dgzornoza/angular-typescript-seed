@@ -25,12 +25,12 @@ class Helpers {
 
         return result;
     }
-	
-	/**
+
+    /**
      * Function for avoid calling a function multiple times between a specified time
      * @param fn function to invoke
      * @param limit time between calls
-     * @returns Function to invoke wrapped in throttle function    
+     * @returns Function to invoke wrapped in throttle function
      */
     public static Throttle(fn: Function, limit: number): Function {
         let wait: boolean = false;
@@ -49,16 +49,16 @@ class Helpers {
             }
         };
     }
-	
-	/**
-     * Returns a function, that, as long as it continues to be invoked, will not be triggered. 
-	 * The function will be called after it stops being called for N milliseconds. 	 
+
+    /**
+     * Returns a function, that, as long as it continues to be invoked, will not be triggered.
+     * The function will be called after it stops being called for N milliseconds.
      * @param fn function to invoke
      * @param wait time for invoke 'fn' once
-	 * @param immediate true if trigger the function on the leading edge, instead of the trailing.
-     * @returns Function to invoke wrapped in Debounce function    
+     * @param immediate true if trigger the function on the leading edge, instead of the trailing.
+     * @returns Function to invoke wrapped in Debounce function
      */
-	public static Debounce(fn: Function, wait: number, immediate?: boolean): Function {
+    public static Debounce(fn: Function, wait: number, immediate?: boolean): Function {
         let timeout: number;
 
         return (thisArg: any, ...argArray: any[]): any => {
@@ -95,7 +95,7 @@ String.isString = function (obj: any): boolean {
 /**  Extend string interface with new features  */
 interface String {
     /** @brief Extension method for split a string into an array just as string.split(), but allowing the array to remove items
-     * that match the string specified by the parameter 'removeItemString'.    
+     * that match the string specified by the parameter 'removeItemString'.
      * @param separator separator to create the array
      * @param removeItemString string to remove items in the array eg "" -> removes empty items
      * @param limit array size limit
@@ -109,21 +109,21 @@ interface String {
 
 /* tslint:disable no-invalid-this */
 String.prototype.splitWithRemove = function (separator: string | RegExp, removeItemString: string, limit?: number): string[] {
-    if ("" == this)  { return new Array(); }        
-    let items = this.split(separator, limit);
+    if ("" === this)  { return new Array(); }
+    let items: any = this.split(separator, limit);
 
     for (let i: number = 0; i < items.length; i++) {
-        if (items[i] == removeItemString) {
+        if (items[i] === removeItemString) {
             items.splice(i, 1);
             i--;
         }
-    }    
-    
+    }
+
     return items;
-}
+};
 
 String.prototype.ensureSlash = function (): string {
-    return this.replace(/\/?$/, '/');  
-}
+    return this.replace(/\/?$/, "/");
+};
 /* tslint:enable no-invalid-this */
 

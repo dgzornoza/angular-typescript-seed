@@ -20,7 +20,6 @@ var thirdPartyLibs = [
     "bower_components/angular-animate/angular-animate.min.js",
     "bower_components/angular-cookies/angular-cookies.min.js",
     "bower_components/angular-mocks/angular-mocks.js",
-    "bower_components/angular-resource/angular-resource.min.js",
     "bower_components/angular-route/angular-route.min.js",
     "bower_components/angular-sanitize/angular-sanitize.min.js",
     "bower_components/angular-translate/angular-translate.min.js",
