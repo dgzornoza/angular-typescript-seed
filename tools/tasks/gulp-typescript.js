@@ -5,6 +5,7 @@
 var gulp = require("gulp");
 var tsc = require("gulp-typescript");
 var tslint = require("gulp-tslint");
+var sourcemaps = require("gulp-sourcemaps");
 
 var tasksConfig = require("./gulp-config");
 
@@ -18,21 +19,21 @@ var tsTestProject = tsc.createProject("src/tests/tsconfig.json", { typescript: r
  * lint and build TypeScript in debug mode
  */
 gulp.task("build-ts-debug", ["lint-ts"], function () {
-    return build(tsProject);
+    return build(tsProject, true);
 });
 
 /**
  * lint and build TypeScript in release mode
  */
 gulp.task("build-ts-release", ["lint-ts"], function () {
-    return build(tsProject);
+    return build(tsProject, false);
 });
 
 /**
  * lint and build TypeScript for tests
  */
 gulp.task("build-ts-tests", ["lint-ts-tests"], function () {
-    return build(tsTestProject);
+    return build(tsTestProject, true);
 });
 
 /**
@@ -51,16 +52,37 @@ gulp.task("lint-ts-tests", function () {
 
 
 
+/** Generar typescript mediante la configuracion establecida como parametro
+ * permitiendo indicar si se generan source maps  */
+function build(tsBuildProject, generateSourceMaps) {
 
-function build(tsBuildProject)
-{
     // compile typescript
-    var tsResult = tsBuildProject.src()
-    .pipe(tsc(tsBuildProject));
-    // send javascript to output folder
-    return tsResult.js.pipe(gulp.dest(tasksConfig.outputFolder));
-};
+    var tsResult = tsBuildProject.src();
 
+    if (generateSourceMaps) {
+        tsResult = tsResult.pipe(sourcemaps.init());
+    }
+
+    tsResult = tsResult.pipe(tsc(tsBuildProject, undefined, tsc.reporter.longReporter()));
+
+    // send javascript to output folder
+    var js = tsResult.js;
+
+    if (generateSourceMaps) {
+        js = js.pipe(sourcemaps.write(".",
+        {
+            includeContent: false,
+            sourceRoot: function(file) {
+                var relativePathsCount = file.sourceMap.file.split('/').length -1;
+                return "../" + "../".repeat(relativePathsCount) + "src/";
+            }
+        }));
+    }
+
+    js = js.pipe(gulp.dest(tasksConfig.outputFolder));
+
+    return js;
+};
 
 function lint(source)
 {

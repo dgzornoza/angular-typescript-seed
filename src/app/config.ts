@@ -15,12 +15,12 @@ requirejs.config({
     // urlArgs: "bust=" + (new Date()).getTime(),
     paths: {
 
-        "angular": "lib/angular.min",
-        "angular-animate": "lib/angular-animate.min",
-        "angular-cookies": "lib/angular-cookies.min",
-        "angular-route": "lib/angular-route.min",
-        "angular-sanitize": "lib/angular-sanitize.min",
-        "angular-translate": "lib/angular-translate.min",
+        "angular": ["//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min", "lib/angular.min"],
+        "angular-animate": ["//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-animate.min", "lib/angular-animate.min"],
+        "angular-cookies": ["//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-cookies.min", "lib/angular-cookies.min"],
+        "angular-route": ["//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.min", "lib/angular-route.min"],
+        "angular-sanitize": ["//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-sanitize.min", "lib/angular-sanitize.min"],
+        "angular-translate": ["//cdnjs.cloudflare.com/ajax/libs/angular-translate/2.12.1/angular-translate.min", "lib/angular-translate.min"],
 
         "bootstrap": ["//ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.min", "lib/bootstrap.min"],
         "jquery": ["//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.3.min", "lib/jquery.min"],

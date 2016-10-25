@@ -1,14 +1,24 @@
 // Place your settings in this file to overwrite default and user settings.
 {
+    // Columns at which to show vertical rulers
+    "editor.rulers": [160],
     "files.exclude": {
-        "**/.*": true,
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
         "**/.DS_Store": true,
+
+        ".idea": true,
+        ".vscode": false,
         "bower_components": true,
         "node_modules": true,
-        "bin": true,
-        "Dockkerfile": true,
-        "project.lock.json": true
-    }
-	,
-	"typescript.tsdk": "./node_modules/typescript/lib"
+        "tools": false,
+        "typings": true,
+        "wwwroot": true
+    },
+
+    "css.validate": false,
+
+    // Auto Import configuration
+    "autoimport.doubleQuotes": true
 }

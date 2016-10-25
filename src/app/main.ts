@@ -21,11 +21,11 @@ interface IAngularRegister {
      * @param name Directive name
      * @param directive Directive class
      * @return Compiler provider itself used for register directive
-	 * @remarks consider using a component
+     * @remarks consider using a component
      */
     directive: (name: string, directive: Function) => ng.ICompileProvider;
 
-	/** function definition for register component in angular. ::ng.ICompileProvider.component()
+    /** function definition for register component in angular. ::ng.ICompileProvider.component()
      * @see http://docs.angularjs.org/api/ng.$compile
      * @see http://docs.angularjs.org/api/ng.$compileProvider
      * @param name Directive name
@@ -78,11 +78,13 @@ class AngularApp {
             `${APP_NAME}.routeResolverService`];
         this._module = angular.module(APP_NAME, modules);
 
-        this._angularConfig();
-        this._angularRun();
-
-        // start angular app
-        angular.bootstrap(document, [APP_NAME]);
+        // cargar modulos dependientes antes de inicializar angular
+        requirejs(["app/services/httpInterceptor.service"], () => {
+                this._angularConfig();
+                this._angularRun();
+                // start angular app
+                angular.bootstrap(document, [APP_NAME]);
+            });
     }
 
     /** Property for angular get main module */
@@ -112,7 +114,7 @@ class AngularApp {
      * @param name Directive name
      * @param directive Directive class
      * @return Compiler provider itself used for register directive or IModule if not found
-	 * @deprecated for new code, use component instead
+     * @deprecated for new code, use component instead
      */
     public registerDirective(name: string, directive: Function): ng.ICompileProvider | ng.IModule {
 
@@ -123,7 +125,7 @@ class AngularApp {
         }
     }
 
-	/** function definition for register component in angular. ::ng.ICompileProvider.component()
+    /** function definition for register component in angular. ::ng.ICompileProvider.component()
      * @see http://docs.angularjs.org/api/ng.$compile
      * @see http://docs.angularjs.org/api/ng.$compileProvider
      * @param name Component name
@@ -200,19 +202,19 @@ class AngularApp {
             "$routeProvider",
             "RouteResolverProvider",
             ($controllerProvider: ng.IControllerProvider,
-            $compileProvider: ng.ICompileProvider,
-            $filterProvider: ng.IFilterProvider,
-            $provide: ng.auto.IProvideService,
-            $httpProvider: ng.IHttpProvider,
-            $translateProvider: ng.translate.ITranslateProvider,
-            $routeProvider: ng.route.IRouteProvider,
-            $RouteResolverProvider: IRouteResolverProvider
+                $compileProvider: ng.ICompileProvider,
+                $filterProvider: ng.IFilterProvider,
+                $provide: ng.auto.IProvideService,
+                $httpProvider: ng.IHttpProvider,
+                $translateProvider: ng.translate.ITranslateProvider,
+                $routeProvider: ng.route.IRouteProvider,
+                $RouteResolverProvider: IRouteResolverProvider
             ) => {
 
                 // asign angular register functions
                 this._angularRegister = {
                     component: $compileProvider.component,
-					controller: $controllerProvider.register,
+                    controller: $controllerProvider.register,
                     directive: $compileProvider.directive,
                     factory: $provide.factory,
                     filter: $filterProvider.register,
