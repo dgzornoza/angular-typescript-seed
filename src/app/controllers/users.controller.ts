@@ -18,8 +18,6 @@ class UsersController implements IUsersController {
     private _scope: ng.IScope;
     private _usersService: IUsersService;
 
-    private _usersService2: IUsersService | IUserModel;
-
     // variables miembro
     private _users: IUserModel[];
 
@@ -35,35 +33,6 @@ class UsersController implements IUsersController {
     /** Users */
     public get Users(): IUserModel[] {
         return this._users;
-    }
-
-    /** Prueba de funcion de test */
-    public test(a: IUserModel): boolean {
-        return null;
-    }
-    /** Prueba de funcion de test */
-    public static testStatic(a: IUserModel): boolean {
-        return false;
-    }
-
-    /** Users */
-    public get pepo(): UsersController {
-        return null;
-    }
-        /** Users */
-    public set pepo(a: UsersController) {
-        let b = 5;;
-    }
-
-    public set Users2(b: string) {
-        let a = 5;
-    }
-
-    public static get Users2Static(): string {
-        return "asv";
-    }
-    public static set Users2Static(a: string) {
-        let t = "asv";
     }
 
     private _init(): void {
