@@ -23,7 +23,7 @@ interface IAngularRegister {
      * @return Compiler provider itself used for register directive
      * @remarks consider using a component
      */
-    directive: (name: string, directive: Function) => ng.ICompileProvider;
+    directive: (name: string, directive: ng.Injectable<ng.IDirectiveFactory>) => ng.ICompileProvider;
 
     /** function definition for register component in angular. ::ng.ICompileProvider.component()
      * @see http://docs.angularjs.org/api/ng.$compile
@@ -74,7 +74,7 @@ class AngularApp {
     constructor() {
 
         // create angular main module
-        let modules: string[] = ["ngSanitize", "ngAnimate", "ngRoute", "ngCookies", "pascalprecht.translate",
+        let modules: string[] = ["ngSanitize", "ngAnimate", "ngRoute", "ngCookies", "ui.bootstrap", "pascalprecht.translate",
             `${APP_NAME}.routeResolverService`];
         this._module = angular.module(APP_NAME, modules);
 
@@ -99,12 +99,12 @@ class AngularApp {
      * @param name Controller name
      * @param controller Controller class
      */
-    public registerController(name: string, controllerClass: Function): void {
+    public registerController(name: string, controllerClass: ng.Injectable<ng.IControllerConstructor>): void {
 
         if (undefined == this._angularRegister || IS_RUNNING_TESTS) {
             this._module.controller(name, controllerClass);
         } else {
-            this._angularRegister.controller(name, controllerClass);
+            this._angularRegister.controller(name, controllerClass as any);
         }
     }
 
@@ -116,10 +116,10 @@ class AngularApp {
      * @return Compiler provider itself used for register directive or IModule if not found
      * @deprecated for new code, use component instead
      */
-    public registerDirective(name: string, directive: Function): ng.ICompileProvider | ng.IModule {
+    public registerDirective(name: string, directive: ng.Injectable<ng.IDirectiveFactory>): ng.ICompileProvider | ng.IModule {
 
         if (undefined == this._angularRegister || IS_RUNNING_TESTS) {
-            return this._module.directive(name, directive as any);
+            return this._module.directive(name, directive);
         } else {
             return this._angularRegister.directive(name, directive);
         }

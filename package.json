@@ -23,7 +23,7 @@
         "postinstall": "bower install && npm run build.modernizr && typings install",
         "build.modernizr": "cd ./bower_components/modernizr && npm install && node ./bin/modernizr -c ../../tools/modernizr-config.json -d ./dist",
 
-        "prestart": "npm install && npm run iexplore",
+        "prestart": "npm install && npm run chrome",
         "start": "http-server -a localhost -p 8000 -c-1 ./wwwroot",
 
         "pretest" :"npm run rebuild-debug && gulp build-tests",

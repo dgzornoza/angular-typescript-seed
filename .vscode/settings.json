@@ -10,8 +10,8 @@
 
         ".idea": true,
         ".vscode": false,
-        "bower_components": false,
-        "node_modules": false,
+        "bower_components": true,
+        "node_modules": true,
         "tools": false,
         "typings": false,
         "wwwroot": false

@@ -73,8 +73,8 @@ function build(tsBuildProject, generateSourceMaps) {
         {
             includeContent: false,
             sourceRoot: function(file) {
-                var relativePathsCount = file.sourceMap.file.split('/').length -1;
-                return "../" + "../".repeat(relativePathsCount) + "src/";
+                var relativePathsCount = file.sourceMap.file.split('/').length -2;
+                return "../".repeat(relativePathsCount) + "src/";
             }
         }));
     }
