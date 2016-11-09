@@ -24,9 +24,16 @@ class HttpInterceptorService implements ng.IHttpInterceptor {
         this._injector = $injector;
     }
 
-    // implement when use
-    // public request: any = (config: ng.IRequestConfig): ng.IRequestConfig | ng.IPromise<ng.IRequestConfig> => {
-    // }
+    public request: any = (config: ng.IRequestConfig): ng.IRequestConfig | ng.IPromise<ng.IRequestConfig> => {
+
+        config.headers = config.headers || {};
+        config.params = config.params || {};
+
+        // configurar cache para la peticion
+        this._configureRequestCache(config);
+
+        return config;
+    }
 
     // implement when use
     // public requestError: any = (rejection: any): any => {
@@ -48,6 +55,15 @@ class HttpInterceptorService implements ng.IHttpInterceptor {
 
 
 
+    private _configureRequestCache(config: ng.IRequestConfig): void {
+
+        let webApiRegex: RegExp = /^.*\/api\/(.(?!cache=true))*$/;
+
+        // default GET method will not be cached in calls to WebAPI, unless implicitly contain the parameter 'cache = true'
+        if (config.method === "GET" && config.params && (webApiRegex.test(config.url))) {
+            config.params._v = Date.now();
+        }
+    }
 
     private _convertUTCDateStringsToLocalDateObjects(obj: any): void {
 
@@ -65,20 +81,8 @@ class HttpInterceptorService implements ng.IHttpInterceptor {
                 let match: RegExpMatchArray = value.match(REGEX_ISO8601);
 
                 if (match) {
-
                     // HACK: las fechas '0001-01-01T00:00:00' son consideradas como nulas
-                    if (match[0] === "0001-01-01T00:00:00") {
-                        obj[key] = undefined;
-                    } else {
-
-                        let milliseconds: number = Date.parse(match[0]);
-                        if (!isNaN(milliseconds)) {
-
-                            let utcDate: Date = new Date(milliseconds);
-                            // convertir utc en GTM local
-                            obj[key] = new Date(utcDate.getTime() - utcDate.getTimezoneOffset() * 60000);
-                        }
-                    }
+                    obj[key] = match[0] === "0001-01-01T00:00:00" ? undefined : new Date(match[0]);
                 }
 
             } else if (typeof value === "object") {
