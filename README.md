@@ -19,10 +19,6 @@ Cualquier IDE en prinicipio es valido, se recomienda Webstorm o VsCode por ser l
 - Actualizar npm
 npm install -g npm@latest 
 
-- Obtener los siguientes paquetes de nodejs globalmente (-g):<br /><br />
-npm install -g typings@0.8.1
- NOTA: existe una version superior de typings que cambia drasticamente, pero este proyecto no esta actualizado para usarla 
-
 - abrir una consola en el directorio del proyecto y ejecutar el comando para la instalacion de los paquetes node del proyecto:<br /><br />
  npm install
  

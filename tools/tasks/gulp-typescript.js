@@ -63,7 +63,7 @@ function build(tsBuildProject, generateSourceMaps) {
         tsResult = tsResult.pipe(sourcemaps.init());
     }
 
-    tsResult = tsResult.pipe(tsc(tsBuildProject, undefined, tsc.reporter.longReporter()));
+    tsResult = tsResult.pipe(tsBuildProject(tsc.reporter.longReporter()));
 
     // send javascript to output folder
     var js = tsResult.js;
@@ -73,8 +73,8 @@ function build(tsBuildProject, generateSourceMaps) {
         {
             includeContent: false,
             sourceRoot: function(file) {
-                var relativePathsCount = file.sourceMap.file.split('/').length -1;
-                return "../" + "../".repeat(relativePathsCount) + "src/";
+                var relativePathsCount = file.sourceMap.file.split('/').length -2;
+                return "../".repeat(relativePathsCount) + "src/";
             }
         }));
     }
@@ -87,12 +87,13 @@ function build(tsBuildProject, generateSourceMaps) {
 function lint(source)
 {
     return gulp.src(source)
-    .pipe(tslint())
-    .pipe(tslint.report("prose",
-    {
-        emitError: false,
-        summarizeFailureOutput: true
-    }));
+        .pipe(tslint({
+            formatter: "prose"
+        }))
+        .pipe(tslint.report( {
+            emitError: false,
+            summarizeFailureOutput: true
+        }))
 };
 
 

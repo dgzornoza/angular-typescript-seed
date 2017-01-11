@@ -244,3 +244,4 @@ wwwroot/app/
 wwwroot/content/
 wwwroot/lib/
 wwwroot/tests/
+.vscode/symbols.json

@@ -1,5 +1,5 @@
-﻿/* tslint:disable no-reference */
-/// <reference path="../../typings/browser.d.ts" />
+﻿/* tslint:disable */
+/// <reference path="../../typings/index.d.ts" />
 
 
 // base url for website/virtual directory/platform (Ended with'/')
@@ -12,7 +12,7 @@ const IS_RUNNING_TESTS: boolean = false;
 // requirejs configuration
 requirejs.config({
     baseUrl: BASE_URL,
-    // urlArgs: "bust=" + (new Date()).getTime(),
+    urlArgs: "bust=" +  "<%= APP_VERSION %>",
     paths: {
 
         "angular": ["//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min", "lib/angular.min"],
@@ -22,8 +22,7 @@ requirejs.config({
         "angular-sanitize": ["//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-sanitize.min", "lib/angular-sanitize.min"],
         "angular-translate": ["//cdnjs.cloudflare.com/ajax/libs/angular-translate/2.12.1/angular-translate.min", "lib/angular-translate.min"],
 
-        "bootstrap": ["//ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.min", "lib/bootstrap.min"],
-        "jquery": ["//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.3.min", "lib/jquery.min"],
+        "angular-ui-bootstrap": ["//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.2.0/ui-bootstrap-tpls.min", "lib/ui-bootstrap-tpls.min"],
         "modernizr": "lib/modernizr",
         "domReady": "lib/domReady"
 
@@ -31,7 +30,6 @@ requirejs.config({
     shim: {
 
         "angular": {
-            deps: ["jquery"],
             exports: "angular"
         },
         "angular-animate": ["angular"],
@@ -40,8 +38,8 @@ requirejs.config({
         "angular-sanitize": ["angular"],
         "angular-translate": ["angular"],
 
-        "bootstrap": {
-            deps: ["jquery"]
+        "angular-ui-bootstrap": {
+            deps: ["angular"]
         }
     }
 
@@ -56,7 +54,7 @@ requirejs(["lib/domReady!",
             "angular-route",
             "angular-sanitize",
             "angular-translate",
-            "bootstrap"],
+            "angular-ui-bootstrap"],
             (_document: Document) => {
 
 	        // start app when dom is loaded

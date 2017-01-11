@@ -78,12 +78,14 @@ var tasksConfig = (function ()
         environmentVars: {
 
             debug: {
+                APP_VERSION: "1.0",
 	            BASE_URL: "/",
                 APP_NAME: "angular.ts.sample",
                 DEBUG_MODE: "true",
                 MINIFIED_EXT: ".min"
             },
             release: {
+                APP_VERSION: "1.0",
 	            BASE_URL: "/",
                 APP_NAME: "angular.ts.sample",
                 DEBUG_MODE: "false",

@@ -55,6 +55,15 @@ class HttpInterceptorService implements ng.IHttpInterceptor {
 
 
 
+    private _configureRequestCache(config: ng.IRequestConfig): void {
+
+        let webApiRegex: RegExp = /^.*\/api\/(.(?!cache=true))*$/;
+
+        // default GET method will not be cached in calls to WebAPI, unless implicitly contain the parameter 'cache = true'
+        if (config.method === "GET" && config.params && (webApiRegex.test(config.url))) {
+            config.params._v = Date.now();
+        }
+    }
 
     private _convertUTCDateStringsToLocalDateObjects(obj: any): void {
 
@@ -73,7 +82,7 @@ class HttpInterceptorService implements ng.IHttpInterceptor {
 
                 if (match) {
                     // HACK: las fechas '0001-01-01T00:00:00' son consideradas como nulas
-                    obj[key]  = match[0] === "0001-01-01T00:00:00" ? undefined : new Date(match[0]);
+                    obj[key] = match[0] === "0001-01-01T00:00:00" ? undefined : new Date(match[0]);
                 }
 
             } else if (typeof value === "object") {
@@ -83,22 +92,17 @@ class HttpInterceptorService implements ng.IHttpInterceptor {
         }
     }
 
-
-    private _configureRequestCache(config: ng.IRequestConfig): void {
-
-        let webApiRegex: RegExp = /^.*\/api\/(.(?!cache=true))*$/;
-        let logonUrlRegex: RegExp = /^.*\/token$/;
-
-        // los metodos GET por defecto NO estaran cacheados en llamadas a webapi
-        // a menos que implicitamente contengan el parametro 'cache=true'
-        if (config.method === "GET" && config.params && (webApiRegex.test(config.url) || logonUrlRegex.test(config.url))) {
-            config.params._v = Date.now();
-        }
-    }
-
 }
 
 // NOTA: (Deben seguir el mismo orden que el constructor del viewmodel)
 HttpInterceptorService.$inject = ["$q", "$location", "$injector"];
 app.module.service("httpInterceptorService", HttpInterceptorService);
+
+
+
+
+
+
+
+
 

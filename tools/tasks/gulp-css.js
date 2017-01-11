@@ -25,7 +25,7 @@ function build()
 {
     // send css to output folder
     gulp.src(tasksConfig.sourceCssFiles)
-    .pipe(gulp.dest(tasksConfig.outputFolder));
+    .pipe(gulp.dest(tasksConfig.outputCssFolder));
 }
 
 function lint()

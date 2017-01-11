@@ -13,12 +13,13 @@
         "bower_components": true,
         "node_modules": true,
         "tools": false,
-        "typings": true,
-        "wwwroot": true
+        "typings": false,
+        "wwwroot": false
     },
 
     "css.validate": false,
 
     // Auto Import configuration
-    "autoimport.doubleQuotes": true
+    "autoimport.doubleQuotes": true,
+    "typescript.tsdk": "./node_modules/typescript/lib"
 }
