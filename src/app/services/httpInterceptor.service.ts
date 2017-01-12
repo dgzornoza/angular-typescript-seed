@@ -1,6 +1,8 @@
 ﻿import { app } from "app/main";
 import "angular";
 
+import "app/services/authentication.service";
+import { IAuthenticationService } from "app/services/authentication.service";
 
 // http://stackoverflow.com/questions/3143070/javascript-regex-iso-datetime
 /* tslint:disable max-line-length */
@@ -14,9 +16,13 @@ const REGEX_ISO8601: RegExp = /^\s*((?:[+-]\d{6}|\d{4})-(?:\d\d-\d\d|W\d\d-\d|W\
  */
 class HttpInterceptorService implements ng.IHttpInterceptor {
 
+    // Services
     private _q: ng.IQService;
     private _location: ng.ILocationService;
     private _injector: ng.auto.IInjectorService;
+
+    // members
+    private _authenticationService: IAuthenticationService;
 
     constructor($q: ng.IQService, $location: ng.ILocationService, $injector: ng.auto.IInjectorService) {
         this._q = $q;
@@ -28,6 +34,9 @@ class HttpInterceptorService implements ng.IHttpInterceptor {
 
         config.headers = config.headers || {};
         config.params = config.params || {};
+
+        // configurar token de autenticacion
+        this.AuthService.tryAddAuthToHttpHeader(config.headers);
 
         // configurar cache para la peticion
         this._configureRequestCache(config);
@@ -53,13 +62,18 @@ class HttpInterceptorService implements ng.IHttpInterceptor {
     // }
 
 
+    private get AuthService(): IAuthenticationService {
 
+        if (undefined == this._authenticationService) { this._authenticationService = this._injector.get("authenticationService") as IAuthenticationService; }
+        return this._authenticationService;
+    }
 
     private _configureRequestCache(config: ng.IRequestConfig): void {
 
+        // regex path web service (Change 'api' for web service path)
         let webApiRegex: RegExp = /^.*\/api\/(.(?!cache=true))*$/;
 
-        // default GET method will not be cached in calls to WebAPI, unless implicitly contain the parameter 'cache = true'
+        // default GET method will not be cached in calls to WebServices, unless implicitly contain the parameter 'cache = true'
         if (config.method === "GET" && config.params && (webApiRegex.test(config.url))) {
             config.params._v = Date.now();
         }

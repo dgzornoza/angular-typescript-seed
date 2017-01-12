@@ -80,6 +80,7 @@ var tasksConfig = (function ()
             debug: {
                 APP_VERSION: "1.0",
 	            BASE_URL: "/",
+                API_BASE_URL: "/",
                 APP_NAME: "angular.ts.sample",
                 DEBUG_MODE: "true",
                 MINIFIED_EXT: ".min"
@@ -87,6 +88,7 @@ var tasksConfig = (function ()
             release: {
                 APP_VERSION: "1.0",
 	            BASE_URL: "/",
+                API_BASE_URL: "/",
                 APP_NAME: "angular.ts.sample",
                 DEBUG_MODE: "false",
                 MINIFIED_EXT: ""
