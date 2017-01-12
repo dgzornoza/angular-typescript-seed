@@ -9,11 +9,13 @@
         "msjsdiag.debugger-for-chrome",
         "msjsdiag.debugger-for-edge",
         "EditorConfig.EditorConfig",
+        "GregorBiswanger.json2ts",
         "IBM.output-colorizer",
         "humao.rest-client",
         "richie5um2.vscode-sort-json",
         "minhthai.vscode-todo-parser",
         "eg2.tslint",
         "benjaminromano.typings-installer"
+
 	]
 }
