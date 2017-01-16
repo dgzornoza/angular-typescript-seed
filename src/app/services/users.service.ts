@@ -3,6 +3,7 @@ import "angular";
 
 import "app/services/authentication.service";
 
+import { BaseHttp } from "app/services/base/baseHttp";
 import { IAuthenticationService, EVT_LOGIN, EVT_LOGOUT } from "app/services/authentication.service";
 import { IUserModel } from "app/models/users";
 
@@ -16,22 +17,19 @@ export interface IUsersService {
     getUsers(): ng.IPromise<IUserModel[]>;
 };
 
-class UsersService implements IUsersService {
+class UsersService extends BaseHttp implements IUsersService {
 
     // servicios
     private _rootScope: ng.IRootScopeService;
-    private _http: ng.IHttpService;
-    private _q: ng.IQService;
     private _authenticationService: IAuthenticationService;
 
     // variables miembro
     private _connectedUser: IUserModel;
 
     constructor($rootScope: ng.IRootScopeService, $http: ng.IHttpService, $q: ng.IQService, authenticationService: IAuthenticationService) {
+        super($http, $q);
 
         this._rootScope = $rootScope;
-        this._http = $http;
-        this._q = $q;
         this._authenticationService = authenticationService;
 
         this._init();
@@ -63,20 +61,9 @@ class UsersService implements IUsersService {
 
     public getUsers(): ng.IPromise<IUserModel[]> {
 
-        return this._http({
-                headers: { "Content-Type": "application/json" },
-                method: "GET",
-                url: BASE_URL + "content/mocks/users.json"
-            }).then((successCallback: ng.IHttpPromiseCallbackArg<IUserModel[]>): IUserModel[] => {
+        let url: string = `${BASE_URL}content/mocks/users.json`;
 
-                return successCallback.data;
-
-            }).catch((reason: any) => {
-
-                return this._q.reject(reason);
-
-            });
-
+        return this.httpGet<IUserModel[]>(url);
     }
 
 
@@ -97,19 +84,13 @@ class UsersService implements IUsersService {
 
     private _readConnectedUserInfo(): ng.IPromise<void> {
 
-        app.logService.debug("user.service - _readConnectedUserInfo: ...");
+        let url: string = `${BASE_URL}content/mocks/userInfo.json`;
 
-        return this._http({
-                headers: { "Content-Type": "application/json" },
-                method: "GET",
-                url: BASE_URL + "content/mocks/userInfo.json"
-            })
+        return this.httpGet<IUserModel>(url)
             .then((resultCallback: ng.IHttpPromiseCallbackArg<IUserModel>): void => {
-                app.logService.debug("user.service - _readConnectedUserInfo: " + angular.toJson(resultCallback.data));
                 this._connectedUser = resultCallback.data;
             })
             .catch((reason: any) => {
-                app.logService.error("Error: usuario.service - _readConnectedUserInfo: " + angular.toJson(reason.data));
                 this._connectedUser = undefined;
             })
             .finally(() => { this._rootScope.$emit(EVT_USERINFO_LOADED); });
