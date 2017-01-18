@@ -18,13 +18,13 @@ requirejs.config({
     urlArgs: "bust=" +  "<%= APP_VERSION %>",
     paths: {
 
-        "angular": ["//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min", "lib/angular.min"],
-        "angular-animate": ["//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-animate.min", "lib/angular-animate.min"],
-        "angular-cookies": ["//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-cookies.min", "lib/angular-cookies.min"],
+        "angular": ["//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.11/angular.min", "lib/angular.min"],
+        "angular-animate": ["//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.11/angular-animate.min", "lib/angular-animate.min"],
+        "angular-cookies": ["//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.11/angular-cookies.min", "lib/angular-cookies.min"],
         "angular-local-storage": "lib/angular-local-storage.min",
-        "angular-route": ["//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.min", "lib/angular-route.min"],
-        "angular-sanitize": ["//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-sanitize.min", "lib/angular-sanitize.min"],
-        "angular-translate": ["//cdnjs.cloudflare.com/ajax/libs/angular-translate/2.12.1/angular-translate.min", "lib/angular-translate.min"],
+        "angular-route": ["//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.11/angular-route.min", "lib/angular-route.min"],
+        "angular-sanitize": ["//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.11/angular-sanitize.min", "lib/angular-sanitize.min"],
+        "angular-translate": ["//cdnjs.cloudflare.com/ajax/libs/angular-translate/2.13.1/angular-translate.min", "lib/angular-translate.min"],
 
         "angular-ui-bootstrap": ["//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.2.0/ui-bootstrap-tpls.min", "lib/ui-bootstrap-tpls.min"],
         "modernizr": "lib/modernizr",
