@@ -1,20 +1,19 @@
-/* tslint:disable no-reference */
-/// <reference path="../../typings/browser.d.ts" />
+/* tslint:disable */
 
-var allTestFiles = [];
-var TEST_REGEXP = /(spec|test)\.js$/i;
+let allTestFiles = [];
+let TEST_REGEXP = /(spec|test)\.js$/i;
 
 // define karma var
 interface Window {
     __karma__: any;
 }
 // define ngMidwayTester function
-var ngMidwayTester: (moduleName: string, options?: any) => any;
+let ngMidwayTester: (moduleName: string, options?: any) => any;
 
 
 // Get a list of all the test files to include
-var tests = [];
-for (var file in window.__karma__.files) {
+let tests = [];
+for (let file in window.__karma__.files) {
   if (window.__karma__.files.hasOwnProperty(file)) {
     if (TEST_REGEXP.test(file)) {
       allTestFiles.push(file);
@@ -25,6 +24,8 @@ for (var file in window.__karma__.files) {
 // base url for website/virtual directory/platform (Ended with'/')
 // NOTE: Karma defaults use 'base'
 const BASE_URL: string = "<%= BASE_URL %>";
+// base url for webservice  (Ended with'/')
+const API_BASE_URL: string = "<%= API_BASE_URL %>";
 // application name
 const APP_NAME: string = "<%= APP_NAME %>";
 // flag for configure app for running tests execution

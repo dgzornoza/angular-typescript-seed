@@ -1,4 +1,4 @@
-import "angular";
+import * as angular from "angular";
 import "app/main";
 
 import "app/controllers/users.controller";

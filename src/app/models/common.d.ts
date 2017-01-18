@@ -1,4 +1,4 @@
-
+import { infraestructure } from "app/infraestructure";
 
 /** Modelo con una propiedad */
 export interface IPropertyModel<T> {

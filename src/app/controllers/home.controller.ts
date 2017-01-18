@@ -6,7 +6,7 @@ class HomeController {
     private _scope: ng.IScope;
 
     /** Constructor por defecto de la clase */
-    constructor($scope: ng.IScope, $uibModal: ng.ui.bootstrap.IModalService) {
+    constructor($scope: ng.IScope) {
         this._scope = $scope;
     }
 }

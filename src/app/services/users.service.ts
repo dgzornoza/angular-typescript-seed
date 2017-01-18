@@ -90,7 +90,7 @@ class UsersService extends BaseHttp implements IUsersService {
             .then((resultCallback: ng.IHttpPromiseCallbackArg<IUserModel>): void => {
                 this._connectedUser = resultCallback.data;
             })
-            .catch((reason: any) => {
+            .catch(() => {
                 this._connectedUser = undefined;
             })
             .finally(() => { this._rootScope.$emit(EVT_USERINFO_LOADED); });

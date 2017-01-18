@@ -1,4 +1,5 @@
-﻿import "app/services/routeResolver.provider";
+﻿import * as angular from "angular";
+import "app/services/routeResolver.provider";
 import "app/helpers";
 
 import { IRouteResolverProvider, IRouteDefinition } from "app/services/routeResolver.provider";
@@ -364,6 +365,8 @@ class AngularApp implements IAngularApp {
                 RoutesConfig.initialize($routeProvider, $RouteResolverProvider);
 
                 // configure languages
+                $translateProvider.fallbackLanguage("en")
+                    .preferredLanguage("en");
                 // $translateProvider.fallbackLanguage("en")
                 // .preferredLanguage("en")
                 // .useLoaderCache("$translationCache")

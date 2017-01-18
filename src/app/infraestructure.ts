@@ -1,6 +1,6 @@
  /* tslint:disable no-bitwise */
 
-namespace infraestructure {
+export namespace infraestructure {
 "use strict";
 
     /** Flags enumeration for user roles */

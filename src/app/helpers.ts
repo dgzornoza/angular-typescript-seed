@@ -58,6 +58,8 @@ class Helpers {
                 }
             }
         }
+
+        return {} as T;
     }
 
     public static GroupBy<T>(array: T[], key: string): IDynamic<T> {

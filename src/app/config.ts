@@ -1,5 +1,4 @@
 ﻿/* tslint:disable */
-/// <reference path="../../typings/index.d.ts" />
 
 
 // base url for website/virtual directory/platform (Ended with'/')

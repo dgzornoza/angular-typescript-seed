@@ -1,4 +1,5 @@
 import * as angular from "angular";
+import { infraestructure } from "app/infraestructure";
 
 /** Interface for custom route definition model */
 export interface IRouteDefinition extends ng.route.IRoute {
@@ -87,7 +88,7 @@ class RouteResolver implements IRouteResolverProvider {
             requireUserRole: (data.requireUserRole) ? data.requireUserRole : undefined,
             resolve:
             {
-                load: ["$q", "$rootScope", ($q: ng.IQService, $rootScope: ng.IRootScopeService) => {
+                load: ["$q", ($q: ng.IQService) => {
 
                         let defer: angular.IDeferred<{}> = $q.defer();
 

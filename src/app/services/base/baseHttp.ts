@@ -1,5 +1,5 @@
 import { app } from "app/main";
-import "angular";
+import * as angular from "angular";
 
 
 /** Clase base para encapsular las peticiones HTTP */
