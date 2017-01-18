@@ -23,7 +23,6 @@
         "node_modules",
         "src/tests",
         "tools",
-        "typings",
         "wwwroot"
     ]
 }

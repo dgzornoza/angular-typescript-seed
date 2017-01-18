@@ -234,10 +234,9 @@ _Pvt_Extensions
 .fake/
 
 
-# Bower/Node/typings directories
+# Bower/Node directories
 bower_components
 node_modules
-typings
 
 # published app
 wwwroot/app/
