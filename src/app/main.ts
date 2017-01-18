@@ -436,9 +436,13 @@ class AngularApp implements IAngularApp {
 
         requirejs(["app/services/httpInterceptor.service",
                     "app/services/authentication.service",
-                    "app/services/users.service"], () => {
+                    "app/services/users.service",
+                    "app/components/main/mainHeader.component",
+                    "app/components/main/mainSidebar.component",
+                    "app/components/main/mainfooter.component"], () => {
                 ready();
             });
+
     }
 
 }
