@@ -25,6 +25,9 @@ var thirdPartyLibs = [
     "bower_components/angular-route/angular-route.min.js",
     "bower_components/angular-sanitize/angular-sanitize.min.js",
     "bower_components/angular-translate/angular-translate.min.js",
+
+    "bower_components/jquery/dist/jquery.min.js",
+
     "bower_components/modernizr/dist/modernizr.js",
     "node_modules/requirejs/require.js",
     "bower_components/requirejs-domready/domReady.js",

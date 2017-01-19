@@ -1,14 +1,14 @@
 export interface ILoginModel {
-    Username: string;
-    Password: string;
-    UseRefreshTokens: boolean;
+    username: string;
+    password: string;
+    useRefreshTokens: boolean;
 }
 
 export interface ILoginResponseModel {
-    Token: string;
-    UserName: string;
-    RefreshToken: string;
-    UseRefreshTokens: boolean;
-    LoginDateTime: Date;
-    LastRequestDateTime: Date;
+    token: string;
+    userName: string;
+    refreshToken: string;
+    useRefreshTokens: boolean;
+    loginDateTime: Date;
+    lastRequestDateTime: Date;
 }
