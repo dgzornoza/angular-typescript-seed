@@ -11,14 +11,18 @@
         "target": "es5",
         "declaration": false,
         "inlineSourceMap": true,
-        "inlineSources": false
+        "inlineSources": false,
+
+        "allowUnusedLabels": false,
+        "noImplicitReturns": true,
+        "noUnusedParameters": true,
+        "noUnusedLocals": true
     },
     "exclude": [
         "bower_components",
         "node_modules",
-		"src/tests",
+        "src/tests",
         "tools",
-        "typings",
         "wwwroot"
     ]
 }

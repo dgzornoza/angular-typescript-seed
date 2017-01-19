@@ -1,9 +1,10 @@
 import * as angular from "angular";
+import { infraestructure } from "app/infraestructure";
 
 /** Interface for custom route definition model */
 export interface IRouteDefinition extends ng.route.IRoute {
-    /** flag indicating whether the route requires authentication */
-    requireAuth: boolean;
+    /** (optional) user rol required for path access */
+    requireUserRole: infraestructure.enumUserRoles;
 }
 
 /** Interface for define dynamic routes model resolution */
@@ -16,8 +17,8 @@ export interface IResolveModel {
      * (default will be the same as the class name of controller without the suffix, e.g 'oneController' = 'one')
      */
     controllerAs?: string;
-    /** (optional) flag indicating whether the route requires authentication (default not require authentication) */
-    requireAuth?: boolean;
+    /** (optional) roles de usuario requeridos para el acceso a la ruta */
+    requireUserRole?: infraestructure.enumUserRoles;
 }
 
 /** Interface for declare ::RouteResolver provider */
@@ -76,23 +77,24 @@ class RouteResolver implements IRouteResolverProvider {
         let controllerPath: string = BASE_URL + this._controllersBasePath + data.path + ".controller.js";
         let controllerName: string = data.path.split("/").pop();
         let controllerClass: string = controllerName + "Controller";
+        // 'controllerAs' default is controller name without 'Controller' prefix
+        data.controllerAs = data.controllerAs || controllerName;
 
         // create return object with route definition
         let route: IRouteDefinition = {
             // HACK: set 'as' also in the controller, in some frameworks like Ionic does not work 'controllerAs'
             controller: controllerClass + " as " + data.controllerAs,
             controllerAs: data.controllerAs,
-            requireAuth: (data.requireAuth) ? data.requireAuth : false,
+            requireUserRole: (data.requireUserRole) ? data.requireUserRole : undefined,
             resolve:
             {
-                load: ["$q", "$rootScope", ($q: ng.IQService, $rootScope: ng.IRootScopeService) => {
+                load: ["$q", ($q: ng.IQService) => {
 
                         let defer: angular.IDeferred<{}> = $q.defer();
 
                         // load async with requirejs
                         requirejs([controllerPath], () => {
                             defer.resolve();
-                            // $rootScope.$apply();
                         });
 
                         // return promise

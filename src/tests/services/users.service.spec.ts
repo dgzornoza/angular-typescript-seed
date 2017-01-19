@@ -54,7 +54,7 @@ describe("usersService", () => {
                     expect(resultCallback[0].Name).toBeDefined();
                     expect(resultCallback[0].FirstName).toBeDefined();
                     expect(resultCallback[0].LastName).toBeDefined();
-                    expect(resultCallback[0].Birthdate).toBeDefined();
+                    expect(resultCallback[0].Rol).toBeDefined();
 
                 })
                 .catch((reason: any) => expect(reason).not.toBeDefined())

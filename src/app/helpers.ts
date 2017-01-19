@@ -1,7 +1,18 @@
 ﻿
-/** Interface for create pair keys/values */
-interface IKeyValueMap<T> {
+/******************************************
+ * Helpers
+ */
+
+/** Interface for create dynamic objects */
+interface IDynamic<T> {
     [key: string]: T;
+}
+
+
+/** Interface for create key/values pair */
+interface IKeyValueMap<T, U> {
+    key: T;
+    value: U;
 }
 
 /** @Brief Class for define help methods */
@@ -20,7 +31,64 @@ class Helpers {
         // Loop for split result array
         let result: any[] = [];
         for (let i: number = 0; i < input.length; i += chunks) {
-             result.push(input.slice(i, i + chunks));
+            result.push(input.slice(i, i + chunks));
+        }
+
+        return result;
+    }
+
+    /**
+     * Function to search for an item in an array that matches the specified property and value
+     * @param inputArray Array of objects where search
+     * @param propertyName property name that will be used to compare the value
+     * @param propertyValue Value that will be compared to find the element in the array
+     * @return item array match, empty object if not found
+     */
+    public static findArrayItemFromPropertyValue<T>(inputArray: T[], propertyName: string, propertyValue: any): T {
+
+        if (undefined == inputArray || inputArray.length === 0 || undefined === propertyName || undefined == propertyValue) {
+            return {} as T;
+        }
+
+        for (let obj of inputArray) {
+
+            for (let prop in obj) {
+                if (obj.hasOwnProperty(prop) && prop === propertyName && obj[prop] === propertyValue) {
+                    return obj;
+                }
+            }
+        }
+
+        return {} as T;
+    }
+
+    public static GroupBy<T>(array: T[], key: string): IDynamic<T> {
+
+        let obj: any = array.reduce((previous: T, current: T) => {
+            (previous[current[key]] = previous[current[key]] || []).push(current);
+            return previous;
+        }, {} as any);
+
+        return obj;
+    }
+
+    public static ArrayToDynamicObject<T>(array: T[], key: string): IDynamic<T> {
+
+        let obj: any = array.reduce((previous: T, current: T) => {
+            previous[current[key]] = current || {};
+            return previous;
+        }, {} as any);
+
+        return obj;
+    }
+
+    public static DynamicObjectToArray<T>(obj: any): T[] {
+
+        let result: T[] = [];
+        for (let prop in obj) {
+            if (obj.hasOwnProperty(prop)) {
+                result.push(obj[prop]);
+            }
         }
 
         return result;
@@ -73,8 +141,46 @@ class Helpers {
             timeout = setTimeout(later, wait);
             if (callNow) { fn.call(thisArg, argArray); }
         };
-    };
+    }
+
+    /** Function for download multiples files
+     * @param urls urls to files
+     */
+    public static DownloadMultipleFiles(...urls: string[]): void {
+
+        for (let i: number = 0; i < urls.length; i++) {
+
+            let link: HTMLAnchorElement = document.createElement("a");
+            link.setAttribute("download", urls[i].split("/").pop());
+            link.style.display = "none";
+            link.setAttribute("href", urls[i]);
+
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    }
 }
+
+/******************************************
+ * Common Regular Expressions
+ */
+
+namespace Helpers {
+    "use strict";
+
+    /* tslint:disable max-line-length */
+    export class CommonPatterns {
+        public static MAIL: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        public static PASSWORD: RegExp = /((?=.*\d)(?=.*[A-Z])(?=.*\W).{8,8})/;
+    }
+    /* tslint:enable max-line-length */
+}
+
+
+/******************************************
+ * Add functions to string object
+ */
 
 /* tslint:disable interface-name */
 /** Extend StringConstructor interface with new features */
@@ -109,7 +215,7 @@ interface String {
 
 /* tslint:disable no-invalid-this */
 String.prototype.splitWithRemove = function (separator: string | RegExp, removeItemString: string, limit?: number): string[] {
-    if ("" === this)  { return new Array(); }
+    if ("" === this) { return new Array(); }
     let items: any = this.split(separator, limit);
 
     for (let i: number = 0; i < items.length; i++) {

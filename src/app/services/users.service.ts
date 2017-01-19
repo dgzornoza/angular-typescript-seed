@@ -1,54 +1,102 @@
 import { app } from "app/main";
+import "angular";
 
+import "app/services/authentication.service";
+
+import { BaseHttp } from "app/services/base/baseHttp";
+import { IAuthenticationService, EVT_LOGIN, EVT_LOGOUT } from "app/services/authentication.service";
 import { IUserModel } from "app/models/users";
 
-/**
- * Servicio para la gestion de usuarios
- */
+/** Evento en rootscope para registrarse que sera invocado al cargarse los datos con la informacion del usuario */
+export const EVT_USERINFO_LOADED: string = "user.service.evt.userinfo_loaded";
+
 export interface IUsersService {
 
-    /**
-     * Funcion para obtener los usuarios desde el servidor
-     * @return Array de modelos de usuarios obtenidos
-     */
-    getUsers(): ng.IPromise<IUserModel[]>;
-}
+    readonly connectedUser: ng.IPromise<IUserModel>;
 
-class UsersService implements IUsersService {
+    getUsers(): ng.IPromise<IUserModel[]>;
+};
+
+class UsersService extends BaseHttp implements IUsersService {
 
     // servicios
-    private _http: ng.IHttpService;
-    private _q: ng.IQService;
+    private _rootScope: ng.IRootScopeService;
+    private _authenticationService: IAuthenticationService;
 
-    constructor($http: ng.IHttpService, $q: ng.IQService) {
-        this._http = $http;
-        this._q = $q;
+    // variables miembro
+    private _connectedUser: IUserModel;
+
+    constructor($rootScope: ng.IRootScopeService, $http: ng.IHttpService, $q: ng.IQService, authenticationService: IAuthenticationService) {
+        super($http, $q);
+
+        this._rootScope = $rootScope;
+        this._authenticationService = authenticationService;
+
+        this._init();
+    }
+
+
+    public get connectedUser(): ng.IPromise<IUserModel> {
+
+        let deferred: angular.IDeferred<IUserModel> = this._q.defer();
+
+        // si existen datos de autenticacion y no del usuario conectado, es por que aun no se a invocado el servicio, de modo que
+        // se suscribe al evento ocurrido al obtenerse los datos de usuario
+        if (this._authenticationService.AuthenticationData !== undefined && this._connectedUser == undefined) {
+
+            let unwatchEvt: Function = this._rootScope.$on(EVT_USERINFO_LOADED, () => {
+
+                // eliminar el registro del evento
+                unwatchEvt();
+                deferred.resolve(this._connectedUser);
+            });
+
+        } else {
+            deferred.resolve(this._connectedUser);
+        }
+
+        return deferred.promise;
     }
 
 
     public getUsers(): ng.IPromise<IUserModel[]> {
 
-        return this._http({
-                headers: { "Content-Type": "application/json" },
-                method: "GET",
-                url: BASE_URL + "content/mocks/users.json"
-            }).then((successCallback: ng.IHttpPromiseCallbackArg<IUserModel[]>): IUserModel[] => {
+        let url: string = `${BASE_URL}content/mocks/users.json`;
 
-                return successCallback.data;
-
-            }).catch((reason: any) => {
-
-                return this._q.reject(reason);
-
-            });
-
+        return this.httpGet<IUserModel[]>(url);
     }
 
+
+    private _init(): void {
+
+        if (this._authenticationService.AuthenticationData !== undefined) {
+            this._readConnectedUserInfo();
+        }
+
+        this._rootScope.$on(EVT_LOGIN, () => {
+            this._readConnectedUserInfo();
+        });
+
+        this._rootScope.$on(EVT_LOGOUT, () => {
+            this._connectedUser = undefined;
+        });
+    }
+
+    private _readConnectedUserInfo(): ng.IPromise<void> {
+
+        let url: string = `${BASE_URL}content/mocks/userInfo.json`;
+
+        return this.httpGet<IUserModel>(url)
+            .then((resultCallback: ng.IHttpPromiseCallbackArg<IUserModel>): void => {
+                this._connectedUser = resultCallback.data;
+            })
+            .catch(() => {
+                this._connectedUser = undefined;
+            })
+            .finally(() => { this._rootScope.$emit(EVT_USERINFO_LOADED); });
+    }
 }
 
-// establecer variables a inyectar en el viewmodel
 // NOTA: (Deben seguir el mismo orden que el constructor del viewmodel)
-UsersService.$inject = ["$http", "$q"];
-
-// registrar el servicio en la aplicacion
+UsersService.$inject = ["$rootScope", "$http", "$q", "authenticationService"];
 app.registerService("usersService", UsersService);

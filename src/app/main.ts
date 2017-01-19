@@ -1,8 +1,27 @@
-﻿import { IRouteResolverProvider } from "app/services/routeResolver.provider";
+﻿import * as angular from "angular";
 import "app/services/routeResolver.provider";
+import "app/helpers";
+
+import { IRouteResolverProvider, IRouteDefinition } from "app/services/routeResolver.provider";
 import { RoutesConfig } from "app/routesConfig";
 
-import "app/helpers";
+import { IUsersService } from "app/services/users.service";
+import { IAuthenticationService } from "app/services/authentication.service";
+
+import { IUserModel } from "app/models/users";
+
+
+/** Servicio con el RootScope personalizado para permiti añadir propiedades */
+export interface ICustomRootScopeService extends ng.IRootScopeService {
+    isLoading: boolean;
+    debugMode: boolean;
+}
+
+/** Enumeracion con los dirferentes identificadores usados para gestionar la cache de angular en la aplicacion */
+export enum enumCacheFactoryKeys {
+    CACHE_FILTER_ID
+}
+
 
 /** Interface for declare angular register methods */
 interface IAngularRegister {
@@ -65,8 +84,24 @@ interface IAngularRegister {
 /** Interface for angular main app */
 export interface IAngularApp {
 
-    /** Property for angular get main module */
+    /** Property for get main angular module */
     readonly module: ng.IModule;
+
+    /** Property for get angular log service */
+    readonly logService: ng.ILogService;
+
+    /** property for get custom angular main root scope service */
+    readonly rootScopeService: ICustomRootScopeService;
+
+    /** property for get authentication service */
+    readonly authenticationService: IAuthenticationService;
+
+    /** property for get users service */
+    readonly usersService: IUsersService;
+
+    /** Property for get angular cache object for app */
+    getCacheFactory(id: enumCacheFactoryKeys): ng.ICacheObject;
+
 
     /** function definition for register controller in angular. ::ng.IControllerProvider.register()
      * @see http://docs.angularjs.org/api/ng.$controller
@@ -132,17 +167,23 @@ class AngularApp implements IAngularApp {
     /** Object for angular register components */
     private _angularRegister: IAngularRegister;
 
+    /** common services in app */
+    private _cacheFactory: ng.ICacheFactoryService;
+    private _rootScope: ICustomRootScopeService;
+    private _logService: ng.ILogService;
+    private _authenticationService: IAuthenticationService;
+    private _usersService: IUsersService;
 
     /** Default constructor */
     constructor() {
 
         // create angular main module
-        let modules: string[] = ["ngSanitize", "ngAnimate", "ngRoute", "ngCookies", "ui.bootstrap", "pascalprecht.translate",
+        let modules: string[] = ["ngSanitize", "ngAnimate", "ngRoute", "ngCookies", "LocalStorageModule", "ui.bootstrap", "pascalprecht.translate",
             `${APP_NAME}.routeResolverService`];
         this._module = angular.module(APP_NAME, modules);
 
-        // cargar modulos dependientes antes de inicializar angular
-        requirejs(["app/services/httpInterceptor.service"], () => {
+        // load dependient modules before initialize angular
+        this._loadRequiredComponents(() => {
                 this._angularConfig();
                 this._angularRun();
                 // start angular app
@@ -154,6 +195,34 @@ class AngularApp implements IAngularApp {
     public get module(): ng.IModule {
         return this._module;
     }
+
+    public get rootScopeService(): ICustomRootScopeService {
+        return this._rootScope;
+    }
+
+    public get logService(): ng.ILogService {
+        return this._logService;
+    }
+
+    public get authenticationService(): IAuthenticationService {
+        return this._authenticationService;
+    }
+
+    public get usersService(): IUsersService {
+        return this._usersService;
+    }
+
+
+    public getCacheFactory(id: enumCacheFactoryKeys): ng.ICacheObject {
+
+        let cache: ng.ICacheObject = this._cacheFactory.get(enumCacheFactoryKeys[id]);
+        if (undefined === cache) {
+            cache = this._cacheFactory(enumCacheFactoryKeys[id]);
+        }
+        return cache;
+    }
+
+
 
 
 
@@ -256,6 +325,8 @@ class AngularApp implements IAngularApp {
                 RoutesConfig.initialize($routeProvider, $RouteResolverProvider);
 
                 // configure languages
+                $translateProvider.fallbackLanguage("en")
+                    .preferredLanguage("en");
                 // $translateProvider.fallbackLanguage("en")
                 // .preferredLanguage("en")
                 // .useLoaderCache("$translationCache")
@@ -276,18 +347,64 @@ class AngularApp implements IAngularApp {
         // crear el array con los parametros que seran inyectados en la funcion de ejecucion y crear la funcion de ejecucion de angular
         // NOTA: la funcion debe contener los parametros a inyectar en el mismo orden
         let fn: any[] =
-            ["$rootScope", "$location", "$translate",
-                ($rootScope: ng.IRootScopeService, $location: ng.ILocationService, $translate: ng.translate.ITranslateService) => {
+            ["$rootScope", "$location", "$log", "$injector", "$cacheFactory",
+                ($rootScope: ICustomRootScopeService, $location: ng.ILocationService, $log: ng.ILogService, $injector: ng.auto.IInjectorService,
+                    $cacheFactory: ng.ICacheFactoryService) => {
 
-                    // TODO: translate partial
-                    // $rootScope.$on("$translatePartialLoaderStructureChanged", () => {
-                    //     $translate.refresh();
-                    // });
+                    // guardar variables de aplicacion
+                    this._cacheFactory = $cacheFactory;
+                    this._logService = $log;
+
+                    this._authenticationService = $injector.get("authenticationService") as IAuthenticationService;
+                    this._usersService = $injector.get("usersService") as IUsersService;
+
+                    // Parametros globales
+                    this._rootScope = $rootScope;
+                    this._rootScope.debugMode = "true" === "<%= DEBUG_MODE %>" as any;
+
+                    // verify user rol in paths y configure states
+                    this._rootScope.$on("$routeChangeStart", (_event: ng.IAngularEvent, _next: IRouteDefinition, _current: IRouteDefinition) => {
+
+                        // set loading on chage route (Should be set to false at the end of initialization on the controllers)
+                        this._rootScope.isLoading = true;
+
+                        if (_next && _next.requireUserRole) {
+
+                            // verify allowed roles
+                            this._usersService.connectedUser.then((user: IUserModel) => {
+
+                                /* tslint:disable no-bitwise */
+                                if (!user || (_next.requireUserRole & user.Rol) !== _next.requireUserRole) {
+                                    /* tslint:enable no-bitwise */
+
+                                    this._rootScope.$evalAsync(() => {
+                                        $location.path("login");
+                                    });
+                                }
+                            });
+                        }
+                    });
 
                 }];
 
         this._module.run(fn);
     }
+
+
+
+    private _loadRequiredComponents(ready: Function): void {
+
+        requirejs(["app/services/httpInterceptor.service",
+                    "app/services/authentication.service",
+                    "app/services/users.service",
+                    "app/components/main/mainHeader.component",
+                    "app/components/main/mainSidebar.component",
+                    "app/components/main/mainfooter.component"], () => {
+                ready();
+            });
+
+    }
+
 }
 
 
