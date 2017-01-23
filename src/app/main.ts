@@ -186,15 +186,15 @@ class AngularApp implements IAngularApp {
 
         // load dependient modules before initialize angular
         this._loadRequiredComponents(() => {
-                this._angularConfig();
-                this._angularRun();
-                // start angular app
-                angular.bootstrap(document, [APP_NAME]);
+            this._angularConfig();
+            this._angularRun();
+            // start angular app
+            angular.bootstrap(document, [APP_NAME]);
 				// invoke initialization event
 				if (undefined != onInit) {
 					onInit();
 				}				
-            });
+        });
     }
 
     /** Property for angular get main module */
@@ -227,6 +227,7 @@ class AngularApp implements IAngularApp {
         }
         return cache;
     }
+
 
 
 
@@ -421,7 +422,7 @@ class AngularApp implements IAngularApp {
                             this._usersService.connectedUser.then((user: IUserModel) => {
 
                                 /* tslint:disable no-bitwise */
-                                if (!user || (_next.requireUserRole & user.Rol) !== _next.requireUserRole) {
+                                if (!user || (_next.requireUserRole & user.rol) !== _next.requireUserRole) {
                                     /* tslint:enable no-bitwise */
 
                                     this._rootScope.$evalAsync(() => {
@@ -430,6 +431,15 @@ class AngularApp implements IAngularApp {
                                 }
                             });
                         }
+                    });
+
+                    this._rootScope.$on("$routeChangeSuccess", (_event: ng.IAngularEvent, _current: IRouteDefinition, _previous: IRouteDefinition) => {
+                        this._rootScope.isLoading = false;
+                    });
+
+                    this._rootScope.$on("$routeChangeError", (_event: ng.IAngularEvent, _current: IRouteDefinition, _previous: IRouteDefinition,
+                        _rejection: any) => {
+                        this._rootScope.isLoading = false;
                     });
 
                 }];
@@ -442,11 +452,11 @@ class AngularApp implements IAngularApp {
     private _loadRequiredComponents(ready: Function): void {
 
         requirejs(["app/services/httpInterceptor.service",
-                    "app/services/authentication.service",
-                    "app/services/users.service",
-                    "app/components/main/mainHeader.component",
-                    "app/components/main/mainSidebar.component",
-                    "app/components/main/mainfooter.component"], () => {
+            "app/services/authentication.service",
+            "app/services/users.service",
+            "app/components/main/mainHeader.component",
+            "app/components/main/mainSidebar.component",
+            "app/components/main/mainfooter.component"], () => {
                 ready();
             });
 

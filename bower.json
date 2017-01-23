@@ -22,15 +22,19 @@
     "dependencies": {
         "angular": "1.5.11",
         "angular-animate": "1.5.11",
-        "angular-bootstrap": "2.2.0",
+        "angular-bootstrap": "2.4.0",
         "angular-cookies": "1.5.11",
+        "angular-local-storage": "0.5.2",
         "angular-mocks": "1.5.11",
         "angular-route": "1.5.11",
         "angular-sanitize": "1.5.11",
         "angular-translate": "2.13.1",
-        "angular-local-storage": "0.5.2",
         "bootstrap": "3.3.6",
+        "jquery": "2.2.4",
         "modernizr": "3.3.1",
         "requirejs-domready": "2.0.1"
+    },
+    "resolutions": {
+        "jquery": "2.2.4"
     }
 }

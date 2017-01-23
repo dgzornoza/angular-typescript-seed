@@ -76,11 +76,11 @@ class AuthenticationService implements IAuthenticationService {
 
         let params: any = {
             grant_type: "password",
-            password: loginData.Password,
-            username: loginData.Username
+            password: loginData.password,
+            username: loginData.username
         };
 
-        if (loginData.UseRefreshTokens) {
+        if (loginData.useRefreshTokens) {
             params.client_id = APP_NAME;
         }
 
@@ -95,12 +95,12 @@ class AuthenticationService implements IAuthenticationService {
 
             let now: Date = new Date();
             let loginResponse: ILoginResponseModel = {
-                    LastRequestDateTime: now,
-                    LoginDateTime: now,
-                    RefreshToken: loginData.UseRefreshTokens ? resultCallback.data.refresh_token : "",
-                    Token: resultCallback.data.access_token,
-                    UseRefreshTokens: loginData.UseRefreshTokens ? true : false,
-                    UserName: loginData.Username
+                    lastRequestDateTime: now,
+                    loginDateTime: now,
+                    refreshToken: loginData.useRefreshTokens ? resultCallback.data.refresh_token : "",
+                    token: resultCallback.data.access_token,
+                    useRefreshTokens: loginData.useRefreshTokens ? true : false,
+                    userName: loginData.username
             };
 
             this._localStorageService.set(LOCAL_STORAGE_AUTH_KEY, loginResponse);

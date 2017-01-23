@@ -19,13 +19,15 @@ requirejs.config({
 
         "angular": ["//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.11/angular.min", "lib/angular.min"],
         "angular-animate": ["//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.11/angular-animate.min", "lib/angular-animate.min"],
+        "angular-bootstrap": ["//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.2.0/ui-bootstrap-tpls.min", "lib/ui-bootstrap-tpls.min"],
         "angular-cookies": ["//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.11/angular-cookies.min", "lib/angular-cookies.min"],
         "angular-local-storage": "lib/angular-local-storage.min",
         "angular-route": ["//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.11/angular-route.min", "lib/angular-route.min"],
         "angular-sanitize": ["//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.11/angular-sanitize.min", "lib/angular-sanitize.min"],
         "angular-translate": ["//cdnjs.cloudflare.com/ajax/libs/angular-translate/2.13.1/angular-translate.min", "lib/angular-translate.min"],
 
-        "angular-ui-bootstrap": ["//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.2.0/ui-bootstrap-tpls.min", "lib/ui-bootstrap-tpls.min"],
+        "jquery": ["//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min", "lib/jquery.min"],
+
         "modernizr": "lib/modernizr",
         "domReady": "lib/domReady"
 
@@ -33,6 +35,7 @@ requirejs.config({
     shim: {
 
         "angular": {
+            deps: ["jquery"],
             exports: "angular"
         },
         "angular-animate": ["angular"],
@@ -42,7 +45,7 @@ requirejs.config({
         "angular-sanitize": ["angular"],
         "angular-translate": ["angular"],
 
-        "angular-ui-bootstrap": {
+        "angular-bootstrap": {
             deps: ["angular"]
         }
     }
@@ -54,12 +57,12 @@ requirejs.config({
 requirejs(["lib/domReady!",
             "angular",
             "angular-animate",
+            "angular-bootstrap",
             "angular-cookies",
             "angular-local-storage",
             "angular-route",
             "angular-sanitize",
-            "angular-translate",
-            "angular-ui-bootstrap"],
+            "angular-translate"],
             (_document: Document) => {
 
 	        // start app when dom is loaded
