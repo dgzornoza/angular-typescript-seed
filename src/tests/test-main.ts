@@ -97,9 +97,11 @@ function lazyStart() {
             "angular-translate",
             "bootstrap"], () => {
 
-                // start app and init karma tests
-                requirejs(["app/main"].concat(allTestFiles), () => {
-	                window.__karma__.start();
-                });
+				// start app and init karma tests
+				requirejs(["app/main"].concat(allTestFiles), (_main: any) => {
+					_main.onInit = () => {
+						window.__karma__.start();
+					}
+				});
             });
 }
