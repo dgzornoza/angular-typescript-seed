@@ -9,12 +9,20 @@ export interface IPropertyModel<T> {
 }
 
 export interface IRangeListModel<T> {
-    totalListItems: number;
+    /** Registros totales sin filtrar */
+    totalItems: number;
+    /** Registros totales como resultado de un filtrado */
+    totalFilteredItems: number;
+    /** Items de la lista */
     rangeItems: T[];
 }
 
 export interface IRangeDynamicListModel<T> {
-    totalListItems: number;
+    /** Registros totales sin filtrar */
+    totalItems: number;
+    /** Registros totales como resultado de un filtrado */
+    totalFilteredItems: number;
+	/** Items de la lista */
     rangeItems: IDynamic<T>;
 }
 
