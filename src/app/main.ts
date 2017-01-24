@@ -23,7 +23,7 @@ export enum enumCacheFactoryKeys {
 }
 
 // exportar evento ocurrido al inicializarse la clase
-export var onInit: Function;
+export let onInit: Function;
 
 /** Interface for declare angular register methods */
 interface IAngularRegister {
@@ -190,10 +190,10 @@ class AngularApp implements IAngularApp {
             this._angularRun();
             // start angular app
             angular.bootstrap(document, [APP_NAME]);
-				// invoke initialization event
-				if (undefined != onInit) {
-					onInit();
-				}				
+            // invoke initialization event
+            if (undefined != onInit) {
+                onInit();
+            }
         });
     }
 
@@ -365,7 +365,7 @@ class AngularApp implements IAngularApp {
 
                 // configure http interceptor
                 $httpProvider.interceptors.push("httpInterceptorService");
-				$httpProvider.defaults.headers.common = { "Content-Type" : "application/json" };
+                $httpProvider.defaults.headers.common = { "Content-Type" : "application/json" };
 
                 // Configure routes
                 $RouteResolverProvider.controllersBasePath = "app/controllers/";
