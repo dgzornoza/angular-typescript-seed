@@ -19,7 +19,7 @@ export interface IRangeListModel<T> {
 
 export interface IRangeDynamicListModel<T> {
     /** Registros totales sin filtrar */
-    totalItems: number;
+    totalItems?: number;
     /** Registros totales como resultado de un filtrado */
     totalFilteredItems: number;
 	/** Items de la lista */
