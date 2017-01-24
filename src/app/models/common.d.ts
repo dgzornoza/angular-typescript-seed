@@ -45,9 +45,9 @@ export interface IRangeFilterModel<T> extends ISortFilterModel {
 /** Modelo para implementar un filtro base con paginacion, identificadores y busqueda general */
 export interface IBaseFilterModel extends IRangeFilterModel<number> {
     /** Enumeracion de identificadores unicos para el filtro */
-    ids: number[];
+    ids?: number[];
     /** Cadena usada en el filtro para una busqueda general en cualquier campo string */
-    search: string;
+    search?: string;
 }
 
 
