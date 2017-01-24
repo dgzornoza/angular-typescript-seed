@@ -29,7 +29,7 @@ export interface IRangeDynamicListModel<T> {
 /** Modelo para implementar una ordenacion sobre una propiedad en operaciones con filtros */
 export interface ISortFilterModel {
     /** Nombre de la propiedad en el filtro */
-    sortPropertyName: string;
+    sortPropertyName?: string;
     /** Orden de clasificacion establecido por la enumeracion ::enumSortOrder. */
     sortOrder?: infraestructure.enumSortOrder;
 }

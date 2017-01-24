@@ -22,6 +22,8 @@ export enum enumCacheFactoryKeys {
     CACHE_FILTER_ID
 }
 
+// exportar evento ocurrido al inicializarse la clase
+export var onInit: Function;
 
 /** Interface for declare angular register methods */
 interface IAngularRegister {
@@ -188,6 +190,10 @@ class AngularApp implements IAngularApp {
             this._angularRun();
             // start angular app
             angular.bootstrap(document, [APP_NAME]);
+				// invoke initialization event
+				if (undefined != onInit) {
+					onInit();
+				}				
         });
     }
 
@@ -226,6 +232,12 @@ class AngularApp implements IAngularApp {
 
 
 
+    /** function definition for register controller in angular. ::ng.IControllerProvider.register()
+     * @see http://docs.angularjs.org/api/ng.$controller
+     * @see http://docs.angularjs.org/api/ng.$controllerProvider
+     * @param name Controller name
+     * @param controller Controller class
+     */
     public registerController(name: string, controllerClass: ng.Injectable<ng.IControllerConstructor>): void {
 
         if (undefined == this._angularRegister || IS_RUNNING_TESTS) {
@@ -235,6 +247,14 @@ class AngularApp implements IAngularApp {
         }
     }
 
+    /** function definition for register directive in angular. ::ng.ICompileProvider.directive()
+     * @see http://docs.angularjs.org/api/ng.$compile
+     * @see http://docs.angularjs.org/api/ng.$compileProvider
+     * @param name Directive name
+     * @param directive Directive class
+     * @return Compiler provider itself used for register directive or IModule if not found
+     * @deprecated for new code, use component instead
+     */
     public registerDirective(name: string, directive: ng.Injectable<ng.IDirectiveFactory>): ng.ICompileProvider | ng.IModule {
 
         if (undefined == this._angularRegister || IS_RUNNING_TESTS) {
@@ -244,6 +264,13 @@ class AngularApp implements IAngularApp {
         }
     }
 
+    /** function definition for register component in angular. ::ng.ICompileProvider.component()
+     * @see http://docs.angularjs.org/api/ng.$compile
+     * @see http://docs.angularjs.org/api/ng.$compileProvider
+     * @param name Component name
+     * @param options Component options
+     * @return Compiler provider itself used for register component or IModule if not found
+     */
     public registerComponent(name: string, options: ng.IComponentOptions): ng.ICompileProvider | ng.IModule {
 
         if (undefined == this._angularRegister || IS_RUNNING_TESTS) {
@@ -253,6 +280,13 @@ class AngularApp implements IAngularApp {
         }
     }
 
+    /** function definition for register filter in angular. ::ng.IFilterProvider.register()
+     * @see http://docs.angularjs.org/api/ng.$filter
+     * @see http://docs.angularjs.org/api/ng.$filterProvider
+     * @param name Filter name
+     * @param filter Filter class
+     * @return Instance of registered filter or instances map of registered filters (if filters map has been provided) or IModule if not found
+     */
     public registerFilter(name: string, filter: Function): ng.IServiceProvider | ng.IModule {
 
         if (undefined == this._angularRegister || IS_RUNNING_TESTS) {
@@ -262,6 +296,12 @@ class AngularApp implements IAngularApp {
         }
     }
 
+    /** function definition for register a service factory in angular. ::ng.IProvideService.factory()
+     * @see http://docs.angularjs.org/api/AUTO.$provide
+     * @param name Service factory name
+     * @param serviceFactory Service factory (Internally this is an abbreviation for $provide.provider(name, {$get: $getFn}).
+     * @return Registered service factory instance or IModule if not found
+     */
     public registerFactory(name: string, serviceFactory: Function): ng.IServiceProvider | ng.IModule {
 
         if (undefined == this._angularRegister || IS_RUNNING_TESTS) {
@@ -271,6 +311,13 @@ class AngularApp implements IAngularApp {
         }
     }
 
+    /** function definition for register a service constructor in angular, which will be invoked with new to create the service instance.
+     * ::ng.IProvideService.service()
+     * @see http://docs.angularjs.org/api/AUTO.$provide
+     * @param name Service constructor name
+     * @param service Service class.
+     * @return Registered service constructor instance or IModule if not found
+     */
     public registerService(name: string, service: Function): ng.IServiceProvider | ng.IModule {
 
         if (undefined == this._angularRegister || IS_RUNNING_TESTS) {
@@ -318,6 +365,7 @@ class AngularApp implements IAngularApp {
 
                 // configure http interceptor
                 $httpProvider.interceptors.push("httpInterceptorService");
+				$httpProvider.defaults.headers.common = { "Content-Type" : "application/json" };
 
                 // Configure routes
                 $RouteResolverProvider.controllersBasePath = "app/controllers/";
