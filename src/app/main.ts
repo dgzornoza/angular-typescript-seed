@@ -13,6 +13,11 @@ import { IUserModel } from "app/models/users";
 
 /** Servicio con el RootScope personalizado para permiti añadir propiedades */
 export interface ICustomRootScopeService extends ng.IRootScopeService {
+    /** Object with current and previous route definitions */
+    routes: {
+        current: IRouteDefinition,
+        previous: IRouteDefinition
+    };
     isLoading: boolean;
     debugMode: boolean;
 }
@@ -415,6 +420,11 @@ class AngularApp implements IAngularApp {
 
                         // set loading on chage route (Should be set to false at the end of initialization on the controllers)
                         this._rootScope.isLoading = true;
+                        // set routes en root scope
+                        this._rootScope.routes = {
+                            current: _next,
+                            previous: _current
+                        };
 
                         if (_next && _next.requireUserRole) {
 
