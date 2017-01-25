@@ -179,6 +179,23 @@ namespace Helpers {
 
 
 /******************************************
+ * Add functions to Number object
+ */
+
+/* tslint:disable interface-name */
+interface NumberConstructor {
+    // https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER
+    MAX_SAFE_INTEGER: number;
+}
+
+// https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER
+if (!Number.MAX_SAFE_INTEGER) {
+    Number.MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
+}
+/* tslint:enable interface-name */
+
+
+/******************************************
  * Add functions to string object
  */
 
@@ -195,8 +212,6 @@ interface StringConstructor {
 String.isString = function (obj: any): boolean {
     return typeof obj === "string" || obj instanceof String;
 };
-
-
 
 /**  Extend string interface with new features  */
 interface String {
