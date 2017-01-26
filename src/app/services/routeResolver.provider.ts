@@ -4,7 +4,11 @@ import { infraestructure } from "app/infraestructure";
 /** Interface for custom route definition model */
 export interface IRouteDefinition extends ng.route.IRoute {
     /** (optional) user rol required for path access */
-    requireUserRole: infraestructure.enumUserRoles;
+    requireUserRole?: infraestructure.enumUserRoles;
+    /** (optional) route title */
+    title?: string;
+    /** (optional) route subtitle */
+    subtitle?: string;
 }
 
 /** Interface for define dynamic routes model resolution */
@@ -19,6 +23,10 @@ export interface IResolveModel {
     controllerAs?: string;
     /** (optional) roles de usuario requeridos para el acceso a la ruta */
     requireUserRole?: infraestructure.enumUserRoles;
+    /** (optional) route title */
+    title?: string;
+    /** (optional) route subtitle */
+    subtitle?: string;
 }
 
 /** Interface for declare ::RouteResolver provider */
@@ -101,7 +109,9 @@ class RouteResolver implements IRouteResolverProvider {
                         return defer.promise;
                     }]
             },
-            templateUrl: viewPath
+            subtitle: data.subtitle,
+            templateUrl: viewPath,
+            title: data.title
         };
 
         return route;

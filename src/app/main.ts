@@ -13,6 +13,11 @@ import { IUserModel } from "app/models/users";
 
 /** Servicio con el RootScope personalizado para permiti añadir propiedades */
 export interface ICustomRootScopeService extends ng.IRootScopeService {
+    /** Object with current and previous route definitions */
+    routes: {
+        current: IRouteDefinition,
+        previous: IRouteDefinition
+    };
     isLoading: boolean;
     debugMode: boolean;
 }
@@ -23,7 +28,7 @@ export enum enumCacheFactoryKeys {
 }
 
 // exportar evento ocurrido al inicializarse la clase
-export var onInit: Function;
+export let onInit: Function;
 
 /** Interface for declare angular register methods */
 interface IAngularRegister {
@@ -190,10 +195,10 @@ class AngularApp implements IAngularApp {
             this._angularRun();
             // start angular app
             angular.bootstrap(document, [APP_NAME]);
-				// invoke initialization event
-				if (undefined != onInit) {
-					onInit();
-				}				
+            // invoke initialization event
+            if (undefined != onInit) {
+                onInit();
+            }
         });
     }
 
@@ -365,7 +370,7 @@ class AngularApp implements IAngularApp {
 
                 // configure http interceptor
                 $httpProvider.interceptors.push("httpInterceptorService");
-				$httpProvider.defaults.headers.common = { "Content-Type" : "application/json" };
+                $httpProvider.defaults.headers.common = { "Content-Type" : "application/json" };
 
                 // Configure routes
                 $RouteResolverProvider.controllersBasePath = "app/controllers/";
@@ -415,6 +420,11 @@ class AngularApp implements IAngularApp {
 
                         // set loading on chage route (Should be set to false at the end of initialization on the controllers)
                         this._rootScope.isLoading = true;
+                        // set routes en root scope
+                        this._rootScope.routes = {
+                            current: _next,
+                            previous: _current
+                        };
 
                         if (_next && _next.requireUserRole) {
 
