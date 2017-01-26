@@ -29,7 +29,8 @@ class Helpers {
         link.rel = "stylesheet";
         link.href = url;
         if (insertBeforeId) {
-            document.getElementsByTagName(`#${insertBeforeId}`)[0].appendChild(link);
+            let element: Element = document.querySelector(`#${insertBeforeId}`);
+            element.parentNode.insertBefore(link, element);
         } else {
             document.getElementsByTagName("head")[0].appendChild(link);
         }
