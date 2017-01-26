@@ -18,12 +18,29 @@ interface IKeyValueMap<T, U> {
 /** @Brief Class for define help methods */
 class Helpers {
 
+    /** Funcion para cargar un css de forma dinamica
+     * @param url url del css a cargar
+     * @param idPrevious (Opcional) Identificador del elemento tras el que sera añadido el css,
+     * en caso de no especificarse sera añadido como ultimo elemento de <head>
+     */
+    public static loadCss(url: string, idPrevious?: string) {
+        let link: HTMLLinkElement = document.createElement("link");
+        link.type = "text/css";
+        link.rel = "stylesheet";
+        link.href = url;
+        if (idPrevious) {
+            document.getElementsByTagName("idPrevious")[0].appendChild(link);
+        } else {
+            document.getElementsByTagName("head")[0].appendChild(link);
+        }
+    }
+
     /** @brief Help function for split an array/string into parts of a specified size
      * @param input Array elements or string to split into parts
      * @param chunks Size of parts that will separate the array/string
      * @return Matrix containing splitted input array, null if not able to perform.
      */
-    public static SplitArray<T>(input: T[] | string, chunks: number = 1): any[] {
+    public static splitArray<T>(input: T[] | string, chunks: number = 1): any[] {
 
         // verify array type
         if (!Array.isArray(input) && !String.isString(input)) { return undefined; }
@@ -62,7 +79,7 @@ class Helpers {
         return {} as T;
     }
 
-    public static GroupBy<T>(array: T[], key: string): IDynamic<T> {
+    public static groupBy<T>(array: T[], key: string): IDynamic<T> {
 
         let obj: any = array.reduce((previous: T, current: T) => {
             (previous[current[key]] = previous[current[key]] || []).push(current);
@@ -72,7 +89,7 @@ class Helpers {
         return obj;
     }
 
-    public static ArrayToDynamicObject<T>(array: T[], key: string): IDynamic<T> {
+    public static arrayToDynamicObject<T>(array: T[], key: string): IDynamic<T> {
 
         let obj: any = array.reduce((previous: T, current: T) => {
             previous[current[key]] = current || {};
@@ -82,7 +99,7 @@ class Helpers {
         return obj;
     }
 
-    public static DynamicObjectToArray<T>(obj: any): T[] {
+    public static dynamicObjectToArray<T>(obj: any): T[] {
 
         let result: T[] = [];
         for (let prop in obj) {
@@ -100,7 +117,7 @@ class Helpers {
      * @param limit time between calls
      * @returns Function to invoke wrapped in throttle function
      */
-    public static Throttle(fn: Function, limit: number): Function {
+    public static throttle(fn: Function, limit: number): Function {
         let wait: boolean = false;
 
         // Inicialmente no se espera, se retorna la funcion throttle.
@@ -126,7 +143,7 @@ class Helpers {
      * @param immediate true if trigger the function on the leading edge, instead of the trailing.
      * @returns Function to invoke wrapped in Debounce function
      */
-    public static Debounce(fn: Function, wait: number, immediate?: boolean): Function {
+    public static debounce(fn: Function, wait: number, immediate?: boolean): Function {
         let timeout: number;
 
         return (thisArg: any, ...argArray: any[]): any => {
@@ -146,7 +163,7 @@ class Helpers {
     /** Function for download multiples files
      * @param urls urls to files
      */
-    public static DownloadMultipleFiles(...urls: string[]): void {
+    public static downloadMultipleFiles(...urls: string[]): void {
 
         for (let i: number = 0; i < urls.length; i++) {
 
