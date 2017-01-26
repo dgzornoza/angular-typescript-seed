@@ -29,7 +29,7 @@ class Helpers {
         link.rel = "stylesheet";
         link.href = url;
         if (insertBeforeId) {
-            document.getElementsByTagName("idPrevious")[0].appendChild(link);
+            document.getElementsByTagName(`#${insertBeforeId}`)[0].appendChild(link);
         } else {
             document.getElementsByTagName("head")[0].appendChild(link);
         }
