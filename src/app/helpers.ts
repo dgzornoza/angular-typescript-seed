@@ -23,7 +23,7 @@ class Helpers {
      * @param insertBeforeId (Opcional) Identificador del elemento que sera usado para insertarse antes de el.
      * en caso de no especificarse sera añadido como ultimo elemento de <head>
      */
-    public static loadCss(url: string, insertBeforeId?: string) {
+    public static loadCss(url: string, insertBeforeId?: string): void {
         let link: HTMLLinkElement = document.createElement("link");
         link.type = "text/css";
         link.rel = "stylesheet";
