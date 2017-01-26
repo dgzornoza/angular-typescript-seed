@@ -20,15 +20,15 @@ class Helpers {
 
     /** Funcion para cargar un css de forma dinamica
      * @param url url del css a cargar
-     * @param idPrevious (Opcional) Identificador del elemento tras el que sera añadido el css,
+     * @param insertBeforeId (Opcional) Identificador del elemento que sera usado para insertarse antes de el.
      * en caso de no especificarse sera añadido como ultimo elemento de <head>
      */
-    public static loadCss(url: string, idPrevious?: string) {
+    public static loadCss(url: string, insertBeforeId?: string) {
         let link: HTMLLinkElement = document.createElement("link");
         link.type = "text/css";
         link.rel = "stylesheet";
         link.href = url;
-        if (idPrevious) {
+        if (insertBeforeId) {
             document.getElementsByTagName("idPrevious")[0].appendChild(link);
         } else {
             document.getElementsByTagName("head")[0].appendChild(link);
