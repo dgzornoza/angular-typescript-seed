@@ -18,6 +18,7 @@ export interface ICustomRootScopeService extends ng.IRootScopeService {
         current: IRouteDefinition,
         previous: IRouteDefinition
     };
+    isAuthUser: boolean;
     isLoading: boolean;
     debugMode: boolean;
 }
@@ -374,7 +375,7 @@ class AngularApp implements IAngularApp {
 
                 // Configure routes
                 $RouteResolverProvider.controllersBasePath = "app/controllers/";
-                $RouteResolverProvider.viewsBasePath = "app/views/";
+                $RouteResolverProvider.viewsBasePath = "app/controllers/";
                 RoutesConfig.initialize($routeProvider, $RouteResolverProvider);
 
                 // configure languages
@@ -414,6 +415,7 @@ class AngularApp implements IAngularApp {
                     // Parametros globales
                     this._rootScope = $rootScope;
                     this._rootScope.debugMode = "true" === "<%= DEBUG_MODE %>" as any;
+                    this._rootScope.isAuthUser = false;
 
                     // verify user rol in paths y configure states
                     this._rootScope.$on("$routeChangeStart", (_event: ng.IAngularEvent, _next: IRouteDefinition, _current: IRouteDefinition) => {
@@ -476,4 +478,4 @@ class AngularApp implements IAngularApp {
 
 
 // create main app instance for export
-export let app: IAngularApp = new AngularApp();
+export let angularApp: IAngularApp = new AngularApp();

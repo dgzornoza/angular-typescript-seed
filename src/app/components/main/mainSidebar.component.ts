@@ -1,4 +1,4 @@
-import { app } from "app/main";
+import { angularApp } from "app/main";
 
 
 /******************************************
@@ -16,7 +16,7 @@ let mainSidebarComponent: ng.IComponentOptions = {
 };
 
 // registrar el componente en la aplicacion
-app.registerComponent("mainSidebar", mainSidebarComponent);
+angularApp.registerComponent("mainSidebar", mainSidebarComponent);
 
 
 
@@ -65,7 +65,7 @@ class MainSidebarComponentController {
 // establecer variables a inyectar en el controlador
 // NOTA: (Deben seguir el mismo orden que el constructor del controlador)
 MainSidebarComponentController.$inject = ["$scope", "$attrs", "$element", "$parse"];
-app.registerController("mainSidebarComponentController", MainSidebarComponentController);
+angularApp.registerController("mainSidebarComponentController", MainSidebarComponentController);
 
 
 

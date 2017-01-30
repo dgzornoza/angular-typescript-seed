@@ -1,4 +1,4 @@
-import { app } from "app/main";
+import { angularApp } from "app/main";
 
 class HomeController {
 
@@ -16,4 +16,4 @@ class HomeController {
 HomeController.$inject = ["$scope"];
 
 // registrar el controlador en la aplicacion
-app.registerController("homeController", HomeController);
+angularApp.registerController("homeController", HomeController);

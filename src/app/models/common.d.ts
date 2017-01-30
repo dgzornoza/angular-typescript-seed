@@ -1,5 +1,9 @@
 import { infraestructure } from "app/infraestructure";
 
+export interface IBaseModel {
+    id: number;
+}
+
 /** Modelo con una propiedad */
 export interface IPropertyModel<T> {
     /** Nombre de la propiedad */
