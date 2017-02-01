@@ -1,4 +1,4 @@
-﻿import { app } from "app/main";
+﻿import { angularApp } from "app/main";
 import * as angular from "angular";
 
 import { ILoginModel, ILoginResponseModel } from "app/models/authentications";
@@ -67,7 +67,7 @@ class AuthenticationService implements IAuthenticationService {
 
     public login(loginData: ILoginModel): ng.IPromise<ILoginResponseModel>  {
 
-        app.logService.debug("authentication.service - login ...");
+        angularApp.logService.debug("authentication.service - login ...");
 
         // eliminar datos de logon si ya se esta logueado
         if (this.AuthenticationData) {
@@ -91,7 +91,7 @@ class AuthenticationService implements IAuthenticationService {
             url: API_BASE_URL + "token"
         })
         .then((resultCallback: ng.IHttpPromiseCallbackArg<any>): ILoginResponseModel => {
-            app.logService.debug("authentication.service - login: " + angular.toJson(resultCallback.data));
+            angularApp.logService.debug("authentication.service - login: " + angular.toJson(resultCallback.data));
 
             let now: Date = new Date();
             let loginResponse: ILoginResponseModel = {
@@ -110,7 +110,7 @@ class AuthenticationService implements IAuthenticationService {
             return loginResponse;
         })
         .catch((reason: any) => {
-            app.logService.error("Error: auth.service - login: " + angular.toJson(reason.data));
+            angularApp.logService.error("Error: auth.service - login: " + angular.toJson(reason.data));
             this.logOut();
             return this._q.reject(reason);
         });
@@ -121,7 +121,7 @@ class AuthenticationService implements IAuthenticationService {
         this._localStorageService.remove(LOCAL_STORAGE_AUTH_KEY);
 
         this._rootScope.$emit(EVT_LOGOUT);
-        app.logService.debug("authentication.service - logOut");
+        angularApp.logService.debug("authentication.service - logOut");
     }
 
 
@@ -130,4 +130,4 @@ class AuthenticationService implements IAuthenticationService {
 
 // NOTA: (Deben seguir el mismo orden que el constructor del viewmodel)
 AuthenticationService.$inject = ["$rootScope", "$http", "$q", "localStorageService"];
-app.registerService("authenticationService", AuthenticationService);
+angularApp.registerService("authenticationService", AuthenticationService);

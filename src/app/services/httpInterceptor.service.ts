@@ -1,4 +1,4 @@
-﻿import { app } from "app/main";
+﻿import { angularApp } from "app/main";
 import "angular";
 
 import "app/services/authentication.service";
@@ -110,7 +110,7 @@ class HttpInterceptorService implements ng.IHttpInterceptor {
 
 // NOTA: (Deben seguir el mismo orden que el constructor del viewmodel)
 HttpInterceptorService.$inject = ["$q", "$location", "$injector"];
-app.module.service("httpInterceptorService", HttpInterceptorService);
+angularApp.module.service("httpInterceptorService", HttpInterceptorService);
 
 
 

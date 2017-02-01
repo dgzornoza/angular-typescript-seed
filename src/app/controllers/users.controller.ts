@@ -1,4 +1,4 @@
-import { app } from "app/main";
+import { angularApp } from "app/main";
 
 import "app/services/users.service";
 
@@ -49,4 +49,4 @@ class UsersController implements IUsersController {
 UsersController.$inject = ["$scope", "usersService"];
 
 // registrar el controlador en la aplicacion
-app.registerController("usersController", UsersController);
+angularApp.registerController("usersController", UsersController);

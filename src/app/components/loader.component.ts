@@ -1,4 +1,4 @@
-import { app } from "app/main";
+import { angularApp } from "app/main";
 import "angular";
 
 
@@ -25,7 +25,7 @@ let loaderComponent: Function = (): ng.IComponentOptions => {
 };
 
 // registrar la directiva en la aplicacion
-app.registerComponent("loader", loaderComponent());
+angularApp.registerComponent("loader", loaderComponent());
 
 
 /******************************************
@@ -76,6 +76,6 @@ class LoaderComponentController {
 // establecer variables a inyectar en el controlador
 // NOTA: (Deben seguir el mismo orden que el constructor del controlador)
 LoaderComponentController.$inject = ["$rootScope", "$scope", "$element"];
-app.registerController("loaderComponentController", LoaderComponentController);
+angularApp.registerController("loaderComponentController", LoaderComponentController);
 
 

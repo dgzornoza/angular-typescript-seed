@@ -1,9 +1,9 @@
-import { app } from "app/main";
+import { angularApp } from "app/main";
 import "angular";
 
 import "app/services/authentication.service";
 
-import { BaseHttp } from "app/services/base/baseHttp";
+import { BaseHttp } from "app/services/common/baseHttp";
 import { IAuthenticationService, EVT_LOGIN, EVT_LOGOUT } from "app/services/authentication.service";
 import { IUserModel } from "app/models/users";
 
@@ -99,4 +99,4 @@ class UsersService extends BaseHttp implements IUsersService {
 
 // NOTA: (Deben seguir el mismo orden que el constructor del viewmodel)
 UsersService.$inject = ["$rootScope", "$http", "$q", "authenticationService"];
-app.registerService("usersService", UsersService);
+angularApp.registerService("usersService", UsersService);

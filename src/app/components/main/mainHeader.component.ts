@@ -1,4 +1,4 @@
-import { app } from "app/main";
+import { angularApp } from "app/main";
 import { infraestructure } from "app/infraestructure";
 
 import { IUserModel } from "app/models/users.d";
@@ -20,7 +20,7 @@ let mainHeaderComponent: ng.IComponentOptions = {
 };
 
 // registrar el componente en la aplicacion
-app.registerComponent("mainHeader", mainHeaderComponent);
+angularApp.registerComponent("mainHeader", mainHeaderComponent);
 
 
 
@@ -62,7 +62,7 @@ class MainHeaderComponentController {
 
 
     public LogoutCmd(): void {
-        app.authenticationService.logOut();
+        angularApp.authenticationService.logOut();
         // ir a la pagina principal (refrescando la URL)
         location.replace("/");
     }
@@ -70,9 +70,9 @@ class MainHeaderComponentController {
 
     private _init(): void {
 
-        app.rootScopeService.$on(EVT_USERINFO_LOADED, () => {
+        angularApp.rootScopeService.$on(EVT_USERINFO_LOADED, () => {
             this._scope.$applyAsync(() => {
-                app.usersService.connectedUser.then((user: IUserModel) => {
+                angularApp.usersService.connectedUser.then((user: IUserModel) => {
                     this._userModel = user;
                 });
             });
@@ -83,7 +83,7 @@ class MainHeaderComponentController {
 // establecer variables a inyectar en el controlador
 // NOTA: (Deben seguir el mismo orden que el constructor del controlador)
 MainHeaderComponentController.$inject = ["$scope", "$attrs", "$element", "$parse"];
-app.registerController("mainHeaderComponentController", MainHeaderComponentController);
+angularApp.registerController("mainHeaderComponentController", MainHeaderComponentController);
 
 
 
