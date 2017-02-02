@@ -18,6 +18,19 @@ interface IKeyValueMap<T, U> {
 /** @Brief Class for define help methods */
 class Helpers {
 
+    /** Funcion para crear un mixing en typescript y poder componer clases
+     * @param clase derivada de los objetos que se quiere componer
+     * @param array con las clases hijas usadas para la composicion
+     * https://www.typescriptlang.org/docs/handbook/mixins.html
+     */
+    public static applyMixins(derivedCtor: any, baseCtors: any[]): void {
+        baseCtors.forEach((baseCtor: any) => {
+            Object.getOwnPropertyNames(baseCtor.prototype).forEach((name: any) => {
+                derivedCtor.prototype[name] = baseCtor.prototype[name];
+            });
+        });
+    }
+	
     /** Funcion para cargar un css de forma dinamica
      * @param url url del css a cargar
      * @param insertBeforeId (Opcional) Identificador del elemento que sera usado para insertarse antes de el.
