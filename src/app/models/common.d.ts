@@ -46,6 +46,14 @@ export interface IRangeFilterModel<T> extends ISortFilterModel {
     take: T;
 }
 
+/** Modelo para implementar un filtro generico para un rango de valores (sin ordenacion) */
+export interface IBeetweenFilterModel<T> {
+    /** Indice incial del rango */
+    from: T;
+    /** Numero de elementos a obtener */
+    to: T;
+}
+
 /** Modelo para implementar un filtro base con paginacion, identificadores y busqueda general */
 export interface IBaseFilterModel extends IRangeFilterModel<number> {
     /** Enumeracion de identificadores unicos para el filtro */
