@@ -1,5 +1,5 @@
 # angular-typescript-seed
-Seed project for angular 1 apps with typescript.  http://angularjs.org/ 
+Seed project for angularjs 1 apps with typescript.  http://angularjs.org/ 
 
 
 #requisitos desarrollo
