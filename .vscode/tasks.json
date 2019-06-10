@@ -1,50 +1,82 @@
 {
     // See https://go.microsoft.com/fwlink/?LinkId=733558
     // for the documentation about the tasks.json format
-    "version": "0.1.0",
-    "command": "npm",
-    "isShellCommand": true,
-    "showOutput": "always",
-    "suppressTaskName": true,
-    "tasks": [
-        {
-            "taskName": "build",
+    "version": "2.0.0",
+    "tasks": [{
+            "label": "build",
+            "command": "npm",
+            "type": "shell",
             "args": [
                 "run",
                 "rebuild-debug"
             ],
             // Watching
-            "isWatching": false,
-            // Show the output window only if unrecognized errors occur.
-            "showOutput": "always",
+            "isBackground": false,
+
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
             // Usar los mismos que la tarea 'build watch' si se quieren usar
             "problemMatcher": []
         },
         {
-            "taskName": "rebuild",
+            "label": "rebuild",
+            "command": "npm",
+            "type": "shell",
             "args": [
                 "run",
                 "build-debug"
             ],
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
             // Watching
-            "isWatching": false,
-            // Show the output window only if unrecognized errors occur.
-            "showOutput": "always",
+            "isBackground": false,
+
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
             // Usar los mismos que la tarea 'build watch' si se quieren usar
             "problemMatcher": []
         },
         {
-            "taskName": "watch",
+            "label": "watch",
+            "command": "npm",
+            "type": "shell",
             "args": [
                 "run",
                 "watch"
             ],
-            // Make this the default build command.
-            "isBuildCommand": true,
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            // Comando por defecto
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+
             // Watching
-            "isWatching": true,
-            // Show the output window only if unrecognized errors occur.
-            "showOutput": "always",
+            "isBackground": true,
+
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
             // Use the standard less compilation problem matcher.
             "problemMatcher": [
                 // Actualmente vscode implementa gestor de errores para typescript (descomentar si no funciona bien.)
